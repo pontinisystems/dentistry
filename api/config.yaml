@@ -1,0 +1,6 @@
+database:
+ username: "postgres"
+ password: "f03c2919"
+ host: localhost
+ port: 5434
+ databaseName: dentistry_api

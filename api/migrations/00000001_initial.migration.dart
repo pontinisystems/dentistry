@@ -1,0 +1,35 @@
+import 'dart:async';
+import 'package:aqueduct/aqueduct.dart';   
+
+class Migration1 extends Migration { 
+  @override
+  Future upgrade() async {
+   		database.createTable(SchemaTable("procedure", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("description", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true)]));
+		database.createTable(SchemaTable("doctor_clinic", [SchemaColumn("id", ManagedPropertyType.bigInteger, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false)]));
+		database.createTable(SchemaTable("user_person", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("email", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("password", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("numberPhone", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("fullName", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("dateOfBirth", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("gender", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: false)]));
+		database.createTable(SchemaTable("clinic", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("cnpj", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true),SchemaColumn("name", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true),SchemaColumn("description", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true)]));
+		database.createTable(SchemaTable("address", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("city", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true),SchemaColumn("neighborhood", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true),SchemaColumn("street", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true),SchemaColumn("number", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true)]));
+		database.createTable(SchemaTable("doctor", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("cro", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true)]));
+		database.createTable(SchemaTable("patient", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("crm", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true)]));
+		database.createTable(SchemaTable("appointment_doctor", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false)]));
+		database.createTable(SchemaTable("payment", [SchemaColumn("id", ManagedPropertyType.integer, isPrimaryKey: true, autoincrement: true, isIndexed: false, isNullable: false, isUnique: false),SchemaColumn("type", ManagedPropertyType.string, isPrimaryKey: false, autoincrement: false, isIndexed: false, isNullable: false, isUnique: true)]));
+		database.addColumn("procedure", SchemaColumn.relationship("procedure", ManagedPropertyType.integer, relatedTableName: "appointment_doctor", relatedColumnName: "id", rule: DeleteRule.nullify, isNullable: true, isUnique: false));
+		database.addColumn("doctor_clinic", SchemaColumn.relationship("clinic", ManagedPropertyType.integer, relatedTableName: "clinic", relatedColumnName: "id", rule: DeleteRule.nullify, isNullable: true, isUnique: false));
+		database.addColumn("doctor_clinic", SchemaColumn.relationship("doctor", ManagedPropertyType.integer, relatedTableName: "doctor", relatedColumnName: "id", rule: DeleteRule.nullify, isNullable: true, isUnique: false));
+		database.addColumn("clinic", SchemaColumn.relationship("address", ManagedPropertyType.integer, relatedTableName: "address", relatedColumnName: "id", rule: DeleteRule.cascade, isNullable: false, isUnique: true));
+		database.addColumn("doctor", SchemaColumn.relationship("user", ManagedPropertyType.integer, relatedTableName: "user_person", relatedColumnName: "id", rule: DeleteRule.cascade, isNullable: false, isUnique: true));
+		database.addColumn("patient", SchemaColumn.relationship("user", ManagedPropertyType.integer, relatedTableName: "user_person", relatedColumnName: "id", rule: DeleteRule.cascade, isNullable: false, isUnique: true));
+		database.addColumn("patient", SchemaColumn.relationship("address", ManagedPropertyType.integer, relatedTableName: "address", relatedColumnName: "id", rule: DeleteRule.cascade, isNullable: false, isUnique: true));
+		database.addColumn("appointment_doctor", SchemaColumn.relationship("clinic", ManagedPropertyType.integer, relatedTableName: "clinic", relatedColumnName: "id", rule: DeleteRule.nullify, isNullable: true, isUnique: false));
+		database.addColumn("appointment_doctor", SchemaColumn.relationship("doctor", ManagedPropertyType.integer, relatedTableName: "doctor", relatedColumnName: "id", rule: DeleteRule.nullify, isNullable: true, isUnique: false));
+		database.addColumn("appointment_doctor", SchemaColumn.relationship("patient", ManagedPropertyType.integer, relatedTableName: "patient", relatedColumnName: "id", rule: DeleteRule.nullify, isNullable: true, isUnique: false));
+		database.addColumn("appointment_doctor", SchemaColumn.relationship("address", ManagedPropertyType.integer, relatedTableName: "address", relatedColumnName: "id", rule: DeleteRule.cascade, isNullable: false, isUnique: true));
+  }
+  
+  @override
+  Future downgrade() async {}
+  
+  @override
+  Future seed() async {}
+}
+    
