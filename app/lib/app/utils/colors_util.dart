@@ -7,3 +7,6 @@ const colorTen=0xFF42425B;
 
 const field_color=0xFFCEE8FF;
 const label_color=0xFF42425B;
+
+const test_color_new_screen=0xFF9BA4B2;
+const test_color_dashBoard=0xFF95989A;
