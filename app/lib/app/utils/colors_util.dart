@@ -28,4 +28,4 @@ const color_light_sea_green=0XFF20CBAF;
 const color_blue_whale=0XFF142235;
 const color_light_cyan=0XFFCEE8FF;
 const color_blue_zodiac=0XFF42425B;
-
+const color_cyprus=0XFF0B2246;

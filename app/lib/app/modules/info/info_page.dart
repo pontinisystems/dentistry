@@ -1,9 +1,7 @@
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
-import 'package:dentistry/app/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
 import 'info_controller.dart';
 
 class InfoPage extends StatefulWidget {
@@ -29,6 +27,7 @@ class _InfoPageState extends ModularState<InfoPage, InfoController> {
               height: MediaQuery.of(context).padding.top,
             ),
             _makeHeader(),
+            _makeStatistic(),
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
@@ -41,10 +40,20 @@ class _InfoPageState extends ModularState<InfoPage, InfoController> {
                           child: Container(
                             height: MediaQuery.of(context).size.height,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Flexible(
-                                  child: _makeStatistic(),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 15,
+                                    top: 15,
+                                    right: 15,
+                                  ),
+                                  child: Text('Today',
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: Color(color_cyprus))),
                                 ),
+                                Flexible(child: _makeTest()),
                               ],
                             ),
                           ),
@@ -63,32 +72,57 @@ class _InfoPageState extends ModularState<InfoPage, InfoController> {
 
   Widget _makeStatistic() {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(right: 10, left: 10),
       width: double.infinity,
       height: 175.0,
       child: Card(
         color: Color(color_white),
-        child: 
-        
-        
-        
-        
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              width: 4.0,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: Text('20,  Jan  - 20 Abr',
+                      style: TextStyle(
+                          fontSize: 12.0, color: Color(color_cyprus))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: Text('Filter',
+                      style: TextStyle(
+                          fontSize: 12.0, color: Color(color_cyprus))),
+                ),
+              ],
             ),
-            _statisctContainer(Color(color_tomato),),
-            SizedBox(
-              width: 4.0,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width: 4.0,
+                ),
+                _statisctContainer(
+                  Color(color_tomato),
+                ),
+                SizedBox(
+                  width: 4.0,
+                ),
+                _statisctContainer(Color(color_light_sea_green)),
+                SizedBox(
+                  width: 4.0,
+                ),
+                _statisctContainer(Color(color_moon_yellow))
+              ],
             ),
-            _statisctContainer(Color(color_light_sea_green)),
-            SizedBox(
-              width: 4.0,
-            ),
-            _statisctContainer(Color(color_moon_yellow))
           ],
         ),
       ),
@@ -107,13 +141,16 @@ class _InfoPageState extends ModularState<InfoPage, InfoController> {
             Icons.schedule,
             color: Colors.white,
           ),
-          SizedBox(height: 2.0,),
+          SizedBox(
+            height: 2.0,
+          ),
           Text(
             '10',
             style: TextStyle(color: Colors.white),
           ),
-          SizedBox(height: 2.0,),
-
+          SizedBox(
+            height: 2.0,
+          ),
           Text(
             'Remarcada',
             style: TextStyle(color: Colors.white),
@@ -125,49 +162,82 @@ class _InfoPageState extends ModularState<InfoPage, InfoController> {
     );
   }
 
-  Widget _grafic() {
-    return Container(
-      width: 103.0,
-      height: 97.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-        gradient: LinearGradient(
-          // Where the linear gradient begins and ends
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          // Add one stop for each color. Stops should increase from 0 to 1
-          stops: [0.1, 0.9],
-          colors: [
-            // Colors are easy thanks to Flutter's Colors class.
-            Color(0xff1d83ab),
-            Color(0xff0cbab8),
-          ],
-        ),
-      ),
-      child: FlatButton(
-        child: Text(
-          'A',
-          style: TextStyle(
-            fontSize: 16.0,
-            fontFamily: 'Righteous',
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        textColor: Colors.white,
-        color: Colors.transparent,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        onPressed: () {},
-      ),
-    );
-  }
-
   Widget _makeTest() {
     return ListView.builder(
-        itemCount: 30,
+        itemCount: 40,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('data'),
+          return Container(
+            margin: EdgeInsets.only(right: 10.0, left: 10.0),
+            height: 78,
+            child: Card(
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment
+                      .start, //Ele centralza a base horizontal
+                  mainAxisAlignment:
+                      MainAxisAlignment.start, //Ele centralza a base vertical
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(right: 10.0, left: 10.0),
+                        child: CircleAvatar(
+                          radius: 25.0,
+                          backgroundImage: NetworkImage(
+                              'https://s3.portalt5.com.br/imagens/ronaldinhogaucho.jpeg?mtime=20191026212926'),
+                          backgroundColor: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Ronaldinho Gaucho',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Color(color_cyprus),
+                            ),
+                          ),
+                          Text(
+                            "10:00 AM - 10:30 AM (30 min)",
+                            //item?.description ?? "",
+                            maxLines: 3,
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: Color(color_cyprus),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+                    Padding(
+                        padding: const EdgeInsets.only(
+                          left: 5,
+                          top: 30,
+                          right: 5,
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            height: 25,
+                            width: 70,
+                            child: Card(
+                              color: Color(color_summer_sky),
+                              child: Center(
+                                child: Text(
+                                  'Consultar',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 11),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
+                  ]),
+            ),
           );
         });
   }
