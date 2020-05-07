@@ -1,6 +1,7 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/doctor_clinic_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
+import 'package:dentistry_api/model/item_plan.dart';
 
 import 'address_model.dart';
 import 'appointment_doctor_model.dart';
@@ -21,14 +22,16 @@ class _ClinicModel {
   @Column(unique: true)
   String description;
 
-  @Relate(#address,isRequired: true,  onDelete: DeleteRule.cascade,  )
+  ItemPlanModel itemPlan;
+
+  @Relate(
+    #address,
+    isRequired: true,
+    onDelete: DeleteRule.cascade,
+  )
   AddressModel address;
 
-    ManagedSet<AppointmentDoctorModel> appointmentDoctors;
+  ManagedSet<AppointmentDoctorModel> appointmentDoctors;
 
-
- ManagedSet<DoctorClinicModel> doctorClinics;
-
-
-
+  ManagedSet<DoctorClinicModel> doctorClinics;
 }

@@ -24,6 +24,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   Widget build(BuildContext context) {
     ThemeUtils.init(context);
     SizeUtils.init(context);
+    print('object');
     
     Future.delayed(Duration(seconds: 1), () => Get.offAllNamed('/dashboard'));
     return Scaffold(

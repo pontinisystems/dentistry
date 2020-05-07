@@ -30,11 +30,6 @@ static Map<String,String> validateField(DoctorModel doctorModel) {
     if(doctorModel.user == null || doctorModel.user.dateOfBirth.isEmpty) {
       mapValidate['NumberPhone'] = 'Data Nasc obrigatório';
     }
-
-
-    
-
-
     return mapValidate;
 
   }
