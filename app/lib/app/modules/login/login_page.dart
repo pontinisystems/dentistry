@@ -6,7 +6,6 @@ import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
-import 'package:dentistry/app/utils/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';

@@ -1,8 +1,11 @@
+import 'package:dentistry_api/excepetions/entity_not_found.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
+import 'package:dentistry_api/model/message.dart';
 import 'package:dentistry_api/services/doctor_service.dart';
 import 'package:dentistry_api/services/user_service.dart';
 
 import '../../dentistry_api.dart';
+import '../../strings.dart';
 
 class DoctorController extends ResourceController {
   DoctorController(this.context)
@@ -25,28 +28,31 @@ class DoctorController extends ResourceController {
       final bool isLimitSizeDoctor = await doctorService.isLimitSizeDoctor(5);
       if (!isLimitSizeDoctor) {
         return Response.ok(
-          {
-            'message': 'A cliníca atingiu o número máximo de funcionários',
-            'save': false
-          },
-        );
+            Message(action: false, technicalMessage: maximumNumberOfDoctors));
       }
-    } catch (e) {
-       return Response.ok(
-          {
-            'message': e,
-            'save': false
-          },
-        );
-    }
-
-    try {
       await userService.saveUserDoctor(doctorModel);
-      return Response.ok(
-          {'message': 'Cadastrado realizado com sucesso', 'save': true});
+      return Response.ok(Message(
+              action: true,
+              technicalMessage: successfulRegistration,
+              userMessage: userSuccessfullyRegistered)
+          .toMap());
+    
+    } on EntityNotFound {
+      return Response.notFound(
+        body: Message(
+                action: false,
+                technicalMessage: entityNotFound,
+                userMessage: unexpectedFailure)
+            .toMap(),
+      );
+    
     } catch (e) {
       print(e);
-      return Response.serverError(body: {'message': 'Erro ao salvar médico  '});
+      return Response.serverError(
+          body: Message(
+              action: false,
+              userMessage: unexpectedFailure,
+              technicalMessage: serverError));
     }
   }
 }

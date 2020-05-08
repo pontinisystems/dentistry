@@ -1,6 +1,8 @@
+import 'package:dentistry_api/excepetions/entity_not_found.dart';
+import 'package:dentistry_api/model/clinic_model.dart';
 import 'package:dentistry_api/repositories/clinic_repository.dart';
 import 'package:dentistry_api/repositories/plan_repository.dart.dart';
-
+import 'package:dentistry_api/strings.dart';
 import '../dentistry_api.dart';
 
 class DoctorService {
@@ -12,14 +14,16 @@ class DoctorService {
   final PlanRepository planRepository;
 
   Future<bool> isLimitSizeDoctor(int clinicId) async {
-
-
-    return await clinicRepository.find(clinicId).then((clinic) {
-      if (clinic.itemPlan.planModel.doctorLimit < 10) {
+    try {
+      final ClinicModel clinic = await clinicRepository.find(clinicId);
+      if (clinic.itemPlan.planModel.doctorLimit < 5) {
         return true;
       } else {
         return false;
       }
-    });
+    } catch (e) {
+      throw const EntityNotFound(entityNotFound);
+    }
+
   }
 }
