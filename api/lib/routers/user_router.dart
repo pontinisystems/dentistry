@@ -8,7 +8,7 @@ class UserRouter {
 
   static void configure(Router router, ManagedContext context) {
     router
-      .route('user/login')
+      .route('v1/user/login')
       .link(() => LoginController(context));
     
  

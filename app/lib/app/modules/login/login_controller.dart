@@ -77,7 +77,7 @@ abstract class _LoginControllerBase with Store {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure, description: tryagainLater);
         }
-      } catch (e) {
+      } catch (e,s) {
        print("objectaa");
 
         errorMessage = errorMessage.copyWith(

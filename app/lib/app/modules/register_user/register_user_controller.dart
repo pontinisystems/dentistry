@@ -2,7 +2,7 @@ import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
 import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/user_model.dart';
-import 'package:dentistry/app/repositories/interfaces/i_user_repository.dart';
+import 'package:dentistry/app/service/i_user_service.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 
@@ -15,9 +15,9 @@ class RegisterUserController = _RegisterUserControllerBase
     with _$RegisterUserController;
 
 abstract class _RegisterUserControllerBase with Store {
-  IUserRepository _userRepository;
+  IUserService userService;
 
-  _RegisterUserControllerBase(this._userRepository);
+  _RegisterUserControllerBase(this.userService);
 
   @observable
   DoctorModel insertDoctorModel = DoctorModel();
@@ -123,8 +123,7 @@ abstract class _RegisterUserControllerBase with Store {
     print(validate);
     if (validate == null) {
       try {
-        _registerUserFuture =
-            ObservableFuture(_userRepository.registerDoctor(insertDoctorModel));
+        _registerUserFuture =  ObservableFuture(userService.registerDoctor(insertDoctorModel));
         await _registerUserFuture;
       } on DioError catch (e) {
         print(e);

@@ -8,10 +8,10 @@ class DoctorRouter {
 
   static void configure(Router router, ManagedContext context) {
     router
-      .route('doctor/login')
+      .route('v1/doctor/login')
       .link(() => LoginController(context));
     
-    router.route('doctor/register')
+    router.route('v1/doctor/register')
     .link(()=>DoctorController(context)); 
 
 

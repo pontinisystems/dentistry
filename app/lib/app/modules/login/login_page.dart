@@ -1,14 +1,11 @@
-import 'package:dentistry/app/components/button_action_widegt.dart';
 import 'package:dentistry/app/components/button_action_widegt_v2.dart';
 import 'package:dentistry/app/components/text_field_widget.dart';
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/mixins/loader_mixin.dart';
 import 'package:dentistry/app/models/message.dart';
-import 'package:dentistry/app/modules/register_user/register_user_module.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
-import 'package:dentistry/app/utils/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,6 +41,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController>
           // Chamar um loading
         } else if (state == StoreState.loaded) {
           // esconder o loading
+          print("gravou");
           hideLoader();
         }else if(state == StoreState.error){
           print('error');
@@ -127,7 +125,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController>
 
   Widget _makeHeader() {
     return Container(
-      color: ThemeUtils.primaryColor,
+      color:Color(colorThree),
       width: SizeUtils.widthScreen,
       height: (MediaQuery.of(context).size.height * .5) -
           MediaQuery.of(context).padding.top -

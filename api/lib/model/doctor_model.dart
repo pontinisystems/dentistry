@@ -11,28 +11,18 @@ static Map<String,String> validateField(DoctorModel doctorModel) {
     final Map<String,String> mapValidate = {};
 
     if(doctorModel == null || doctorModel.cro.isEmpty) {
-      mapValidate['Cro'] = 'Login obrigatório';
+      mapValidate['cro'] = 'Login obrigatório';
     }
     
     if(doctorModel.user == null || doctorModel.user.fullName.isEmpty) {
       mapValidate['fullName'] = 'Nome obrigatório';
     }
     
-    if(doctorModel.user == null || doctorModel.user.fullName.isEmpty) {
-      mapValidate['fullName'] = 'Nome obrigatório';
-    }
+   
     
-    if(doctorModel.user == null || doctorModel.user.numberPhone.isEmpty) {
-      mapValidate['NumberPhone'] = 'Número de telefone obrigatório';
+    if(doctorModel.user == null || doctorModel.user.numberPhone == null || doctorModel.user.numberPhone.isEmpty) {
+      mapValidate['numberPhone'] = 'Número de telefone obrigatório';
     }
-
-
-    if(doctorModel.user == null || doctorModel.user.dateOfBirth.isEmpty) {
-      mapValidate['NumberPhone'] = 'Data Nasc obrigatório';
-    }
-
-
-    
 
 
     return mapValidate;

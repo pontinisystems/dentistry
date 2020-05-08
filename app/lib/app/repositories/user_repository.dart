@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'interfaces/i_user_repository.dart';
 
 class UserRepository implements IUserRepository {
+ 
   Future<bool> isLogged() async {
     final String token = await this.getToken();
     return token != null;
@@ -23,7 +24,7 @@ class UserRepository implements IUserRepository {
 
   Future<bool> login(LoginModel loginModel) {
     final dio = CustomDio().instance;
-    return dio.post('user/login', data: loginModel.toJson()).then((res) async {
+    return dio.post('v1/user/login', data: loginModel.toJson()).then((res) async {
       final String token = res.data['token'];
       print(token);
       if (token != null) {
@@ -38,9 +39,7 @@ class UserRepository implements IUserRepository {
 
   Future<void> registerDoctor(DoctorModel insertDoctorModel) async {
     final dio = CustomDio().instance;
-    print(insertDoctorModel.user.toJson());
-    print(insertDoctorModel.toJson());
-    return dio.post('doctor/register',data:{
+    return dio.post('v1/doctor/register',data:{
     'user': insertDoctorModel.user.toJson(),
     'cro':insertDoctorModel.cro,
 

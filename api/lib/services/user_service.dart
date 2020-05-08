@@ -8,7 +8,6 @@ import 'package:dentistry_api/utils/jwt_utils.dart';
 import '../dentistry_api.dart';
 
 class UserService {
-
   UserService(this.context) : userRepository = UserRepository(context);
   final ManagedContext context;
   final UserRepository userRepository;
@@ -37,7 +36,7 @@ class UserService {
   Future<UserModel> findId(int id) async {
     return await userRepository.findId(id);
   }
-
-
-
 }
+
+
+

@@ -45,7 +45,7 @@ class _RegisterUserPageState
           showLoader();
         } else if (state == StoreState.loaded) {
           hideLoader();
-          Get.offAllNamed('/login');
+          Get.offAllNamed('/dashboard');
         }else if(state == StoreState.error){
           hideLoader();
         }
