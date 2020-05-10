@@ -4,3 +4,5 @@ const unexpectedFailure ="Falha inesperada.";
 const serverError ="Internal Server Error - 500";
 const successfulRegistration ="Registro realizado com sucesso.";
 const userSuccessfullyRegistered ="Usuário cadastrado com sucesso.";
+const doctorExist ="Usuário já existe.";
+const entidadeExist ="Entidade já existe.";

@@ -8,16 +8,12 @@ class _AddressModel {
   @Column(primaryKey: true, autoincrement: true)
   int id;
 
-  @Column(unique: true)
   String city;
 
-  @Column(unique: true)
   String neighborhood;
 
-  @Column(unique: true)
   String street;
   
-  @Column(unique: true)
   String number;
 
 
