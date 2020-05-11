@@ -3,7 +3,7 @@ import 'package:jaguar_jwt/jaguar_jwt.dart';
 
 class JwtUtils {
 
-  static const String _jwtChavePrivada = 'senhasenha';
+  static const String _jwtChavePrivada = 'DuGru4jQvUMxP9eyTvDxwpBJhhMTnCXU8cG8YYu8g4jhpRermB5jHSk';
 
   static String generateTokenJWT(UserModel usuario) {
     final claimSet = JwtClaim(
