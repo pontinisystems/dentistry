@@ -6,8 +6,8 @@ import 'package:dentistry/app/service/i_user_service.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 
-import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
+import 'package:mobx/mobx.dart';
 
 part 'register_user_controller.g.dart';
 

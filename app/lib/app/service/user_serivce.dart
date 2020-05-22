@@ -8,7 +8,7 @@ class UserService implements IUserService{
 
   IUserRepository userRepository;
 
-  UserService(IUserRepository userRepository){
+  UserService(IUserRepository userRepository,){
     this.userRepository =userRepository;
   }
 
@@ -21,26 +21,26 @@ class UserService implements IUserService{
   @override
   Future<String> getToken() {
    
-    return null;
+    return  userRepository.getToken();
   }
 
   @override
   Future<bool> isLogged() {
-    // TODO: implement isLogged
-    return null;
+    return userRepository.isLogged();
   }
 
   @override
   Future<bool> login(loginModel) {
-    // TODO: implement login
-    return null;
+    return userRepository.login(loginModel);
   }
 
   @override
-  Future<void> logout() {
-    // TODO: implement logout
-    return null;
+  Future<void> logout() async {
+     userRepository.logout();
   }
+
+
+
 
 
 }

@@ -1,8 +1,12 @@
+import 'package:dentistry/app/core/store_state.dart';
+import 'package:dentistry/app/mixins/loader_mixin.dart';
+import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:dentistry/app/utils/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,20 +17,70 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _HomePageState extends ModularState<HomePage, HomeController>   with LoaderMixin {
   //use 'controller' variable to access controller
+ 
+  List<ReactionDisposer> _disposer;
+
   @override
+  void dispose() {
+    _disposer.forEach((dispose) => dispose());
+    super.dispose();
+  }
+
+ @override
   void initState() {
     super.initState();
+    _disposer ??= [
+      reaction((_) => controller.state, (StoreState state) {
+        if (state == StoreState.loading) {
+          showLoader();
+          // Chamar um loading
+        } else if (state == StoreState.loaded) {
+          // esconder o loading
+          hideLoader();
+
+          
+          Get.offAllNamed('/workinvitation');
+
+          
+
+          
+        }else if(state == StoreState.error){
+           hideLoader();
+        }
+      }),
+   
+      reaction((_) => controller.isLogged, (isLogged) {
+        print(isLogged);
+        if (isLogged != null) {
+          if (isLogged) {           
+            controller.fetchMyWorkInvitation();
+          } else {
+           Get.offAllNamed('/login');
+          }
+        }
+      }),
+      reaction((_) => controller.errorMessage, (Message errorMessage) {
+            print('errroraa'+errorMessage.description);
+
+        if(errorMessage.description.isNotEmpty) {
+          // esconder o loading
+          print('aaaaa');
+          Get.snackbar(errorMessage.title, errorMessage.description, backgroundColor: Colors.white, colorText: Colors.redAccent);
+         // hideLoader();
+        }
+      })
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeUtils.init(context);
-    SizeUtils.init(context);
-    print('object');
+    SizeUtils.init(context);    
+    Future.delayed(Duration(seconds: 5), () =>controller.initApp());
     
-    Future.delayed(Duration(seconds: 1), () => Get.offAllNamed('/login'));
+    
     return Scaffold(
       
       body: Center(

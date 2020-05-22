@@ -7,4 +7,5 @@ abstract class IUserRepository {
   Future<String> getToken();
   Future<void> logout();
   Future<void> registerDoctor(DoctorModel insertDoctorModel);
+
 }

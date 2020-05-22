@@ -6,6 +6,7 @@ const invalidateFIeld ="campos inválidos";
 const eunexpectedError="Erro inesperado!";
 const tryagainLater="Tente novamente mais tarde!";
 const registerYourself="Registrar-se";
+const invites="Convites";
 const email="E-mail";
 const phoneNumber="Número do telefone";
 const createPassword="Senha";

@@ -1,3 +1,12 @@
+import 'package:dentistry/app/core/store_state.dart';
+import 'package:dentistry/app/models/message.dart';
+import 'package:dentistry/app/models/work_invitation_model.dart';
+import 'package:dentistry/app/service/i_user_service.dart';
+import 'package:dentistry/app/service/i_work_invitation_service.dart';
+import 'package:dentistry/app/utils/store_utils.dart';
+import 'package:dentistry/app/utils/strings.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
@@ -5,11 +14,59 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  @observable
-  int value = 0;
+  IUserService _userService;
+  IWorkInvitationService _workInvitationService;
 
-  @action
-  void increment() {
-    value++;
+  _HomeControllerBase(this._userService, this._workInvitationService);
+
+  @observable
+  ObservableFuture<List<WorkInvitationModel>> _works;
+
+  @observable
+  ObservableList<WorkInvitationModel> works;
+
+  @observable
+  Message errorMessage;
+
+  @computed
+  StoreState get state => StoreUtils.statusCheck(_works);
+
+  @observable
+  bool isLogged;
+
+  Future<void> initApp() async {
+    bool isLogged = await _userService.isLogged();
+
+    if (!isLogged) {
+      
+      Get.offAllNamed('/login');
+    } else {
+      fetchMyWorkInvitation();
+    }
+  }
+
+  fetchMyWorkInvitation() async {
+    try {
+      _works =
+          ObservableFuture(_workInvitationService.fetchMyWorkInvitations());
+      List<WorkInvitationModel> result = await _works;
+      works = result.asObservable();
+    
+    }on DioError catch (e) {
+       print("object");
+        if (e.response != null) {
+          errorMessage = errorMessage.copyWith(
+              title: unexpectedFailure,
+              description: e.response.data['message']);
+        } else {
+          print('objectaaaa');
+          errorMessage = errorMessage.copyWith(
+              title: unexpectedFailure, description: tryagainLater);
+        }
+      } catch (e,s) {
+       print("objectaa");
+        errorMessage = errorMessage.copyWith(
+            title: eunexpectedError, description: tryagainLater);
+      }
   }
 }

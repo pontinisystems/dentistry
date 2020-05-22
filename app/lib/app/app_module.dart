@@ -1,6 +1,7 @@
 import 'package:dentistry/app/app_controller.dart';
 import 'package:dentistry/app/modules/dashboard/dashboard_module.dart';
 import 'package:dentistry/app/modules/login/login_module.dart';
+import 'package:dentistry/app/modules/work_invitation/work_invitation_module.dart';
 import 'package:dentistry/app/repositories/user_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class AppModule extends MainModule {
         Router(Modular.initialRoute, module: HomeModule()),
         Router('/login', module: LoginModule()),
         Router('/dashboard', module: DashboardModule()),
+        Router('/workinvitation', module: WorkInvitationModule()),
       ];
 
   @override

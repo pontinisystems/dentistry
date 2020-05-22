@@ -2,8 +2,9 @@ import 'package:dentistry/app/modules/info/info_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dentistry/app/modules/info/info_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class InfoModule extends ModuleWidget {
+class InfoModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => InfoController()),

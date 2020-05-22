@@ -1,6 +1,6 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:dentistry/app/modules/dashboard/dashboard_module.dart';
 import 'package:dentistry/app/modules/info/info_module.dart';
+import 'package:dentistry/app/modules/info/info_page.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -24,7 +24,7 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
-        children: [InfoModule()],
+        children: [InfoPage()],
       ),
       
   //    floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.av_timer),),
