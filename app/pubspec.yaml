@@ -21,7 +21,7 @@ dependencies:
   shared_preferences: ^0.5.6+3
   dio: ^3.0.9
   logger: ^0.8.3  
-  get: ^1.11.6
+  get: ^2.5.7
   bubble_bottom_bar: ^1.2.0
   json_serializable: ^3.3.0
   flutter_svg: ^0.17.2
