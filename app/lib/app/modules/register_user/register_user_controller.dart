@@ -34,6 +34,8 @@ abstract class _RegisterUserControllerBase with Store {
   @observable
   Message errorMessage = Message();
 
+
+
   @action
   changeGender(int newValue) {
     print(newValue);
@@ -122,6 +124,9 @@ abstract class _RegisterUserControllerBase with Store {
     String validate = validateFields();
     print(validate);
     if (validate == null) {
+      if(insertDoctorModel.user.gender==null){
+       changeGender(1);
+      }
       try {
         _registerUserFuture =  ObservableFuture(userService.registerDoctor(insertDoctorModel));
         await _registerUserFuture;
@@ -165,3 +170,4 @@ abstract class _RegisterUserControllerBase with Store {
     return null;
   }
 }
+  

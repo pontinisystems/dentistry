@@ -23,7 +23,7 @@ class _UserModel {
 
  @Relate(
     #address,
-    isRequired: true,
+    isRequired: false,
     onDelete: DeleteRule.cascade,
   )
   AddressModel address;

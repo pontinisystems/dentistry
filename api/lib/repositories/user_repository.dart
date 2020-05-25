@@ -1,3 +1,4 @@
+import 'package:dentistry_api/model/address_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/user_model.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
@@ -23,11 +24,18 @@ class UserRepository {
       request.user.password =
           Cryptography.encryptPassword(request.user.password);
 
-      await transaction.insertObject(request.user.address).then((addressModel) {
-        request.user.address =addressModel;
-        transaction.insertObject(request.user).then((newUser) {
+      request.user.address = AddressModel();
+      request.user.address.city = "a";
+      request.user.address.neighborhood = "a";
+      request.user.address.street = "a";
+      request.user.address.number = "a";
+      await transaction
+          .insertObject(request.user.address)
+          .then((addressModel) async {
+        request.user.address = addressModel;
+        await transaction.insertObject(request.user).then((newUser) {
           return transaction.insertObject(DoctorModel()
-            ..user = newUser.user
+            ..user = newUser
             ..cro = request.cro);
         });
       });
