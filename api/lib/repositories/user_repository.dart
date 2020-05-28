@@ -47,6 +47,13 @@ class UserRepository {
       ..where((usuario) => usuario.id).equalTo(id);
     return await query.fetchOne();
   }
+Future<DoctorModel> findDoctorId(int id) async {
+
+    final query = Query<DoctorModel>(context)
+      ..where((doctor) => doctor.user).identifiedBy(id);
+
+    return await  query.fetchOne();
+  }
 
   Future<UserModel> findBy(String email, String cro) async {
     final query = Query<UserModel>(context)

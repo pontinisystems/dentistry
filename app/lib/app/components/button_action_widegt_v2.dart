@@ -7,6 +7,8 @@ class ButtonActionWidgetV2 extends StatelessWidget {
   final Color colorBackground;
   final Color colorText;
   final bool isDark;
+  final double width;
+  final double height;
   ButtonActionWidgetV2({
     @required this.isDark,
     Key key,
@@ -14,15 +16,15 @@ class ButtonActionWidgetV2 extends StatelessWidget {
     this.onClick,
     this.colorBorder,
     this.colorBackground,
-    this.colorText,
+    this.colorText, this.width, this.height,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     _customButton() {
       return Container(
-        width: MediaQuery.of(context).size.width,
-        height: 45.0,
+        width: width !=null  ? width :  MediaQuery.of(context).size.width,
+        height: height !=null  ? height : 45.0,
         child: FlatButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),

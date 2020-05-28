@@ -51,6 +51,7 @@ abstract class _HomeControllerBase with Store {
           ObservableFuture(_workInvitationService.fetchMyWorkInvitations());
       List<WorkInvitationModel> result = await _works;
       works = result.asObservable();
+      print(works.length);
     
     }on DioError catch (e) {
        print("object");

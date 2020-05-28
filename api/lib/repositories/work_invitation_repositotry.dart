@@ -10,8 +10,9 @@ class WorkInvitationRepository {
 
   Future<List<WorkInvitationModel>> findAllBy(int idDoctor) async {
     final query = Query<WorkInvitationModel>(context)
-      ..where((work) => work.doctorModel.id).equalTo(idDoctor);
+      ..where((work) => work.doctorModel).identifiedBy(idDoctor);
 
-    return await query.fetch();
+    var list = await query.fetch();
+    return list ;
   }
 }

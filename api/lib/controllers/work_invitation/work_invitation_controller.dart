@@ -18,14 +18,15 @@ class WorkInvitationController extends ResourceController {
   @Operation.get()
   Future<Response> findWorkInvitations() async {
     final UserModel user = request.attachments['user'] as UserModel;
-    print(user.email);
-
-    try {
-      
-
-    } catch (e) {
-
-
-    }
+    return  workInvitationService.findAllBy(user).then((data) {
+        return data.map((m) => {
+          'id': m.id,
+          'message' : m.message,
+          'title': m.title,
+         
+        }).toList();
+        
+      }).then((lista)=> Response.ok(lista));
+    
   }
 }

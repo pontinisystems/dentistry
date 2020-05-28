@@ -1,4 +1,3 @@
-import 'package:dentistry_api/excepetions/entity_not_found.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/message.dart';
 import 'package:dentistry_api/services/doctor_service.dart';
