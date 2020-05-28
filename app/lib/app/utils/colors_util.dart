@@ -29,3 +29,5 @@ const color_blue_whale=0XFF142235;
 const color_light_cyan=0XFFCEE8FF;
 const color_blue_zodiac=0XFF42425B;
 const color_cyprus=0XFF0B2246;
+const color_cloud_burst=0XFF213657;
+const color_black_pearl=0XFF020811;

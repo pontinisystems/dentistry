@@ -39,14 +39,14 @@ class JWTAuthentication extends Controller {
         throw JwtException;
       }
 
-      final  dataAtual = DateTime.now().toUtc();
-      if(dataAtual.isAfter(claimSet.expiry)){
+      final  dateNow = DateTime.now().toUtc();
+      if(dateNow.isAfter(claimSet.expiry)){
         return Response.unauthorized(); // Alterinativa é dar um refresh ......
       }
 
-      final  usuario = await service.findId(userId); 
+      final  user = await service.findId(userId); 
 
-      request.attachments['user']=usuario;
+      request.attachments['user']=user;
 
       return request;
 

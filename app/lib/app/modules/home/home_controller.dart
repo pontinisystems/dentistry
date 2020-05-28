@@ -45,6 +45,15 @@ abstract class _HomeControllerBase with Store {
     }
   }
 
+
+  @action
+  acceptWorkInvitation(int idWorkInvitation){
+
+
+  }
+
+
+  @action  
   fetchMyWorkInvitation() async {
     try {
       _works =
@@ -60,12 +69,10 @@ abstract class _HomeControllerBase with Store {
               title: unexpectedFailure,
               description: e.response.data['message']);
         } else {
-          print('objectaaaa');
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure, description: tryagainLater);
         }
       } catch (e,s) {
-       print("objectaa");
         errorMessage = errorMessage.copyWith(
             title: eunexpectedError, description: tryagainLater);
       }

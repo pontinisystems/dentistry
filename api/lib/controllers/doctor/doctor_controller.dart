@@ -39,7 +39,6 @@ class DoctorController extends ResourceController {
     
     
     } catch (e) {
-      print(e);
       return Response.serverError(
           body: Message(
               action: false,
