@@ -103,38 +103,30 @@ class _WorkInvitationPageState
                   color: Colors.yellow,
                   child: Row(
                     children: <Widget>[
-                            CircleAvatar(
+                      CircleAvatar(
                         radius: 25.0,
                         backgroundImage: NetworkImage(
                             'https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2F2011%2F05%2F31%2F01%2FWDL-Logo-4461_15855_035744941_1779079889.jpg'),
                         backgroundColor: Colors.transparent,
                       ),
                       Container(
-                        margin:  EdgeInsets.all(16.0),
-                        width:SizeUtils.widthScreen- 120.0,
+                        margin: EdgeInsets.all(16.0),
                         color: Colors.green,
-                        child: Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.fill,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment
                                 .start, //Ele centralza a base horizontal
                             mainAxisAlignment:
                                 MainAxisAlignment.start, //Ele centralza a base
                             children: <Widget>[
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                  color: Colors.red,
-                                  child: Text(
-                                    work.title,
-                                  ),
-                                ),
+                              Text(
+                                work.title,
                               ),
-                              FittedBox(
-                                child: Text(
-                                  work.message,
-                                  overflow: TextOverflow.fade,
-                                  maxLines: 5,
-                                ),
+                              Text(
+                                work.message,
+                                overflow: TextOverflow.fade,
+                                maxLines: 5,
                               ),
                             ],
                           ),
