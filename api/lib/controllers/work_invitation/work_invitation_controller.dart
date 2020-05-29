@@ -15,6 +15,24 @@ class WorkInvitationController extends ResourceController {
 
   final WorkInvitationService workInvitationService;
 
+
+  @Operation.post()
+  Future<Response> salvarMovimento() async {
+    
+    try{
+      
+
+      print('object');
+      return Response.ok({});
+      
+    }catch (e) {
+      return Response.serverError(body: {'message': 'Erro ao salvar Movimetacao'});
+    }
+
+
+  }
+
+
   @Operation.get()
   Future<Response> findWorkInvitations() async {
     final UserModel user = request.attachments['user'] as UserModel;

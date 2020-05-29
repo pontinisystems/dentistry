@@ -13,8 +13,9 @@ class WorkInvitationRouter {
       .link(() => WorkInvitationController(context));
     
     
-
-    
+ router
+      .route('v1/work/accept/')
+      .link(() => WorkInvitationController(context));
   }
 
 }
