@@ -39,6 +39,17 @@ mixin _$DashBoardController on _DashBoardController, Store {
   }
 
   @override
+  void onPressed(int index) {
+    final _$actionInfo = _$_DashBoardControllerActionController.startAction(
+        name: '_DashBoardController.onPressed');
+    try {
+      return super.onPressed(index);
+    } finally {
+      _$_DashBoardControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectedIndex: ${selectedIndex}

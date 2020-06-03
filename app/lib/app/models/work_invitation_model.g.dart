@@ -11,6 +11,7 @@ WorkInvitationModel _$WorkInvitationModelFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     title: json['title'] as String,
     message: json['message'] as String,
+    isActivate: json['isActivate'] as bool,
   );
 }
 
@@ -20,4 +21,5 @@ Map<String, dynamic> _$WorkInvitationModelToJson(
       'id': instance.id,
       'message': instance.message,
       'title': instance.title,
+      'isActivate': instance.isActivate,
     };

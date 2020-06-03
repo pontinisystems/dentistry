@@ -77,7 +77,7 @@ class _HomePageState extends ModularState<HomePage, HomeController>
   Widget build(BuildContext context) {
     ThemeUtils.init(context);
     SizeUtils.init(context);
-    Future.delayed(Duration(seconds: 5), () => controller.initApp());
+    Future.delayed(Duration(seconds: 1), () => controller.initApp());
 
     return Scaffold(
       body: Center(

@@ -20,4 +20,10 @@ abstract class _DashBoardController with Store {
     selectedIndex = index;
   }
 
+  @action
+  void onPressed(int index) {
+    pageController.jumpToPage(index);
+    selectedIndex = index;
+  }
+
 }

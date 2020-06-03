@@ -1,5 +1,6 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:dentistry/app/modules/info/info_page.dart';
+import 'package:dentistry/app/modules/patient/patient_page.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,18 +23,19 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
-        children: [InfoPage()],
+        children: [InfoPage(), PatientPage()],
       ),
       floatingActionButton: Observer(builder: (_) {
-        return controller.selectedIndex == 1
-            ? FloatingActionButton(
-                onPressed: () {},
-                child: Icon(Icons.add),
-              )
-            : Container(
-                width: 0.0,
-                height: 0.0,
-              );
+        return Visibility(
+          visible: controller.selectedIndex ==1 ? true :false,
+          child: FloatingActionButton(
+           
+             tooltip: 'Increment',
+             onPressed: () {  },
+             child: new Icon(Icons.add),
+          ),
+        
+        );
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: Observer(
