@@ -1,5 +1,6 @@
 import 'package:dentistry_api/model/address_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
+import 'package:dentistry_api/model/patient_model.dart';
 import 'package:dentistry_api/model/user_model.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
 
@@ -42,6 +43,28 @@ class UserRepository {
     });
   }
 
+  Future savePatient(PatientModel request) async {
+    print(request.user.password);
+    await context.transaction((transaction) async {
+      request.user.password ="";
+      request.user.address = AddressModel();
+      request.user.address.city = "";
+      request.user.address.neighborhood = "";
+      request.user.address.street = "";
+      request.user.address.number = "";
+      await transaction
+          .insertObject(request.user.address)
+          .then((addressModel) async {
+        request.user.address = addressModel;
+        await transaction.insertObject(request.user).then((newUser) {
+          return transaction.insertObject(PatientModel()
+            ..user = newUser
+          );
+        });
+      });
+    });
+  }
+
   Future<UserModel> findId(int id) async {
     final query = Query<UserModel>(context)
       ..where((usuario) => usuario.id).equalTo(id);
@@ -63,7 +86,15 @@ Future<DoctorModel> findDoctorById(int id) async {
     return await  query.fetchOne();
   }
 
-  Future<UserModel> findBy(String email, String cro) async {
+  
+  Future<UserModel> findByName(String fullName) async {
+    final query = Query<UserModel>(context)
+      ..where((user) => user.fullName).equalTo(fullName);
+
+    return await query.fetchOne();
+  }
+
+  Future<UserModel> findByEmail(String email) async {
     final query = Query<UserModel>(context)
       ..where((user) => user.email).equalTo(email);
 

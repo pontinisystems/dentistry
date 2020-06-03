@@ -1,4 +1,5 @@
 import 'package:dentistry/app/models/doctor_model.dart';
+import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/repositories/interfaces/i_user_repository.dart';
 
 import 'i_user_service.dart';
@@ -37,6 +38,12 @@ class UserService implements IUserService{
   @override
   Future<void> logout() async {
      userRepository.logout();
+  }
+
+  @override
+  Future<void> registerPatient(PatientModel insertPatientModel) {
+   return  userRepository.registerPatient(insertPatientModel);
+
   }
 
 

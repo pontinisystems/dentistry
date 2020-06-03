@@ -1,6 +1,7 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:dentistry/app/modules/info/info_page.dart';
 import 'package:dentistry/app/modules/patient/patient_page.dart';
+import 'package:dentistry/app/modules/register_patient/register_patient_page.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -31,7 +32,13 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
           child: FloatingActionButton(
            
              tooltip: 'Increment',
-             onPressed: () {  },
+             onPressed: () {
+                print('object');
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterPatientPage()),
+                );
+               },
              child: new Icon(Icons.add),
           ),
         

@@ -1,11 +1,13 @@
 import 'package:dentistry/app/core/custom_dio.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
 import 'package:dentistry/app/models/login_model.dart';
+import 'package:dentistry/app/models/patient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'interfaces/i_user_repository.dart';
 
 class UserRepository implements IUserRepository {
+  
   Future<bool> isLogged() async {
     print("vamos dar as maos ");
     final String token = await this.getToken();
@@ -49,6 +51,15 @@ class UserRepository implements IUserRepository {
     return dio.post('v1/doctor/register', data: {
       'user': insertDoctorModel.user.toJson(),
       'cro': insertDoctorModel.cro,
+    });
+  }
+
+  @override
+  Future<void> registerPatient(PatientModel insertPatientModel) {
+    final dio = CustomDio().instance;
+    return dio.post('v1/patient/register', data: {
+      'user': insertPatientModel.user.toJson(),
+     
     });
   }
 }

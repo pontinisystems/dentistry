@@ -1,48 +1,49 @@
-import 'package:dentistry_api/model/doctor_model.dart';
+
+
+import 'dart:async';
+
+import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/message.dart';
+import 'package:dentistry_api/model/patient_model.dart';
 import 'package:dentistry_api/services/doctor_service.dart';
+import 'package:dentistry_api/services/patient_service.dart';
 import 'package:dentistry_api/services/user_service.dart';
 
-import '../../dentistry_api.dart';
 import '../../strings.dart';
 
-class DoctorController extends ResourceController {
-  DoctorController(this.context)
-      : userService = UserService(context),
-        doctorService = DoctorService(context);
+
+class PatientController extends ResourceController {
+  PatientController(this.context) 
+        : userService = UserService(context),
+        patientService = PatientService(context);
 
   final ManagedContext context;
   final UserService userService;
-  final DoctorService doctorService;
+  final PatientService patientService;
 
-  @Operation.post()
-  Future<Response> save(@Bind.body() DoctorModel doctorModel) async {
-    final validate = DoctorModel.validateField(doctorModel);
+
+   @Operation.post()
+  Future<Response> save(@Bind.body() PatientModel patientModel) async {
+    final validate = PatientModel.validateField(patientModel);
 
     if (validate.isNotEmpty) {
       return Response.badRequest(body: validate);
     }
 
     try {
-      final bool userExist = await doctorService.userExist(doctorModel.user.email);
+      final bool userExist = await patientService.userExist(patientModel.user.fullName);
       
       if (userExist) {
         return Response.ok(
             Message(action: false, technicalMessage: entidadeExist, userMessage: doctorExist).toMap());
       }
-      await userService.saveUserDoctor(doctorModel);
-      return Response.created('',body:Message(
+      await userService.saveUserPatient(patientModel);
+       return Response.created('',body:Message(
               action: true,
               technicalMessage: successfulRegistration,
               userMessage: userSuccessfullyRegistered)
           .toMap() );
       
-      
-       Response.ok(Message(
-              action: true,
-              technicalMessage: successfulRegistration,
-              userMessage: userSuccessfullyRegistered)
-          .toMap());
     
     
     } catch (e) {

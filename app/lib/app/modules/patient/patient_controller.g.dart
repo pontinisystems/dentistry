@@ -24,24 +24,84 @@ mixin _$PatientController on _PatientControllerBase, Store {
     });
   }
 
-  final _$_PatientControllerBaseActionController =
-      ActionController(name: '_PatientControllerBase');
+  final _$errorMessageAtom = Atom(name: '_PatientControllerBase.errorMessage');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_PatientControllerBaseActionController.startAction(
-        name: '_PatientControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_PatientControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Message get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(Message value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
+  final _$registerSucessAtom =
+      Atom(name: '_PatientControllerBase.registerSucess');
+
+  @override
+  bool get registerSucess {
+    _$registerSucessAtom.reportRead();
+    return super.registerSucess;
+  }
+
+  @override
+  set registerSucess(bool value) {
+    _$registerSucessAtom.reportWrite(value, super.registerSucess, () {
+      super.registerSucess = value;
+    });
+  }
+
+  final _$_registerUserFutureAtom =
+      Atom(name: '_PatientControllerBase._registerUserFuture');
+
+  @override
+  ObservableFuture<dynamic> get _registerUserFuture {
+    _$_registerUserFutureAtom.reportRead();
+    return super._registerUserFuture;
+  }
+
+  @override
+  set _registerUserFuture(ObservableFuture<dynamic> value) {
+    _$_registerUserFutureAtom.reportWrite(value, super._registerUserFuture, () {
+      super._registerUserFuture = value;
+    });
+  }
+
+  final _$insertDoctorModelAtom =
+      Atom(name: '_PatientControllerBase.insertDoctorModel');
+
+  @override
+  PatientModel get insertDoctorModel {
+    _$insertDoctorModelAtom.reportRead();
+    return super.insertDoctorModel;
+  }
+
+  @override
+  set insertDoctorModel(PatientModel value) {
+    _$insertDoctorModelAtom.reportWrite(value, super.insertDoctorModel, () {
+      super.insertDoctorModel = value;
+    });
+  }
+
+  final _$registerDoctorAsyncAction =
+      AsyncAction('_PatientControllerBase.registerDoctor');
+
+  @override
+  Future<void> registerDoctor() {
+    return _$registerDoctorAsyncAction.run(() => super.registerDoctor());
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+value: ${value},
+errorMessage: ${errorMessage},
+registerSucess: ${registerSucess},
+insertDoctorModel: ${insertDoctorModel}
     ''';
   }
 }

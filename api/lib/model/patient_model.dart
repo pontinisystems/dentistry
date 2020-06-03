@@ -4,7 +4,16 @@ import 'package:dentistry_api/model/user_model.dart';
 
 import 'address_model.dart';
 
-class PatientModel extends ManagedObject<_PatientModel> implements _PatientModel {}
+class PatientModel extends ManagedObject<_PatientModel> implements _PatientModel {
+  static Map<String,String> validateField(PatientModel doctorModel) {
+    final Map<String,String> mapValidate = {};
+
+   
+
+    return mapValidate;
+
+  }
+}
 
 @Table(name: 'patient')
 class _PatientModel {

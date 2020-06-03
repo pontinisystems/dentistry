@@ -1,5 +1,6 @@
 import 'package:dentistry_api/controllers/login/dto/login_request.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
+import 'package:dentistry_api/model/patient_model.dart';
 import 'package:dentistry_api/model/user_model.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
@@ -31,6 +32,10 @@ class UserService {
 
   Future<void> saveUserDoctor(DoctorModel request) async {
     await userRepository.saveDoctor(request);
+  }
+
+  Future<void> saveUserPatient(PatientModel request) async {
+    await userRepository.savePatient(request);
   }
 
   Future<UserModel> findId(int id) async {

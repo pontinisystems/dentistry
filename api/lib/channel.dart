@@ -1,4 +1,5 @@
 import 'package:dentistry_api/routers/doctor_router.dart';
+import 'package:dentistry_api/routers/patient_router.dart';
 import 'package:dentistry_api/routers/user_router.dart';
 import 'package:dentistry_api/routers/work_invitation_router.dart';
 import 'model/work_invitation.model.dart';
@@ -49,7 +50,7 @@ class DentistryApiChannel extends ApplicationChannel {
     UserRouter.configure(router, context);
     DoctorRouter.configure(router, context);
     WorkInvitationRouter.configure(router, context);
-
+    PatientRouter.configure(router, context);
 
     return router;
   }
