@@ -11,7 +11,8 @@ part of 'work_invitation_controller.dart';
 mixin _$WorkInvitationController on _WorkInvitationControllerBase, Store {
   @override
   String toString() {
-    final string = '';
-    return '{$string}';
+    return '''
+
+    ''';
   }
 }

@@ -13,17 +13,15 @@ mixin _$InfoController on _InfoControllerBase, Store {
 
   @override
   int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
+    _$valueAtom.reportRead();
     return super.value;
   }
 
   @override
   set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
+    _$valueAtom.reportWrite(value, super.value, () {
       super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+    });
   }
 
   final _$_InfoControllerBaseActionController =
@@ -31,7 +29,8 @@ mixin _$InfoController on _InfoControllerBase, Store {
 
   @override
   void increment() {
-    final _$actionInfo = _$_InfoControllerBaseActionController.startAction();
+    final _$actionInfo = _$_InfoControllerBaseActionController.startAction(
+        name: '_InfoControllerBase.increment');
     try {
       return super.increment();
     } finally {
@@ -41,7 +40,8 @@ mixin _$InfoController on _InfoControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
-    return '{$string}';
+    return '''
+value: ${value}
+    ''';
   }
 }

@@ -10,11 +10,11 @@ import 'model/address_model.dart';
 import 'model/doctor_model.dart';
 import 'model/patient_model.dart';
 import 'model/doctor_clinic_model.dart';
+import 'model/parameter_model.dart';
 import 'model/payment_model.dart';
 import 'model/plan_model.dart';
 import 'model/item_plan.dart';
 import 'dentistry_api.dart';
-
 /// This type initializes an application.
 ///
 /// Override methods in this class to set up routes and initialize services like

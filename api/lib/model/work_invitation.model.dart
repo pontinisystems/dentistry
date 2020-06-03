@@ -22,5 +22,7 @@ String title;
 
 String message;
 
+@Column(defaultValue: "true")
+bool isActive;
 
 }

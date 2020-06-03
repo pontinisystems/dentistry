@@ -11,8 +11,7 @@ class _PatientModel {
   @Column(primaryKey: true, autoincrement: true)
   int id;
 
-  @Column(unique: true)
-  String crm;
+
 
   @Relate(#user,isRequired: true,  onDelete: DeleteRule.cascade,  )
   UserModel user;
@@ -20,7 +19,7 @@ class _PatientModel {
   @Relate(#address,isRequired: true,  onDelete: DeleteRule.cascade,  )
   AddressModel address;
 
-    ManagedSet<AppointmentDoctorModel> appointmentDoctors;
+  ManagedSet<AppointmentDoctorModel> appointmentDoctors;
 
 
 

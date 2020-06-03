@@ -6,3 +6,5 @@ const successfulRegistration ="Registro realizado com sucesso.";
 const userSuccessfullyRegistered ="Usuário cadastrado com sucesso.";
 const doctorExist ="Usuário já existe.";
 const entidadeExist ="Entidade já existe.";
+const requiredFields ="campos obrigatórios";
+const pleaseFillInTheRequiredFields ="Preencha os campos obrigatórios";

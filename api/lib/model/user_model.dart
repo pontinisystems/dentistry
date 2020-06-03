@@ -1,4 +1,5 @@
 import 'package:aqueduct/aqueduct.dart';
+import 'package:dentistry_api/model/persmission_parameter_model.dart';
 
 import 'address_model.dart';
 
@@ -29,4 +30,6 @@ class _UserModel {
   AddressModel address;
   
   UserModel user;
+
+  ManagedSet<PerssisionParameterModel> permissions;
 }

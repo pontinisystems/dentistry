@@ -13,94 +13,87 @@ mixin _$LoginController on _LoginControllerBase, Store {
 
   @override
   StoreState get state =>
-      (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
+      (_$stateComputed ??= Computed<StoreState>(() => super.state,
+              name: '_LoginControllerBase.state'))
+          .value;
 
   final _$_loginFutureAtom = Atom(name: '_LoginControllerBase._loginFuture');
 
   @override
   ObservableFuture<bool> get _loginFuture {
-    _$_loginFutureAtom.context.enforceReadPolicy(_$_loginFutureAtom);
-    _$_loginFutureAtom.reportObserved();
+    _$_loginFutureAtom.reportRead();
     return super._loginFuture;
   }
 
   @override
   set _loginFuture(ObservableFuture<bool> value) {
-    _$_loginFutureAtom.context.conditionallyRunInAction(() {
+    _$_loginFutureAtom.reportWrite(value, super._loginFuture, () {
       super._loginFuture = value;
-      _$_loginFutureAtom.reportChanged();
-    }, _$_loginFutureAtom, name: '${_$_loginFutureAtom.name}_set');
+    });
   }
 
   final _$loginAtom = Atom(name: '_LoginControllerBase.login');
 
   @override
   String get login {
-    _$loginAtom.context.enforceReadPolicy(_$loginAtom);
-    _$loginAtom.reportObserved();
+    _$loginAtom.reportRead();
     return super.login;
   }
 
   @override
   set login(String value) {
-    _$loginAtom.context.conditionallyRunInAction(() {
+    _$loginAtom.reportWrite(value, super.login, () {
       super.login = value;
-      _$loginAtom.reportChanged();
-    }, _$loginAtom, name: '${_$loginAtom.name}_set');
+    });
   }
 
   final _$passwordAtom = Atom(name: '_LoginControllerBase.password');
 
   @override
   String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
+    _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
+    _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+    });
   }
 
   final _$errorMessageAtom = Atom(name: '_LoginControllerBase.errorMessage');
 
   @override
   Message get errorMessage {
-    _$errorMessageAtom.context.enforceReadPolicy(_$errorMessageAtom);
-    _$errorMessageAtom.reportObserved();
+    _$errorMessageAtom.reportRead();
     return super.errorMessage;
   }
 
   @override
   set errorMessage(Message value) {
-    _$errorMessageAtom.context.conditionallyRunInAction(() {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
       super.errorMessage = value;
-      _$errorMessageAtom.reportChanged();
-    }, _$errorMessageAtom, name: '${_$errorMessageAtom.name}_set');
+    });
   }
 
   final _$loginSuccessAtom = Atom(name: '_LoginControllerBase.loginSuccess');
 
   @override
   bool get loginSuccess {
-    _$loginSuccessAtom.context.enforceReadPolicy(_$loginSuccessAtom);
-    _$loginSuccessAtom.reportObserved();
+    _$loginSuccessAtom.reportRead();
     return super.loginSuccess;
   }
 
   @override
   set loginSuccess(bool value) {
-    _$loginSuccessAtom.context.conditionallyRunInAction(() {
+    _$loginSuccessAtom.reportWrite(value, super.loginSuccess, () {
       super.loginSuccess = value;
-      _$loginSuccessAtom.reportChanged();
-    }, _$loginSuccessAtom, name: '${_$loginSuccessAtom.name}_set');
+    });
   }
 
-  final _$requestLoginAsyncAction = AsyncAction('requestLogin');
+  final _$requestLoginAsyncAction =
+      AsyncAction('_LoginControllerBase.requestLogin');
 
   @override
   Future<void> requestLogin() {
@@ -112,7 +105,8 @@ mixin _$LoginController on _LoginControllerBase, Store {
 
   @override
   dynamic changeLogin(String newValue) {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction();
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.changeLogin');
     try {
       return super.changeLogin(newValue);
     } finally {
@@ -122,7 +116,8 @@ mixin _$LoginController on _LoginControllerBase, Store {
 
   @override
   dynamic changePassword(String newValue) {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction();
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.changePassword');
     try {
       return super.changePassword(newValue);
     } finally {
@@ -132,8 +127,12 @@ mixin _$LoginController on _LoginControllerBase, Store {
 
   @override
   String toString() {
-    final string =
-        'login: ${login.toString()},password: ${password.toString()},errorMessage: ${errorMessage.toString()},loginSuccess: ${loginSuccess.toString()},state: ${state.toString()}';
-    return '{$string}';
+    return '''
+login: ${login},
+password: ${password},
+errorMessage: ${errorMessage},
+loginSuccess: ${loginSuccess},
+state: ${state}
+    ''';
   }
 }

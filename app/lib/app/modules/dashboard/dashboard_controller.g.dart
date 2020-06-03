@@ -13,17 +13,15 @@ mixin _$DashBoardController on _DashBoardController, Store {
 
   @override
   int get selectedIndex {
-    _$selectedIndexAtom.context.enforceReadPolicy(_$selectedIndexAtom);
-    _$selectedIndexAtom.reportObserved();
+    _$selectedIndexAtom.reportRead();
     return super.selectedIndex;
   }
 
   @override
   set selectedIndex(int value) {
-    _$selectedIndexAtom.context.conditionallyRunInAction(() {
+    _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
       super.selectedIndex = value;
-      _$selectedIndexAtom.reportChanged();
-    }, _$selectedIndexAtom, name: '${_$selectedIndexAtom.name}_set');
+    });
   }
 
   final _$_DashBoardControllerActionController =
@@ -31,7 +29,8 @@ mixin _$DashBoardController on _DashBoardController, Store {
 
   @override
   void changePage(int index) {
-    final _$actionInfo = _$_DashBoardControllerActionController.startAction();
+    final _$actionInfo = _$_DashBoardControllerActionController.startAction(
+        name: '_DashBoardController.changePage');
     try {
       return super.changePage(index);
     } finally {
@@ -41,7 +40,8 @@ mixin _$DashBoardController on _DashBoardController, Store {
 
   @override
   String toString() {
-    final string = 'selectedIndex: ${selectedIndex.toString()}';
-    return '{$string}';
+    return '''
+selectedIndex: ${selectedIndex}
+    ''';
   }
 }

@@ -33,8 +33,7 @@ class _ClinicModel {
   AddressModel address;
 
   ManagedSet<AppointmentDoctorModel> appointmentDoctors;
-
   ManagedSet<DoctorClinicModel> doctorClinics;
-ManagedSet<WorkInvitationModel> workInvitationModels;
+  ManagedSet<WorkInvitationModel> workInvitationModels;
 
 }

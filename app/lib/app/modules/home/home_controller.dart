@@ -1,4 +1,5 @@
 import 'package:dentistry/app/core/store_state.dart';
+import 'package:dentistry/app/models/accept_work_invitation_model.dart';
 import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/work_invitation_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
@@ -25,8 +26,15 @@ abstract class _HomeControllerBase with Store {
   @observable
   ObservableList<WorkInvitationModel> works;
 
+ @observable
+  ObservableFuture<bool> _acceptWork;
+
+
+  @computed
+  StoreState get stateAccepetWork => StoreUtils.statusCheck(_acceptWork);
+
   @observable
-  Message errorMessage;
+  Message errorMessage = Message();
 
   @computed
   StoreState get state => StoreUtils.statusCheck(_works);
@@ -47,7 +55,26 @@ abstract class _HomeControllerBase with Store {
 
 
   @action
-  acceptWorkInvitation(int idWorkInvitation){
+  acceptWorkInvitation(int idWorkInvitation) async {
+      try{
+
+        await _workInvitationService.acceptWork(AcceptWorkInvitationModel(idWorkInvitation: idWorkInvitation, isAccepet: true));
+          fetchMyWorkInvitation();
+      }on DioError catch (e) {
+       print("object"+e.toString());
+        if (e.response != null) {
+          errorMessage = errorMessage.copyWith(
+              title: unexpectedFailure,
+              description: e.response.data['message']);
+        } else {
+          errorMessage = errorMessage.copyWith(
+              title: unexpectedFailure, description: tryagainLater);
+        }
+      } catch (e,s) {
+       print("object"+e.toString());
+        errorMessage = errorMessage.copyWith(
+            title: eunexpectedError, description: tryagainLater);
+      }
 
 
   }

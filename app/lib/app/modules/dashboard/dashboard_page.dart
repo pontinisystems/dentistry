@@ -1,5 +1,4 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:dentistry/app/modules/info/info_module.dart';
 import 'package:dentistry/app/modules/info/info_page.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'dashboard_controller.dart';
-
 
 class DashBoardPage extends StatefulWidget {
   final String title;
@@ -26,9 +24,18 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
         controller: controller.pageController,
         children: [InfoPage()],
       ),
-      
-  //    floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.av_timer),),
-    //  floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Observer(builder: (_) {
+        return controller.selectedIndex == 1
+            ? FloatingActionButton(
+                onPressed: () {},
+                child: Icon(Icons.add),
+              )
+            : Container(
+                width: 0.0,
+                height: 0.0,
+              );
+      }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: Observer(
         builder: (BuildContext context) {
           return BubbleBottomBar(
@@ -41,7 +48,7 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
               BubbleBottomBarItem(
                 icon: Icon(
                   Icons.dashboard,
-                  color:  Color(test_color_dashBoard),
+                  color: Color(test_color_dashBoard),
                 ),
                 backgroundColor: Colors.blue,
                 title: Text("Dashboard"),
@@ -50,13 +57,12 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
               BubbleBottomBarItem(
                 icon: Icon(
                   Icons.people_outline,
-                  color:  Color(test_color_dashBoard),
+                  color: Color(test_color_dashBoard),
                 ),
                 backgroundColor: Colors.blue,
                 title: Text("Pacientes"),
                 activeIcon: Icon(Icons.people_outline),
               ),
-              
             ],
           );
         },

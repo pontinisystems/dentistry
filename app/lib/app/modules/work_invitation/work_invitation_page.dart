@@ -5,6 +5,7 @@ import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class WorkInvitationPage extends StatefulWidget {
@@ -58,7 +59,7 @@ class _WorkInvitationPageState
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-                    child: Text( 
+                    child: Text(
                       "Você precisa de um convite para utilizar o aplicativo.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -73,18 +74,19 @@ class _WorkInvitationPageState
   }
 
   Widget _makeWorkInvitations() {
-    return Flexible(
-        child: ListView.builder(
-      itemCount: controller.works.length,
-      itemBuilder: (context, i) {
-        return controller.works[i] != null
-            ? _makeItem(controller.works[i])
-            : Container(
-                height: 0,
-                width: 0,
-              );
-      },
-    ));
+    return Flexible(child: Observer(builder: (_) {
+      return ListView.builder(
+        itemCount: controller.works.length,
+        itemBuilder: (context, i) {
+          return controller.works[i] != null
+              ? _makeItem(controller.works[i])
+              : Container(
+                  height: 0,
+                  width: 0,
+                );
+        },
+      );
+    }));
   }
 
   Widget _makeItem(WorkInvitationModel work) {
@@ -106,16 +108,21 @@ class _WorkInvitationPageState
                             "https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2F2011%2F05%2F31%2F01%2FWDL-Logo-4461_15855_035744941_1779079889.jpg"),
                       ),
                       title: Text(
-                        work.title,style: TextStyle( fontWeight: FontWeight.bold,
+                        work.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           color: Color(color_cloud_burst),
                           fontSize: 14.0,
                         ),
-                        
                       ),
-                      subtitle: Text(work.message,style: TextStyle(fontWeight: FontWeight.normal,
+                      subtitle: Text(
+                        work.message,
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
                           color: Color(color_cyprus),
                           fontSize: 16.0,
-                        ),),
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Container(
@@ -140,7 +147,9 @@ class _WorkInvitationPageState
                             height: 40.0,
                             width: 100.0,
                             labelText: 'Aceitar',
-                            onClick: () {},
+                            onClick: () {
+                              controller.acceptWorkInvitation(work.id);
+                            },
                             colorBorder: Color(color_light_sea_green),
                             colorBackground: Color(color_light_sea_green),
                             colorText: Colors.white,

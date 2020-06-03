@@ -13,24 +13,24 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   StoreState get state =>
-      (_$stateComputed ??= Computed<StoreState>(() => super.state)).value;
+      (_$stateComputed ??= Computed<StoreState>(() => super.state,
+              name: '_RegisterUserControllerBase.state'))
+          .value;
 
   final _$insertDoctorModelAtom =
       Atom(name: '_RegisterUserControllerBase.insertDoctorModel');
 
   @override
   DoctorModel get insertDoctorModel {
-    _$insertDoctorModelAtom.context.enforceReadPolicy(_$insertDoctorModelAtom);
-    _$insertDoctorModelAtom.reportObserved();
+    _$insertDoctorModelAtom.reportRead();
     return super.insertDoctorModel;
   }
 
   @override
   set insertDoctorModel(DoctorModel value) {
-    _$insertDoctorModelAtom.context.conditionallyRunInAction(() {
+    _$insertDoctorModelAtom.reportWrite(value, super.insertDoctorModel, () {
       super.insertDoctorModel = value;
-      _$insertDoctorModelAtom.reportChanged();
-    }, _$insertDoctorModelAtom, name: '${_$insertDoctorModelAtom.name}_set');
+    });
   }
 
   final _$registerSucessAtom =
@@ -38,17 +38,15 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   bool get registerSucess {
-    _$registerSucessAtom.context.enforceReadPolicy(_$registerSucessAtom);
-    _$registerSucessAtom.reportObserved();
+    _$registerSucessAtom.reportRead();
     return super.registerSucess;
   }
 
   @override
   set registerSucess(bool value) {
-    _$registerSucessAtom.context.conditionallyRunInAction(() {
+    _$registerSucessAtom.reportWrite(value, super.registerSucess, () {
       super.registerSucess = value;
-      _$registerSucessAtom.reportChanged();
-    }, _$registerSucessAtom, name: '${_$registerSucessAtom.name}_set');
+    });
   }
 
   final _$_registerUserFutureAtom =
@@ -56,19 +54,15 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   ObservableFuture<dynamic> get _registerUserFuture {
-    _$_registerUserFutureAtom.context
-        .enforceReadPolicy(_$_registerUserFutureAtom);
-    _$_registerUserFutureAtom.reportObserved();
+    _$_registerUserFutureAtom.reportRead();
     return super._registerUserFuture;
   }
 
   @override
   set _registerUserFuture(ObservableFuture<dynamic> value) {
-    _$_registerUserFutureAtom.context.conditionallyRunInAction(() {
+    _$_registerUserFutureAtom.reportWrite(value, super._registerUserFuture, () {
       super._registerUserFuture = value;
-      _$_registerUserFutureAtom.reportChanged();
-    }, _$_registerUserFutureAtom,
-        name: '${_$_registerUserFutureAtom.name}_set');
+    });
   }
 
   final _$errorMessageAtom =
@@ -76,17 +70,15 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   Message get errorMessage {
-    _$errorMessageAtom.context.enforceReadPolicy(_$errorMessageAtom);
-    _$errorMessageAtom.reportObserved();
+    _$errorMessageAtom.reportRead();
     return super.errorMessage;
   }
 
   @override
   set errorMessage(Message value) {
-    _$errorMessageAtom.context.conditionallyRunInAction(() {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
       super.errorMessage = value;
-      _$errorMessageAtom.reportChanged();
-    }, _$errorMessageAtom, name: '${_$errorMessageAtom.name}_set');
+    });
   }
 
   final _$confirmPasswordAtom =
@@ -94,20 +86,19 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   String get confirmPassword {
-    _$confirmPasswordAtom.context.enforceReadPolicy(_$confirmPasswordAtom);
-    _$confirmPasswordAtom.reportObserved();
+    _$confirmPasswordAtom.reportRead();
     return super.confirmPassword;
   }
 
   @override
   set confirmPassword(String value) {
-    _$confirmPasswordAtom.context.conditionallyRunInAction(() {
+    _$confirmPasswordAtom.reportWrite(value, super.confirmPassword, () {
       super.confirmPassword = value;
-      _$confirmPasswordAtom.reportChanged();
-    }, _$confirmPasswordAtom, name: '${_$confirmPasswordAtom.name}_set');
+    });
   }
 
-  final _$registerDoctorAsyncAction = AsyncAction('registerDoctor');
+  final _$registerDoctorAsyncAction =
+      AsyncAction('_RegisterUserControllerBase.registerDoctor');
 
   @override
   Future<void> registerDoctor() {
@@ -119,8 +110,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changeGender(int newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changeGender');
     try {
       return super.changeGender(newValue);
     } finally {
@@ -130,8 +121,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changeEmail(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changeEmail');
     try {
       return super.changeEmail(newValue);
     } finally {
@@ -141,8 +132,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changePassword(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changePassword');
     try {
       return super.changePassword(newValue);
     } finally {
@@ -152,8 +143,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changeConfimPassword(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changeConfimPassword');
     try {
       return super.changeConfimPassword(newValue);
     } finally {
@@ -163,8 +154,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changeFullName(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changeFullName');
     try {
       return super.changeFullName(newValue);
     } finally {
@@ -174,8 +165,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changePhoneNumber(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changePhoneNumber');
     try {
       return super.changePhoneNumber(newValue);
     } finally {
@@ -185,8 +176,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changeDateOfBirth(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changeDateOfBirth');
     try {
       return super.changeDateOfBirth(newValue);
     } finally {
@@ -196,8 +187,8 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   dynamic changeCRO(String newValue) {
-    final _$actionInfo =
-        _$_RegisterUserControllerBaseActionController.startAction();
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.changeCRO');
     try {
       return super.changeCRO(newValue);
     } finally {
@@ -207,8 +198,12 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
 
   @override
   String toString() {
-    final string =
-        'insertDoctorModel: ${insertDoctorModel.toString()},registerSucess: ${registerSucess.toString()},errorMessage: ${errorMessage.toString()},confirmPassword: ${confirmPassword.toString()},state: ${state.toString()}';
-    return '{$string}';
+    return '''
+insertDoctorModel: ${insertDoctorModel},
+registerSucess: ${registerSucess},
+errorMessage: ${errorMessage},
+confirmPassword: ${confirmPassword},
+state: ${state}
+    ''';
   }
 }

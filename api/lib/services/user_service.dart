@@ -1,7 +1,6 @@
 import 'package:dentistry_api/controllers/login/dto/login_request.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/user_model.dart';
-import 'package:dentistry_api/model/work_invitation.model.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
 import 'package:dentistry_api/utils/jwt_utils.dart';

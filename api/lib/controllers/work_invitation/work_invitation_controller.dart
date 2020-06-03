@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:aqueduct/aqueduct.dart';
+import 'package:dentistry_api/controllers/doctor/dto/insert_user_request.dart';
+import 'package:dentistry_api/controllers/work_invitation/dto/accept_work_invitation_model.dart';
 import 'package:dentistry_api/model/message.dart';
 import 'package:dentistry_api/model/user_model.dart';
 import 'package:dentistry_api/services/work_invitation_service.dart';
@@ -17,16 +19,27 @@ class WorkInvitationController extends ResourceController {
 
 
   @Operation.post()
-  Future<Response> salvarMovimento() async {
+  Future<Response> acceptWorkInvitation( @Bind.body() AcceptWorkInvitationRequest request) async {
+    final validate = request.validateField();
+    if (validate.isNotEmpty) {
+      return Response.badRequest(body:Message(action: false, technicalMessage: requiredFields, userMessage: doctorExist).toMap());
+    }
+   try {
+      
+      await workInvitationService.linkDoctorToClinic(request.idWorkInvitation);
+      return Response.ok(Message(
+              action: true,
+              technicalMessage: successfulRegistration,
+              userMessage: userSuccessfullyRegistered)
+          .toMap());
     
-    try{
-      
-
-      print('object');
-      return Response.ok({});
-      
-    }catch (e) {
-      return Response.serverError(body: {'message': 'Erro ao salvar Movimetacao'});
+    
+    } catch (e) {
+      return Response.serverError(
+          body: Message(
+              action: false,
+              userMessage: unexpectedFailure,
+              technicalMessage: serverError).toMap());
     }
 
 
