@@ -1,9 +1,10 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:dentistry/app/components/button_action_widegt_v2.dart';
+import 'package:dentistry/app/components/button_action_widget.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
@@ -58,25 +59,14 @@ class _RegisterPatientPageState
             );
           }),
           Observer(builder: (_) {
-            return Container(
-              width: 0,
-              height: 0,
-              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: _textField(
+            return _textField(
                 labelText: phoneNumber,
-                maxLenght: 13,
-              ),
-            );
-          }),
-          Observer(builder: (_) {
-            return Container(
-              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: _textField(
-                labelText: phoneNumber,
-                obscure: true,
-                maxLenght: 10,
-              ),
-            );
+                maxLenght: 11,
+                  keyBoardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+    WhitelistingTextInputFormatter.digitsOnly
+], // Only numbers can be entered
+               );
           }),
           Observer(builder: (_) {
             return Container(
@@ -100,17 +90,14 @@ class _RegisterPatientPageState
               ),
             );
           }),
-        
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
-            child: ButtonActionWidgetV2(
+            child: ButtonActionWidget(
               labelText: register,
-              onClick: controller.r
-              ,
+              onClick: controller.registerPatient,
               colorBorder: Color(colorFour),
               colorBackground: Color(colorFour),
               colorText: Colors.white,
-              isDark: false,
             ),
           ),
         ],
@@ -118,13 +105,19 @@ class _RegisterPatientPageState
     );
   }
 
-  TextField _textField(
-      {String labelText,
-      bool obscure,
-      Function() errorText,
-      @required maxLenght,
-      @required onChanged}) {
+  TextField _textField({
+    String labelText,
+    bool obscure,
+    Function() errorText,
+    @required maxLenght,
+    @required onChanged,
+    @required inputFormatters,
+    @required TextInputType keyBoardType,
+  }) {
     return TextField(
+      
+        keyboardType: keyBoardType,
+        inputFormatters: inputFormatters,
         onChanged: onChanged,
         maxLength: maxLenght == null ? 0 : maxLenght,
         obscureText: obscure == null ? false : obscure,

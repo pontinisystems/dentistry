@@ -29,7 +29,6 @@ class UserService {
     return null;
   }
 
-
   Future<void> saveUserDoctor(DoctorModel request) async {
     await userRepository.saveDoctor(request);
   }
@@ -41,6 +40,4 @@ class UserService {
   Future<UserModel> findId(int id) async {
     return await userRepository.findId(id);
   }
-
-  
 }

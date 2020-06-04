@@ -1,4 +1,4 @@
-import 'package:dentistry/app/components/button_action_widegt_v2.dart';
+import 'package:dentistry/app/components/button_action_widget.dart';
 import 'package:dentistry/app/modules/register_user/register_user_controller.dart';
 import 'package:dentistry/app/modules/register_user/register_user_page.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
@@ -73,7 +73,7 @@ class _SelectUserPageSenderState
           ),
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
-            child: ButtonActionWidgetV2(
+            child: ButtonActionWidget(
               labelText: advance,
               onClick: () {
                 Navigator.push(
@@ -84,7 +84,6 @@ class _SelectUserPageSenderState
               colorBorder: Color(colorFour),
               colorBackground: Color(colorFour),
               colorText: Colors.white,
-              isDark: false,
             ),
           ),
         ],

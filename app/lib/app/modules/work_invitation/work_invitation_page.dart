@@ -1,4 +1,4 @@
-import 'package:dentistry/app/components/button_action_widegt_v2.dart';
+import 'package:dentistry/app/components/button_action_widget.dart';
 import 'package:dentistry/app/models/work_invitation_model.dart';
 import 'package:dentistry/app/modules/home/home_controller.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
@@ -130,7 +130,7 @@ class _WorkInvitationPageState
                         mainAxisAlignment:
                             MainAxisAlignment.end, //Ele centralza a base
                         children: <Widget>[
-                          ButtonActionWidgetV2(
+                          ButtonActionWidget(
                             height: 40.0,
                             width: 100.0,
                             labelText: 'Cancelar',
@@ -138,12 +138,11 @@ class _WorkInvitationPageState
                             colorBorder: Color(color_tomato),
                             colorBackground: Color(color_white),
                             colorText: Color(color_tomato),
-                            isDark: true,
                           ),
                           SizedBox(
                             width: 8.0,
                           ),
-                          ButtonActionWidgetV2(
+                          ButtonActionWidget(
                             height: 40.0,
                             width: 100.0,
                             labelText: 'Aceitar',
@@ -153,7 +152,6 @@ class _WorkInvitationPageState
                             colorBorder: Color(color_light_sea_green),
                             colorBackground: Color(color_light_sea_green),
                             colorText: Colors.white,
-                            isDark: true,
                           ),
                         ],
                       )),

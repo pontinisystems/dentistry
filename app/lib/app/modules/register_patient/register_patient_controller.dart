@@ -1,6 +1,8 @@
 import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
+import 'package:dentistry/app/utils/strings.dart';
+import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 
 part 'register_patient_controller.g.dart';
@@ -29,7 +31,7 @@ abstract class _RegisterPatientControllerBase with Store {
   PatientModel insertDoctorModel = PatientModel();
 
   @action
-  Future<void> registerDoctor() async {
+  Future<void> registerPatient() async {
     String validate = validateFields();
     print(validate);
     if (validate == null) {

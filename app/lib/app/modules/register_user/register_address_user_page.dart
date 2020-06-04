@@ -1,5 +1,5 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:dentistry/app/components/button_action_widegt_v2.dart';
+import 'package:dentistry/app/components/button_action_widget.dart';
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/mixins/loader_mixin.dart';
 import 'package:dentistry/app/models/message.dart';
@@ -175,13 +175,12 @@ class _RegisterAddressUserPageState
           }),
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
-            child: ButtonActionWidgetV2(
+            child: ButtonActionWidget(
               labelText: register,
               onClick: controller.registerDoctor,
               colorBorder: Color(colorFour),
               colorBackground: Color(colorFour),
               colorText: Colors.white,
-              isDark: false,
             ),
           ),
         ],

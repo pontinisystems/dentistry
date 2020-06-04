@@ -45,7 +45,6 @@ class CustomDio {
      // UsuarioRepository().logout();
       Get.offAllNamed('/');
     }
-    print("ERRRRRRRRRRROR"+e.toString());
     return e;
   }
 }

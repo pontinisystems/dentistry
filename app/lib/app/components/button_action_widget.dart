@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ButtonActionWidgetV2 extends StatelessWidget {
+class ButtonActionWidget extends StatelessWidget {
   final String labelText;
   final Function() onClick;
   final Color colorBorder;
   final Color colorBackground;
   final Color colorText;
-  final bool isDark;
   final double width;
   final double height;
-  ButtonActionWidgetV2({
-    @required this.isDark,
+  ButtonActionWidget({
     Key key,
     this.labelText,
     this.onClick,

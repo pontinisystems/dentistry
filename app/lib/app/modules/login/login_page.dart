@@ -1,5 +1,5 @@
-import 'package:dentistry/app/components/button_action_widegt_v2.dart';
-import 'package:dentistry/app/components/text_field_widget.dart';
+import 'package:dentistry/app/components/button_action_widget.dart';
+import 'package:dentistry/app/components/custom_text_field_widget.dart';
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/mixins/loader_mixin.dart';
 import 'package:dentistry/app/models/message.dart';
@@ -58,7 +58,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController>
             
           } else {
             print('erroraaaaaaaa');
-          
           }
         }
       }),
@@ -95,19 +94,18 @@ class _LoginPageState extends ModularState<LoginPage, LoginController>
               Container(
                 margin: EdgeInsets.only(
                     left: 30.0, right: 30.0, bottom: 15.0, top: 5.0),
-                child: ButtonActionWidgetV2(
+                child: ButtonActionWidget(
                   labelText: 'Login',
                   onClick: controller.requestLogin,
                   colorBorder: Color(colorFour),
                   colorBackground: Color(colorFour),
                   colorText: Colors.white,
-                  isDark: false,
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(
                     left: 30.0, right: 30.0, bottom: 15.0, top: 5.0),
-                child: ButtonActionWidgetV2(
+                child: ButtonActionWidget(
                   labelText: registerYourself,
                   onClick: () {
                     Get.toNamed('/login/register');
@@ -115,7 +113,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController>
                   colorBorder: Color(colorFour),
                   colorBackground: Colors.white,
                   colorText: Color(colorFour),
-                  isDark: false,
                 ),
               ),
             ],
