@@ -36,79 +36,54 @@ class _RegisterPatientPageState
           ),
         ));
   }
-Widget _makeForm() {
+
+  Widget _makeForm() {
     return Container(
       margin: EdgeInsets.only(top: 20.0, left: 34.0, right: 34.0),
       child: Column(
         children: <Widget>[
-       
           Observer(builder: (_) {
-            return  _textField(
-                  labelText: email,
-                  maxLenght: 50,
-                  );
-          })
-          ,
+            return Container(
+              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: _textField(
+                labelText: fullName,
+                maxLenght: 50,
+              ),
+            );
+          }),
+          Observer(builder: (_) {
+            return _textField(
+              labelText: email,
+              maxLenght: 50,
+            );
+          }),
           Observer(builder: (_) {
             return Container(
               width: 0,
               height: 0,
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: _textField(
-                  labelText: phoneNumber,
-                  maxLenght: 13,
-                  ),
-            );
-          }),
-          Observer(builder: (_) {
-            return Container(
-              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: _textField(
-                  labelText: createPassword,
-                  obscure: true,
-                  maxLenght: 10,
-),
-            );
-          }),
-          Observer(builder: (_) {
-            return Container(
-              margin: EdgeInsets.only(
-                top: 8.0,
-                bottom: 8.0,
+                labelText: phoneNumber,
+                maxLenght: 13,
               ),
-              child: _textField(
-                  labelText: confirmPassword,
-                  obscure: true,
-                  maxLenght: 10,
-),
             );
           }),
           Observer(builder: (_) {
             return Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: _textField(
-                  labelText: fullName,
-                  maxLenght: 50,
-                  ),
+                labelText: phoneNumber,
+                obscure: true,
+                maxLenght: 10,
+              ),
             );
           }),
- Observer(builder: (_) {
-            return Container(
-              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: _textField(
-                  labelText: phoneNumber,
-                  obscure: true,
-                  maxLenght: 10,
-                  ),
-            );
-          }),
-
           Observer(builder: (_) {
             return Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: DateTimeField(
                 onChanged: (date) {
-                //  controller.changeDateOfBirth(date.toString());
+                  //  controller.changeDateOfBirth(date.toString());
                 },
                 decoration: InputDecoration(
                   counterText: '',
@@ -120,27 +95,18 @@ Widget _makeForm() {
                       context: context,
                       firstDate: DateTime(2000),
                       initialDate: currentValue ?? DateTime.now(),
-                      lastDate:  DateTime.now());
+                      lastDate: DateTime.now());
                 },
               ),
             );
           }),
-          Observer(builder: (_) {
-            return Container(
-              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: _textField(
-                  labelText: cro,
-                  maxLenght: 5,
-                  ),
-            );
-          }),
-         Container(
+        
+          Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidgetV2(
               labelText: register,
-              onClick: (){
-                print('aaa');
-              },
+              onClick: controller.r
+              ,
               colorBorder: Color(colorFour),
               colorBackground: Color(colorFour),
               colorText: Colors.white,
@@ -163,12 +129,12 @@ Widget _makeForm() {
         maxLength: maxLenght == null ? 0 : maxLenght,
         obscureText: obscure == null ? false : obscure,
         decoration: InputDecoration(
-          counterText: '',
-          labelText: labelText,
-       errorText: errorText == null ? null : errorText()));
+            counterText: '',
+            labelText: labelText,
+            errorText: errorText == null ? null : errorText()));
   }
 
-Widget _makeHeader() {
+  Widget _makeHeader() {
     return Container(
         color: Colors.white,
         width: SizeUtils.widthScreen,
@@ -200,5 +166,4 @@ Widget _makeHeader() {
               ))
         ]));
   }
-
 }
