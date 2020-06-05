@@ -38,11 +38,7 @@ class DoctorController extends ResourceController {
           .toMap() );
       
       
-       Response.ok(Message(
-              action: true,
-              technicalMessage: successfulRegistration,
-              userMessage: userSuccessfullyRegistered)
-          .toMap());
+
     
     
     } catch (e) {

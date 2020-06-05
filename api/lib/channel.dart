@@ -13,6 +13,7 @@ import 'model/patient_model.dart';
 import 'model/doctor_clinic_model.dart';
 import 'model/parameter_model.dart';
 import 'model/payment_model.dart';
+import 'model/login_model.dart';
 import 'model/plan_model.dart';
 import 'model/item_plan.dart';
 import 'dentistry_api.dart';
