@@ -60,13 +60,13 @@ class _RegisterPatientPageState
           }),
           Observer(builder: (_) {
             return _textField(
-                labelText: phoneNumber,
-                maxLenght: 11,
-                  keyBoardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-    WhitelistingTextInputFormatter.digitsOnly
-], // Only numbers can be entered
-               );
+              labelText: phoneNumber,
+              maxLenght: 11,
+              keyBoardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                WhitelistingTextInputFormatter.digitsOnly
+              ], // Only numbers can be entered
+            );
           }),
           Observer(builder: (_) {
             return Container(
@@ -89,6 +89,9 @@ class _RegisterPatientPageState
                 },
               ),
             );
+          }),
+          Observer(builder: (_) {
+            return _makeGender();
           }),
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
@@ -115,7 +118,6 @@ class _RegisterPatientPageState
     @required TextInputType keyBoardType,
   }) {
     return TextField(
-      
         keyboardType: keyBoardType,
         inputFormatters: inputFormatters,
         onChanged: onChanged,
@@ -158,5 +160,43 @@ class _RegisterPatientPageState
                 ),
               ))
         ]));
+  }
+
+  Widget _makeGender() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
+          child: ButtonActionWidget(
+            width: 120.0,
+            labelText: male,
+            onClick: () {
+              print(male);
+            },
+            colorBorder: Color(color_blue_zodiac),
+            colorBackground: Colors.white,
+            colorText: Color(color_blue_zodiac),
+          ),
+        ),
+        SizedBox(
+          width: 20.0,
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
+          child: ButtonActionWidget(
+            width: 120.0,
+            labelText: female,
+            onClick: () {
+              print(male);
+            },
+            colorBorder: Color(colorThree),
+            colorBackground: Color(colorThree),
+            colorText: Color(color_blue_zodiac),
+          ),
+        ),
+      ],
+    );
   }
 }
