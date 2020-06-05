@@ -90,9 +90,9 @@ class _RegisterPatientPageState
               ),
             );
           }),
-          Observer(builder: (_) {
-            return _makeGender();
-          }),
+
+           _makeGender(),
+       
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
@@ -167,35 +167,53 @@ class _RegisterPatientPageState
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
+          Observer(builder: (_) {
+            
+            return   Container(
           margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
           child: ButtonActionWidget(
             width: 120.0,
             labelText: male,
             onClick: () {
-              print(male);
+              controller.onChangeGender(SelectGender.Male);
             },
-            colorBorder: Color(color_blue_zodiac),
-            colorBackground: Colors.white,
-            colorText: Color(color_blue_zodiac),
+            colorBorder: controller.selectGender == SelectGender.Male
+                ? Color(color_blue_zodiac)
+                : Color(colorThree),
+            colorBackground: controller.selectGender == SelectGender.Male
+                ? Colors.white
+                : Color(colorThree),
+            colorText: controller.selectGender == SelectGender.Male
+                ? Color(color_blue_zodiac)
+                : Color(color_blue_zodiac),
           ),
-        ),
+        );
+          }),
+      
         SizedBox(
           width: 20.0,
         ),
-        Container(
+         Observer(builder: (_) {
+            return Container(
           margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
           child: ButtonActionWidget(
             width: 120.0,
             labelText: female,
             onClick: () {
-              print(male);
+                controller.onChangeGender(SelectGender.Female);
             },
-            colorBorder: Color(colorThree),
-            colorBackground: Color(colorThree),
-            colorText: Color(color_blue_zodiac),
+            colorBorder: controller.selectGender == SelectGender.Female
+                ? Color(color_blue_zodiac)
+                : Color(colorThree),
+            colorBackground: controller.selectGender == SelectGender.Female
+                ? Colors.white
+                : Color(colorThree),
+            colorText: controller.selectGender == SelectGender.Female
+                ? Color(color_blue_zodiac)
+                : Color(color_blue_zodiac),
           ),
-        ),
+        );
+         })
       ],
     );
   }

@@ -14,7 +14,7 @@ abstract class _RegisterPatientControllerBase with Store {
    IUserService userService;
 
   @observable
-  int value = 0;
+  SelectGender selectGender = SelectGender.Female;
 
 
   @observable
@@ -29,6 +29,10 @@ abstract class _RegisterPatientControllerBase with Store {
 
   @observable
   PatientModel insertDoctorModel = PatientModel();
+
+  @action
+  onChangeGender(SelectGender newValue) => selectGender = newValue;
+ 
 
   @action
   Future<void> registerPatient() async {
@@ -64,3 +68,4 @@ abstract class _RegisterPatientControllerBase with Store {
     return null;
   }
 }
+enum SelectGender { Male,Female  }
