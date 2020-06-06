@@ -1,6 +1,6 @@
 import 'package:dentistry_api/excepetions/entity_not_found.dart';
 import 'package:dentistry_api/model/clinic_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 import 'package:dentistry_api/repositories/clinic_repository.dart';
 import 'package:dentistry_api/repositories/plan_repository.dart.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
@@ -32,7 +32,7 @@ class PatientService {
   }
 
   Future<bool> userExist(String fullName) async {
-      final UserModel userModel = await userRepository.findByName(fullName);
+      final PeopleModel userModel = await userRepository.findByName(fullName);
       if(userModel!=null){
         return true;
       }else{

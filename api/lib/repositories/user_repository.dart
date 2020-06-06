@@ -1,7 +1,7 @@
 import 'package:dentistry_api/model/address_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/patient_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
 
 import '../dentistry_api.dart';
@@ -11,19 +11,18 @@ class UserRepository {
 
   final ManagedContext context;
 
-  Future<UserModel> recoverUserByLoginPassword(String login, String senha) {
-    final query = Query<UserModel>(context)
-      ..where((userPerson) => userPerson.email).equalTo(login.trim())
-      ..where((userPerson) => userPerson.password).equalTo(senha.trim());
+  Future<DoctorModel> recoverUserByLoginPassword(String login, String senha) {
+    final query = Query<DoctorModel>(context)
+      ..where((userPerson) => userPerson.login.email).equalTo(login.trim())
+      ..where((userPerson) => userPerson.login.password).equalTo(senha.trim());
 
     return query.fetchOne();
   }
 
   Future saveDoctor(DoctorModel request) async {
-    print(request.user.password);
+    print(request.login.password);
     await context.transaction((transaction) async {
-      request.user.password =
-          Cryptography.encryptPassword(request.user.password);
+      request.login.password =Cryptography.encryptPassword(request.login.password);
 
       request.user.address = AddressModel();
       request.user.address.city = "a";
@@ -44,9 +43,7 @@ class UserRepository {
   }
 
   Future savePatient(PatientModel request) async {
-    print(request.user.password);
     await context.transaction((transaction) async {
-      request.user.password ="";
       request.user.address = AddressModel();
       request.user.address.city = "";
       request.user.address.neighborhood = "";
@@ -65,8 +62,8 @@ class UserRepository {
     });
   }
 
-  Future<UserModel> findId(int id) async {
-    final query = Query<UserModel>(context)
+  Future<PeopleModel> findId(int id) async {
+    final query = Query<PeopleModel>(context)
       ..where((usuario) => usuario.id).equalTo(id);
     return await query.fetchOne();
   }
@@ -87,16 +84,16 @@ Future<DoctorModel> findDoctorById(int id) async {
   }
 
   
-  Future<UserModel> findByName(String fullName) async {
-    final query = Query<UserModel>(context)
+  Future<PeopleModel> findByName(String fullName) async {
+    final query = Query<PeopleModel>(context)
       ..where((user) => user.fullName).equalTo(fullName);
 
     return await query.fetchOne();
   }
 
-  Future<UserModel> findByEmail(String email) async {
-    final query = Query<UserModel>(context)
-      ..where((user) => user.email).equalTo(email);
+  Future<DoctorModel> findByEmail(String email) async {
+    final query = Query<DoctorModel>(context)
+      ..where((user) => user.login.email).equalTo(email);
 
     return await query.fetchOne();
   }

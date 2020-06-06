@@ -4,7 +4,7 @@ import 'package:dentistry_api/controllers/work_invitation/dto/accept_work_invita
 import 'package:dentistry_api/model/clinic_model.dart';
 import 'package:dentistry_api/model/doctor_clinic_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 import 'package:dentistry_api/model/work_invitation.model.dart';
 import 'package:dentistry_api/repositories/clinic_repository.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
@@ -22,7 +22,7 @@ class WorkInvitationService {
   final ClinicRepository clinicRepository;
 
 
-  Future<List<WorkInvitationModel>> findAllBy(UserModel userModel) async {
+  Future<List<WorkInvitationModel>> findAllBy(PeopleModel userModel) async {
       final DoctorModel doctorModel = await userRepository.findDoctorByUserId(userModel.id);
       return  workInvitationRepository.findAllBy(doctorModel.id);
     

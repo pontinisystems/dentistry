@@ -1,6 +1,6 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/parameter_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 
 class PerssisionParameterModel extends ManagedObject<_PerssisionParameterModel> implements _PerssisionParameterModel {}
 
@@ -10,7 +10,7 @@ class _PerssisionParameterModel {
   int id;
 
   @Relate(#permissions)
-  UserModel userModel;
+  PeopleModel userModel;
 
   @Relate(#permissions)
   ParameterModel parameterModel;

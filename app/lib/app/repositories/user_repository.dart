@@ -49,7 +49,7 @@ class UserRepository implements IUserRepository {
   Future<void> registerDoctor(DoctorModel insertDoctorModel) async {
     final dio = CustomDio().instance;
     return dio.post('v1/doctor/register', data: {
-      'user': insertDoctorModel.user.toJson(),
+      'user': insertDoctorModel.people.toJson(),
       'cro': insertDoctorModel.cro,
     });
   }
@@ -58,7 +58,7 @@ class UserRepository implements IUserRepository {
   Future<void> registerPatient(PatientModel insertPatientModel) {
     final dio = CustomDio().instance;
     return dio.post('v1/patient/register', data: {
-      'user': insertPatientModel.user.toJson(),
+      'user': insertPatientModel.people.toJson(),
      
     });
   }

@@ -8,13 +8,15 @@ part of 'doctor_model.dart';
 
 DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) {
   return DoctorModel(
-    user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+    people: PeopleModel.fromJson(json['people'] as Map<String, dynamic>),
     cro: json['cro'] as String,
+    login: LoginModel.fromJson(json['login'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
     <String, dynamic>{
-      'user': instance.user,
+      'people': instance.people,
       'cro': instance.cro,
+      'login': instance.login,
     };

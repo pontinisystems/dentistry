@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:aqueduct/aqueduct.dart';
-import 'package:dentistry_api/controllers/doctor/dto/insert_user_request.dart';
 import 'package:dentistry_api/controllers/work_invitation/dto/accept_work_invitation_model.dart';
 import 'package:dentistry_api/model/message.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 import 'package:dentistry_api/services/work_invitation_service.dart';
 
 import '../../strings.dart';
@@ -48,7 +47,7 @@ class WorkInvitationController extends ResourceController {
 
   @Operation.get()
   Future<Response> findWorkInvitations() async {
-    final UserModel user = request.attachments['user'] as UserModel;
+    final PeopleModel user = request.attachments['user'] as PeopleModel;
 
     try {
       return await workInvitationService.findAllBy(user).then((data) {

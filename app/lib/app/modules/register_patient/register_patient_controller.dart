@@ -1,5 +1,6 @@
 import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/patient_model.dart';
+import 'package:dentistry/app/models/people_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:dio/dio.dart';
@@ -26,21 +27,43 @@ abstract class _RegisterPatientControllerBase with Store {
   @observable
   ObservableFuture _registerUserFuture;
 
-
   @observable
-  PatientModel insertDoctorModel = PatientModel();
+  PatientModel patienteModel = PatientModel(people: PeopleModel());
+
+
 
   @action
-  onChangeGender(SelectGender newValue) => selectGender = newValue;
+  onChangeGender(SelectGender newValue){
+    var people = patienteModel.people.copyWith(gender: newValue);
+    patienteModel = patienteModel.copyWith(people: people);
+  }
  
+
+  @action
+  onChangeFullName(String newValue){
+   var people = patienteModel.people.copyWith(fullName: newValue);
+    patienteModel = patienteModel.copyWith(people: people);
+  }
+
+  @action
+  onChangeBirthday(String newValue){
+    var people = patienteModel.people.copyWith(dateOfBirth: newValue);
+    patienteModel = patienteModel.copyWith(people: people);
+  }
+
+  @action
+  onChangeNumberPhone(String newValue){
+    var people = patienteModel.people.copyWith(numberPhone: newValue);
+    patienteModel = patienteModel.copyWith(people: people);
+  }
+
 
   @action
   Future<void> registerPatient() async {
     String validate = validateFields();
-    print(validate);
     if (validate == null) {
       try {
-        _registerUserFuture =  ObservableFuture(userService.registerPatient(insertDoctorModel));
+        _registerUserFuture =  ObservableFuture(userService.registerPatient(patienteModel));
         await _registerUserFuture;
       } on DioError catch (e) {
         print(e);
@@ -68,4 +91,4 @@ abstract class _RegisterPatientControllerBase with Store {
     return null;
   }
 }
-enum SelectGender { Male,Female  }
+

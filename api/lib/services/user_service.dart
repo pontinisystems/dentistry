@@ -1,7 +1,7 @@
 import 'package:dentistry_api/controllers/login/dto/login_request.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/patient_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
 import 'package:dentistry_api/utils/jwt_utils.dart';
@@ -19,11 +19,11 @@ class UserService {
 
     final String passwordEncrypts = Cryptography.encryptPassword(password);
 
-    final UserModel user = await userRepository.recoverUserByLoginPassword(
+    final DoctorModel user = await userRepository.recoverUserByLoginPassword(
         login, passwordEncrypts);
     print(user);
     if (user != null) {
-      return JwtUtils.generateTokenJWT(user);
+      return JwtUtils.generateTokenJWT(user.login);
     }
 
     return null;
@@ -37,7 +37,7 @@ class UserService {
     await userRepository.savePatient(request);
   }
 
-  Future<UserModel> findId(int id) async {
+  Future<PeopleModel> findId(int id) async {
     return await userRepository.findId(id);
   }
 }

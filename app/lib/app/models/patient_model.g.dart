@@ -8,13 +8,11 @@ part of 'patient_model.dart';
 
 PatientModel _$PatientModelFromJson(Map<String, dynamic> json) {
   return PatientModel(
-    user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-    cro: json['cro'] as String,
+    people: PeopleModel.fromJson(json['people'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
     <String, dynamic>{
-      'user': instance.user,
-      'cro': instance.cro,
+      'people': instance.people,
     };

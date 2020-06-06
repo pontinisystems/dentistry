@@ -1,9 +1,10 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/doctor_clinic_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 import 'package:dentistry_api/model/work_invitation.model.dart';
 
 import 'appointment_doctor_model.dart';
+import 'login_model.dart';
 
 class DoctorModel extends ManagedObject<_DoctorModel> implements _DoctorModel {
 
@@ -48,7 +49,15 @@ class _DoctorModel {
     isRequired: true,
     onDelete: DeleteRule.cascade,
   )
-  UserModel user;
+  PeopleModel user;
+
+
+    @Relate(
+    #login,
+    isRequired: true,
+    onDelete: DeleteRule.cascade,
+  )
+  LoginModel login;
 
   ManagedSet<DoctorClinicModel> doctorClinics;
 

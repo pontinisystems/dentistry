@@ -1,6 +1,6 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/appointment_doctor_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/people_model.dart';
 
 import 'address_model.dart';
 
@@ -23,7 +23,7 @@ class _PatientModel {
 
 
   @Relate(#user,isRequired: true,  onDelete: DeleteRule.cascade,  )
-  UserModel user;
+  PeopleModel user;
 
   @Relate(#address,isRequired: true,  onDelete: DeleteRule.cascade,  )
   AddressModel address;

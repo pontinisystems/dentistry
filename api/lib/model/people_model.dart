@@ -3,17 +3,13 @@ import 'package:dentistry_api/model/persmission_parameter_model.dart';
 
 import 'address_model.dart';
 
-class UserModel extends ManagedObject<_UserModel> implements _UserModel {}
+class PeopleModel extends ManagedObject<_PeopleModel> implements _PeopleModel {}
 
-@Table(name: 'user_person')
-class _UserModel {
+@Table(name: 'people')
+class _PeopleModel {
   @Column(primaryKey: true, autoincrement: true)
   int id;
-
-  String email;
-
-  String password;
-
+  
   String numberPhone;
 
   String fullName;
@@ -29,7 +25,7 @@ class _UserModel {
   )
   AddressModel address;
   
-  UserModel user;
+  PeopleModel user;
 
   ManagedSet<PerssisionParameterModel> permissions;
 }

@@ -1,18 +1,16 @@
 
+import 'package:dentistry/app/models/people_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:dentistry/app/models/user_model.dart';
 part 'patient_model.g.dart';
 
 @JsonSerializable(nullable: false)
 class PatientModel {
 
-  final UserModel user;
-  final String cro;
+  final PeopleModel people;
   
 
   PatientModel({
-    this.user,
-    this.cro,
+    this.people,
   
   
   });
@@ -23,11 +21,10 @@ class PatientModel {
 
 
   PatientModel copyWith({
-    String cro,
-    UserModel user,
+    PeopleModel people,
   }) {
     return PatientModel(
-      user: user ?? this.user,
+      people: people ?? this.people,
     );
   }
 }

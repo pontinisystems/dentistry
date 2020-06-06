@@ -24,8 +24,8 @@ class DoctorController extends ResourceController {
     }
 
     try {
-      final bool userExist = await doctorService.userExist(doctorModel.user.email);
-      
+      final bool userExist = await doctorService.doctorExist(doctorModel.login.email);
+
       if (userExist) {
         return Response.ok(
             Message(action: false, technicalMessage: entidadeExist, userMessage: doctorExist).toMap());

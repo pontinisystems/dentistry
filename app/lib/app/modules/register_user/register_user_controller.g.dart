@@ -49,19 +49,20 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
     });
   }
 
-  final _$_registerUserFutureAtom =
-      Atom(name: '_RegisterUserControllerBase._registerUserFuture');
+  final _$_registerpeopleFutureAtom =
+      Atom(name: '_RegisterUserControllerBase._registerpeopleFuture');
 
   @override
-  ObservableFuture<dynamic> get _registerUserFuture {
-    _$_registerUserFutureAtom.reportRead();
-    return super._registerUserFuture;
+  ObservableFuture<dynamic> get _registerpeopleFuture {
+    _$_registerpeopleFutureAtom.reportRead();
+    return super._registerpeopleFuture;
   }
 
   @override
-  set _registerUserFuture(ObservableFuture<dynamic> value) {
-    _$_registerUserFutureAtom.reportWrite(value, super._registerUserFuture, () {
-      super._registerUserFuture = value;
+  set _registerpeopleFuture(ObservableFuture<dynamic> value) {
+    _$_registerpeopleFutureAtom.reportWrite(value, super._registerpeopleFuture,
+        () {
+      super._registerpeopleFuture = value;
     });
   }
 
@@ -81,19 +82,19 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
     });
   }
 
-  final _$confirmPasswordAtom =
-      Atom(name: '_RegisterUserControllerBase.confirmPassword');
+  final _$confimrPasswordAtom =
+      Atom(name: '_RegisterUserControllerBase.confimrPassword');
 
   @override
-  String get confirmPassword {
-    _$confirmPasswordAtom.reportRead();
-    return super.confirmPassword;
+  String get confimrPassword {
+    _$confimrPasswordAtom.reportRead();
+    return super.confimrPassword;
   }
 
   @override
-  set confirmPassword(String value) {
-    _$confirmPasswordAtom.reportWrite(value, super.confirmPassword, () {
-      super.confirmPassword = value;
+  set confimrPassword(String value) {
+    _$confimrPasswordAtom.reportWrite(value, super.confimrPassword, () {
+      super.confimrPassword = value;
     });
   }
 
@@ -109,22 +110,22 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
       ActionController(name: '_RegisterUserControllerBase');
 
   @override
-  dynamic changeGender(int newValue) {
+  dynamic onChangeEmail(String newValue) {
     final _$actionInfo = _$_RegisterUserControllerBaseActionController
-        .startAction(name: '_RegisterUserControllerBase.changeGender');
+        .startAction(name: '_RegisterUserControllerBase.onChangeEmail');
     try {
-      return super.changeGender(newValue);
+      return super.onChangeEmail(newValue);
     } finally {
       _$_RegisterUserControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic changeEmail(String newValue) {
+  dynamic changePhoneNumber(String newValue) {
     final _$actionInfo = _$_RegisterUserControllerBaseActionController
-        .startAction(name: '_RegisterUserControllerBase.changeEmail');
+        .startAction(name: '_RegisterUserControllerBase.changePhoneNumber');
     try {
-      return super.changeEmail(newValue);
+      return super.changePhoneNumber(newValue);
     } finally {
       _$_RegisterUserControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -164,17 +165,6 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
   }
 
   @override
-  dynamic changePhoneNumber(String newValue) {
-    final _$actionInfo = _$_RegisterUserControllerBaseActionController
-        .startAction(name: '_RegisterUserControllerBase.changePhoneNumber');
-    try {
-      return super.changePhoneNumber(newValue);
-    } finally {
-      _$_RegisterUserControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic changeDateOfBirth(String newValue) {
     final _$actionInfo = _$_RegisterUserControllerBaseActionController
         .startAction(name: '_RegisterUserControllerBase.changeDateOfBirth');
@@ -197,12 +187,23 @@ mixin _$RegisterUserController on _RegisterUserControllerBase, Store {
   }
 
   @override
+  dynamic onChangeGender(SelectGender newValue) {
+    final _$actionInfo = _$_RegisterUserControllerBaseActionController
+        .startAction(name: '_RegisterUserControllerBase.onChangeGender');
+    try {
+      return super.onChangeGender(newValue);
+    } finally {
+      _$_RegisterUserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 insertDoctorModel: ${insertDoctorModel},
 registerSucess: ${registerSucess},
 errorMessage: ${errorMessage},
-confirmPassword: ${confirmPassword},
+confimrPassword: ${confimrPassword},
 state: ${state}
     ''';
   }

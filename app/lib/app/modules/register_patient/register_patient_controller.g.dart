@@ -73,19 +73,19 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
     });
   }
 
-  final _$insertDoctorModelAtom =
-      Atom(name: '_RegisterPatientControllerBase.insertDoctorModel');
+  final _$patienteModelAtom =
+      Atom(name: '_RegisterPatientControllerBase.patienteModel');
 
   @override
-  PatientModel get insertDoctorModel {
-    _$insertDoctorModelAtom.reportRead();
-    return super.insertDoctorModel;
+  PatientModel get patienteModel {
+    _$patienteModelAtom.reportRead();
+    return super.patienteModel;
   }
 
   @override
-  set insertDoctorModel(PatientModel value) {
-    _$insertDoctorModelAtom.reportWrite(value, super.insertDoctorModel, () {
-      super.insertDoctorModel = value;
+  set patienteModel(PatientModel value) {
+    _$patienteModelAtom.reportWrite(value, super.patienteModel, () {
+      super.patienteModel = value;
     });
   }
 
@@ -112,12 +112,46 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
   }
 
   @override
+  dynamic onChangeFullName(String newValue) {
+    final _$actionInfo = _$_RegisterPatientControllerBaseActionController
+        .startAction(name: '_RegisterPatientControllerBase.onChangeFullName');
+    try {
+      return super.onChangeFullName(newValue);
+    } finally {
+      _$_RegisterPatientControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic onChangeBirthday(String newValue) {
+    final _$actionInfo = _$_RegisterPatientControllerBaseActionController
+        .startAction(name: '_RegisterPatientControllerBase.onChangeBirthday');
+    try {
+      return super.onChangeBirthday(newValue);
+    } finally {
+      _$_RegisterPatientControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic onChangeNumberPhone(String newValue) {
+    final _$actionInfo =
+        _$_RegisterPatientControllerBaseActionController.startAction(
+            name: '_RegisterPatientControllerBase.onChangeNumberPhone');
+    try {
+      return super.onChangeNumberPhone(newValue);
+    } finally {
+      _$_RegisterPatientControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectGender: ${selectGender},
 errorMessage: ${errorMessage},
 registerSucess: ${registerSucess},
-insertDoctorModel: ${insertDoctorModel}
+patienteModel: ${patienteModel}
     ''';
   }
 }

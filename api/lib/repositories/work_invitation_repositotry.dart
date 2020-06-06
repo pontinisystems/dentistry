@@ -1,7 +1,6 @@
 import 'package:dentistry_api/model/clinic_model.dart';
 import 'package:dentistry_api/model/doctor_clinic_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
 import 'package:dentistry_api/model/work_invitation.model.dart';
 
 import '../dentistry_api.dart';

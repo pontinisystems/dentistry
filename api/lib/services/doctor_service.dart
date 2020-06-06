@@ -1,7 +1,6 @@
 import 'package:dentistry_api/excepetions/entity_not_found.dart';
 import 'package:dentistry_api/model/clinic_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
-import 'package:dentistry_api/model/user_model.dart';
 import 'package:dentistry_api/repositories/clinic_repository.dart';
 import 'package:dentistry_api/repositories/plan_repository.dart.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
@@ -32,9 +31,9 @@ class DoctorService {
 
   }
 
-  Future<bool> userExist(String email) async {
+  Future<bool> doctorExist(String email) async {
     print(email);
-      final UserModel userModel = await userRepository.findByEmail(email);
+      final DoctorModel userModel = await userRepository.findByEmail(email);
       if(userModel!=null){
         return true;
       }else{

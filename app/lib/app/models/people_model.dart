@@ -2,46 +2,35 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_model.g.dart';
+part 'people_model.g.dart';
 
 @JsonSerializable(nullable: false)
-class UserModel {
+class PeopleModel {
   
-  final String email;
   final String numberPhone;
-  final String password;
   final String fullName;
   final String dateOfBirth;
-final String gender;
+final SelectGender gender;
 
-  UserModel( {
+  PeopleModel( {
     this.gender,
-    this.email,
     this.numberPhone,
-    this.password,
     this.fullName,
     this.dateOfBirth,
   
   });
 
+  factory PeopleModel.fromJson(Map<String, dynamic> json) => _$PeopleModelFromJson(json);
+  Map<String, dynamic> toJson() => _$PeopleModelToJson(this);
 
-
-
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  UserModel copyWith({
-    String email,
+  PeopleModel copyWith({
     String numberPhone,
-    String pasword,
     String fullName,
     String dateOfBirth,
-    String gender,
+    SelectGender gender,
   }) {
-    return UserModel(
-      email: email ?? this.email,
+    return PeopleModel(
       numberPhone: numberPhone ?? this.numberPhone,
-      password: pasword ?? this.password,
       fullName: fullName ?? this.fullName,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       gender: gender ?? this.gender,
@@ -49,3 +38,4 @@ final String gender;
     );
   }
 }
+enum SelectGender { Male,Female  }

@@ -20,11 +20,11 @@ factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(j
  
 
   LoginModel copyWith({
-    String login,
+    String email,
     String password,
   }) {
     return LoginModel(
-      email: login ?? this.email,
+      email: email ?? this.email,
       password: password ?? this.password,
     );
   }

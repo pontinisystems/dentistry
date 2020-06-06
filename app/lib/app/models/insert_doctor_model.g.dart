@@ -8,15 +8,19 @@ part of 'insert_doctor_model.dart';
 
 InsertDoctorModel _$InsertDoctorModelFromJson(Map<String, dynamic> json) {
   return InsertDoctorModel(
-    userModel: json['user'] == null
+    peopleModel: json['people'] == null
         ? null
-        : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+        : PeopleModel.fromJson(json['people'] as Map<String, dynamic>),
+    loginModel: json['loginModel'] == null
+        ? null
+        : LoginModel.fromJson(json['loginModel'] as Map<String, dynamic>),
     cro: json['cro'] as String,
   );
 }
 
 Map<String, dynamic> _$InsertDoctorModelToJson(InsertDoctorModel instance) =>
     <String, dynamic>{
-      'user': instance.userModel,
+      'people': instance.peopleModel,
+      'loginModel': instance.loginModel,
       'cro': instance.cro,
     };
