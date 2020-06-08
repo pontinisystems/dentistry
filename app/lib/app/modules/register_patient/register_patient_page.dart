@@ -49,19 +49,20 @@ class _RegisterPatientPageState
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: _textField(
                 labelText: fullName,
-                maxLenght: 50,
+                maxLenght: 50, onChanged: controller.onChangeFullName,
               ),
             );
           }),
           Observer(builder: (_) {
             return _textField(
               labelText: email,
-              maxLenght: 50,
+              maxLenght: 50, onChanged: controller.onChangeEmail,
             );
           }),
           Observer(builder: (_) {
             return _textField(
               labelText: phoneNumber,
+              onChanged: controller.onChangeNumberPhone,
               maxLenght: 11,
               keyBoardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -74,7 +75,7 @@ class _RegisterPatientPageState
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: DateTimeField(
                 onChanged: (date) {
-                  //  controller.changeDateOfBirth(date.toString());
+                    controller.onChangeBirthday(date.toString());
                 },
                 decoration: InputDecoration(
                   counterText: '',

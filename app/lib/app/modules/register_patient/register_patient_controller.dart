@@ -38,6 +38,10 @@ abstract class _RegisterPatientControllerBase with Store {
     patienteModel = patienteModel.copyWith(people: people);
   }
  
+  @action
+  onChangeEmail(String newValue){
+    patienteModel =patienteModel.copyWith(email: newValue);
+  }
 
   @action
   onChangeFullName(String newValue){

@@ -7,11 +7,11 @@ part 'patient_model.g.dart';
 class PatientModel {
 
   final PeopleModel people;
-  
+  final String email;
 
   PatientModel({
     this.people,
-  
+    this.email
   
   });
 
@@ -21,10 +21,11 @@ class PatientModel {
 
 
   PatientModel copyWith({
-    PeopleModel people,
+    PeopleModel people, String email,
   }) {
     return PatientModel(
       people: people ?? this.people,
+      email: email ?? this.email,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:dentistry/app/core/custom_dio.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
-import 'package:dentistry/app/models/login_model.dart';
 import 'package:dentistry/app/models/patient_model.dart';
+import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'interfaces/i_user_repository.dart';
@@ -29,7 +29,7 @@ class UserRepository implements IUserRepository {
     prefs.clear();
   }
 
-  Future<bool> login(LoginModel loginModel) {
+  Future<bool> login(UserAcessModel loginModel) {
     final dio = CustomDio().instance;
     return dio
         .post('v1/user/login', data: loginModel.toJson())
@@ -48,10 +48,10 @@ class UserRepository implements IUserRepository {
 
   Future<void> registerDoctor(DoctorModel insertDoctorModel) async {
     final dio = CustomDio().instance;
-    return dio.post('v1/doctor/register', data: {
-      'user': insertDoctorModel.people.toJson(),
-      'cro': insertDoctorModel.cro,
-    });
+    print(insertDoctorModel.toJson());
+    return dio.post('v1/doctor/register', data: insertDoctorModel.people.toJson()
+     
+    );
   }
 
   @override

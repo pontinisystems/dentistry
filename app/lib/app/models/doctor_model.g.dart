@@ -10,7 +10,7 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) {
   return DoctorModel(
     people: PeopleModel.fromJson(json['people'] as Map<String, dynamic>),
     cro: json['cro'] as String,
-    login: LoginModel.fromJson(json['login'] as Map<String, dynamic>),
+    login: UserAcessModel.fromJson(json['login'] as Map<String, dynamic>),
   );
 }
 

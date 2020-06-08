@@ -13,7 +13,7 @@ InsertDoctorModel _$InsertDoctorModelFromJson(Map<String, dynamic> json) {
         : PeopleModel.fromJson(json['people'] as Map<String, dynamic>),
     loginModel: json['loginModel'] == null
         ? null
-        : LoginModel.fromJson(json['loginModel'] as Map<String, dynamic>),
+        : UserAcessModel.fromJson(json['loginModel'] as Map<String, dynamic>),
     cro: json['cro'] as String,
   );
 }

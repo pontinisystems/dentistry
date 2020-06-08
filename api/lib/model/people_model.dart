@@ -25,7 +25,7 @@ class _PeopleModel {
   )
   AddressModel address;
   
-  PeopleModel user;
+  PeopleModel people;
 
   ManagedSet<PerssisionParameterModel> permissions;
 }

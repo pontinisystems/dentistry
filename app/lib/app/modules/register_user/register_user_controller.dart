@@ -1,8 +1,8 @@
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
-import 'package:dentistry/app/models/login_model.dart';
 import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/people_model.dart';
+import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
@@ -22,7 +22,7 @@ abstract class _RegisterUserControllerBase with Store {
 
   @observable
   DoctorModel insertDoctorModel =
-      DoctorModel(people: PeopleModel(), login: LoginModel());
+      DoctorModel(people: PeopleModel(), login: UserAcessModel());
 
   @observable
   bool registerSucess;
@@ -41,7 +41,7 @@ abstract class _RegisterUserControllerBase with Store {
 
   @action
   onChangeEmail(String newValue) {
-     var login = insertDoctorModel.login.copyWith(email: newValue );
+     var login = insertDoctorModel.login.copyWith(login: newValue );
     insertDoctorModel = insertDoctorModel.copyWith(login: login);
   }
 

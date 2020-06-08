@@ -1,10 +1,10 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/doctor_clinic_model.dart';
 import 'package:dentistry_api/model/people_model.dart';
+import 'package:dentistry_api/model/user_acess_model.dart';
 import 'package:dentistry_api/model/work_invitation.model.dart';
 
 import 'appointment_doctor_model.dart';
-import 'login_model.dart';
 
 class DoctorModel extends ManagedObject<_DoctorModel> implements _DoctorModel {
 
@@ -16,13 +16,13 @@ static Map<String,String> validateField(DoctorModel doctorModel) {
       mapValidate['cro'] = 'Login obrigatório';
     }
     
-    if(doctorModel.user == null || doctorModel.user.fullName.isEmpty) {
+    if(doctorModel.people == null || doctorModel.people.fullName.isEmpty) {
       mapValidate['fullName'] = 'Nome obrigatório';
     }
     
    
     
-    if(doctorModel.user == null || doctorModel.user.numberPhone == null || doctorModel.user.numberPhone.isEmpty) {
+    if(doctorModel.people == null || doctorModel.people.numberPhone == null || doctorModel.people.numberPhone.isEmpty) {
       mapValidate['numberPhone'] = 'Número de telefone obrigatório';
     }
 
@@ -45,19 +45,19 @@ class _DoctorModel {
   String cro;
 
   @Relate(
+    #people,
+    isRequired: true,
+    onDelete: DeleteRule.cascade,
+  )
+  PeopleModel people;
+
+
+    @Relate(
     #user,
     isRequired: true,
     onDelete: DeleteRule.cascade,
   )
-  PeopleModel user;
-
-
-    @Relate(
-    #login,
-    isRequired: true,
-    onDelete: DeleteRule.cascade,
-  )
-  LoginModel login;
+  UserAcessModel user;
 
   ManagedSet<DoctorClinicModel> doctorClinics;
 

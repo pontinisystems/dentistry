@@ -14,16 +14,16 @@ class UserService {
   final UserRepository userRepository;
 
   Future<String> login(LoginRequest request) async {
-    final String login = request.email;
+    final String login = request.login;
     final String password = request.password;
 
     final String passwordEncrypts = Cryptography.encryptPassword(password);
 
-    final DoctorModel user = await userRepository.recoverUserByLoginPassword(
+    final DoctorModel doctor = await userRepository.recoverUserByLoginPassword(
         login, passwordEncrypts);
-    print(user);
-    if (user != null) {
-      return JwtUtils.generateTokenJWT(user.login);
+    print(doctor);
+    if (doctor != null) {
+      return JwtUtils.generateTokenJWT(doctor.user);
     }
 
     return null;

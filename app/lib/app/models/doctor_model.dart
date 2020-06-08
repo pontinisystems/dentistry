@@ -1,6 +1,6 @@
 
-import 'package:dentistry/app/models/login_model.dart';
 import 'package:dentistry/app/models/people_model.dart';
+import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'doctor_model.g.dart';
 
@@ -9,7 +9,7 @@ class DoctorModel {
 
   final PeopleModel people;
   final String cro;
-  final LoginModel login;
+  final UserAcessModel login;
   
 
   DoctorModel({ 
@@ -29,7 +29,7 @@ class DoctorModel {
   DoctorModel copyWith({
     String cro,
     PeopleModel people,
-    LoginModel login
+    UserAcessModel login
   }) {
     return DoctorModel(
       cro: cro ?? this.cro,

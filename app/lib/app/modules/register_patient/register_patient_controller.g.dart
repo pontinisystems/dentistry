@@ -112,6 +112,17 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
   }
 
   @override
+  dynamic onChangeEmail(String newValue) {
+    final _$actionInfo = _$_RegisterPatientControllerBaseActionController
+        .startAction(name: '_RegisterPatientControllerBase.onChangeEmail');
+    try {
+      return super.onChangeEmail(newValue);
+    } finally {
+      _$_RegisterPatientControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic onChangeFullName(String newValue) {
     final _$actionInfo = _$_RegisterPatientControllerBaseActionController
         .startAction(name: '_RegisterPatientControllerBase.onChangeFullName');

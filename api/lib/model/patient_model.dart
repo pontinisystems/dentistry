@@ -22,8 +22,8 @@ class _PatientModel {
 
 
 
-  @Relate(#user,isRequired: true,  onDelete: DeleteRule.cascade,  )
-  PeopleModel user;
+  @Relate(#people,isRequired: true,  onDelete: DeleteRule.cascade,  )
+  PeopleModel people;
 
   @Relate(#address,isRequired: true,  onDelete: DeleteRule.cascade,  )
   AddressModel address;

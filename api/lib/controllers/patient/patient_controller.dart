@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/message.dart';
 import 'package:dentistry_api/model/patient_model.dart';
-import 'package:dentistry_api/services/doctor_service.dart';
 import 'package:dentistry_api/services/patient_service.dart';
 import 'package:dentistry_api/services/user_service.dart';
 
@@ -31,7 +30,7 @@ class PatientController extends ResourceController {
     }
 
     try {
-      final bool userExist = await patientService.userExist(patientModel.user.fullName);
+      final bool userExist = await patientService.userExist(patientModel.people.fullName);
       
       if (userExist) {
         return Response.ok(

@@ -11,28 +11,29 @@ class UserRepository {
 
   final ManagedContext context;
 
-  Future<DoctorModel> recoverUserByLoginPassword(String login, String senha) {
-    final query = Query<DoctorModel>(context)
-      ..where((userPerson) => userPerson.login.email).equalTo(login.trim())
-      ..where((userPerson) => userPerson.login.password).equalTo(senha.trim());
+  Future<DoctorModel> recoverUserByLoginPassword(String login, String password) {
 
+    
+    final query = Query<DoctorModel>(context)
+      ..where((userPerson) => userPerson.user.login).equalTo(login.trim())
+      ..where((userPerson) => userPerson.user.password).equalTo(password.trim());
     return query.fetchOne();
   }
 
   Future saveDoctor(DoctorModel request) async {
-    print(request.login.password);
+    print(request.user.password);
     await context.transaction((transaction) async {
-      request.login.password =Cryptography.encryptPassword(request.login.password);
+      request.user.password =Cryptography.encryptPassword(request.user.password);
 
-      request.user.address = AddressModel();
-      request.user.address.city = "a";
-      request.user.address.neighborhood = "a";
-      request.user.address.street = "a";
-      request.user.address.number = "a";
+      request.people.address = AddressModel();
+      request.people.address.city = "a";
+      request.people.address.neighborhood = "a";
+      request.people.address.street = "a";
+      request.people.address.number = "a";
       await transaction
-          .insertObject(request.user.address)
+          .insertObject(request.people.address)
           .then((addressModel) async {
-        request.user.address = addressModel;
+        request.people.address = addressModel;
         await transaction.insertObject(request.user).then((newUser) {
           return transaction.insertObject(DoctorModel()
             ..user = newUser
@@ -44,18 +45,18 @@ class UserRepository {
 
   Future savePatient(PatientModel request) async {
     await context.transaction((transaction) async {
-      request.user.address = AddressModel();
-      request.user.address.city = "";
-      request.user.address.neighborhood = "";
-      request.user.address.street = "";
-      request.user.address.number = "";
+      request.people.address = AddressModel();
+      request.people.address.city = "";
+      request.people.address.neighborhood = "";
+      request.people.address.street = "";
+      request.people.address.number = "";
       await transaction
-          .insertObject(request.user.address)
+          .insertObject(request.people.address)
           .then((addressModel) async {
-        request.user.address = addressModel;
-        await transaction.insertObject(request.user).then((newUser) {
+        request.people.address = addressModel;
+        await transaction.insertObject(request.people).then((newUser) {
           return transaction.insertObject(PatientModel()
-            ..user = newUser
+            ..people = newUser
           );
         });
       });
@@ -93,7 +94,7 @@ Future<DoctorModel> findDoctorById(int id) async {
 
   Future<DoctorModel> findByEmail(String email) async {
     final query = Query<DoctorModel>(context)
-      ..where((user) => user.login.email).equalTo(email);
+      ..where((user) => user.user.login).equalTo(email);
 
     return await query.fetchOne();
   }
