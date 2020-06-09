@@ -4,9 +4,11 @@ VALUES('Blumenau', 'Victor Konder', 'Max Hering', '472');
 
 select * from address a 
 
+
+
 INSERT INTO public.clinic
 (cnpj, "name", description, address_id)
-VALUES('00856170000172', 'OdontoPrev', '', 0);
+VALUES('00856170000172', 'OdontoPrev', '', 2);
 
 
 INSERT INTO public.address

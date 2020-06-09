@@ -22,7 +22,7 @@ abstract class _RegisterUserControllerBase with Store {
 
   @observable
   DoctorModel insertDoctorModel =
-      DoctorModel(people: PeopleModel(), login: UserAcessModel());
+      DoctorModel(people: PeopleModel(gender: SelectGender.Male), userAcess: UserAcessModel());
 
   @observable
   bool registerSucess;
@@ -41,8 +41,8 @@ abstract class _RegisterUserControllerBase with Store {
 
   @action
   onChangeEmail(String newValue) {
-     var login = insertDoctorModel.login.copyWith(login: newValue );
-    insertDoctorModel = insertDoctorModel.copyWith(login: login);
+     var login = insertDoctorModel.userAcess.copyWith(login: newValue );
+    insertDoctorModel = insertDoctorModel.copyWith(userAcess: login);
   }
 
   @action
@@ -53,8 +53,8 @@ abstract class _RegisterUserControllerBase with Store {
 
   @action
   changePassword(String newValue) {
-    var login = insertDoctorModel.login.copyWith(password: newValue);
-    insertDoctorModel = insertDoctorModel.copyWith(login: login);
+    var login = insertDoctorModel.userAcess.copyWith(password: newValue);
+    insertDoctorModel = insertDoctorModel.copyWith(userAcess: login);
   }
 
   @action

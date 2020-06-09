@@ -10,7 +10,7 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) {
   return DoctorModel(
     people: PeopleModel.fromJson(json['people'] as Map<String, dynamic>),
     cro: json['cro'] as String,
-    login: UserAcessModel.fromJson(json['login'] as Map<String, dynamic>),
+    userAcess: UserAcessModel.fromJson(json['login'] as Map<String, dynamic>),
   );
 }
 
@@ -18,5 +18,5 @@ Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
     <String, dynamic>{
       'people': instance.people,
       'cro': instance.cro,
-      'login': instance.login,
+      'login': instance.userAcess,
     };

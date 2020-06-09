@@ -35,7 +35,6 @@ class UserRepository implements IUserRepository {
         .post('v1/user/login', data: loginModel.toJson())
         .then((res) async {
       final String token = res.data['token'];
-      print(token);
       if (token != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', token);
@@ -47,9 +46,15 @@ class UserRepository implements IUserRepository {
   }
 
   Future<void> registerDoctor(DoctorModel insertDoctorModel) async {
+    print(insertDoctorModel.people.fullName);
+    print(insertDoctorModel.cro);
+    print(insertDoctorModel.userAcess.login);
     final dio = CustomDio().instance;
-    print(insertDoctorModel.toJson());
-    return dio.post('v1/doctor/register', data: insertDoctorModel.people.toJson()
+    return dio.post('v1/doctor/register', data:{
+      'cro':insertDoctorModel.cro,
+      'people':insertDoctorModel.people,
+      'userAcess':insertDoctorModel.userAcess
+    }
      
     );
   }

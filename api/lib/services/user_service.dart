@@ -2,6 +2,7 @@ import 'package:dentistry_api/controllers/login/dto/login_request.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/patient_model.dart';
 import 'package:dentistry_api/model/people_model.dart';
+import 'package:dentistry_api/model/user_acess_model.dart';
 import 'package:dentistry_api/repositories/user_repository.dart';
 import 'package:dentistry_api/utils/cryptography_util.dart';
 import 'package:dentistry_api/utils/jwt_utils.dart';
@@ -23,7 +24,7 @@ class UserService {
         login, passwordEncrypts);
     print(doctor);
     if (doctor != null) {
-      return JwtUtils.generateTokenJWT(doctor.user);
+      return JwtUtils.generateTokenJWT(doctor.userAcess);
     }
 
     return null;
@@ -39,5 +40,9 @@ class UserService {
 
   Future<PeopleModel> findId(int id) async {
     return await userRepository.findId(id);
+  }
+  
+  Future<UserAcessModel> findUserAcess(int id) async {
+    return await userRepository.findUserAcess(id);
   }
 }

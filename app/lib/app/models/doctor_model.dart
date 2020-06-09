@@ -9,13 +9,13 @@ class DoctorModel {
 
   final PeopleModel people;
   final String cro;
-  final UserAcessModel login;
+  final UserAcessModel userAcess;
   
 
   DoctorModel({ 
     this.people,
     this.cro,
-    this.login
+    this.userAcess
   
   });
 
@@ -29,12 +29,12 @@ class DoctorModel {
   DoctorModel copyWith({
     String cro,
     PeopleModel people,
-    UserAcessModel login
+    UserAcessModel userAcess
   }) {
     return DoctorModel(
       cro: cro ?? this.cro,
       people: people ?? this.people,
-      login: login ?? this.login,
+      userAcess: userAcess ?? this.userAcess,
     );
   }
 }

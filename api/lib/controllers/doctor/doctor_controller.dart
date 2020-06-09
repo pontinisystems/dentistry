@@ -24,7 +24,7 @@ class DoctorController extends ResourceController {
     }
 
     try {
-      final bool userExist = await doctorService.doctorExist(doctorModel.user.login);
+      final bool userExist = await doctorService.doctorExist(doctorModel.userAcess.login);
 
       if (userExist) {
         return Response.ok(
@@ -42,6 +42,7 @@ class DoctorController extends ResourceController {
     
     
     } catch (e) {
+      print(e);
       return Response.serverError(
           body: Message(
               action: false,

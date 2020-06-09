@@ -1,3 +1,4 @@
+import 'package:dentistry_api/model/user_acess_model.dart';
 import 'package:dentistry_api/services/user_service.dart';
 import 'package:dentistry_api/utils/jwt_utils.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
@@ -18,6 +19,8 @@ class JWTAuthentication extends Controller {
 
   @override
   FutureOr<RequestOrResponse> handle(Request request) async {
+    print('object');
+    
     final authHeader = request.raw.headers['authorization'];
 
     if (authHeader == null || authHeader.isEmpty) {
@@ -43,10 +46,8 @@ class JWTAuthentication extends Controller {
       if(dateNow.isAfter(claimSet.expiry)){
         return Response.unauthorized(); // Alterinativa é dar um refresh ......
       }
-
-      final  user = await service.findId(userId); 
-
-      request.attachments['user']=user;
+      final   userAcessModel = await service.findUserAcess(userId); 
+      request.attachments['userAcess']=userAcessModel;
 
       return request;
 

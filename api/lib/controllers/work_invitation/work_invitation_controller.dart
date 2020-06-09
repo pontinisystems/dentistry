@@ -4,6 +4,7 @@ import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/controllers/work_invitation/dto/accept_work_invitation_model.dart';
 import 'package:dentistry_api/model/message.dart';
 import 'package:dentistry_api/model/people_model.dart';
+import 'package:dentistry_api/model/user_acess_model.dart';
 import 'package:dentistry_api/services/work_invitation_service.dart';
 
 import '../../strings.dart';
@@ -47,10 +48,12 @@ class WorkInvitationController extends ResourceController {
 
   @Operation.get()
   Future<Response> findWorkInvitations() async {
-    final PeopleModel user = request.attachments['user'] as PeopleModel;
+    final UserAcessModel userAcess = request.attachments['userAcess'] as UserAcessModel;
+
 
     try {
-      return await workInvitationService.findAllBy(user).then((data) {
+
+      return await workInvitationService.findAllBy(userAcess).then((data) {
         return data
             .map((m) => {
                   'id': m.id,
@@ -59,8 +62,8 @@ class WorkInvitationController extends ResourceController {
                 })
             .toList();
       }).then((lista) => Response.ok(lista));
-    } catch (e) {
-      print(e.toString());
+    } catch (e,s) {
+      print("errourr"+e.toString());
       return Response.serverError(
           body: Message(
                   action: false,

@@ -28,7 +28,7 @@ abstract class _RegisterPatientControllerBase with Store {
   ObservableFuture _registerUserFuture;
 
   @observable
-  PatientModel patienteModel = PatientModel(people: PeopleModel());
+  PatientModel patienteModel = PatientModel(people: PeopleModel(gender: SelectGender.Male));
 
 
 
