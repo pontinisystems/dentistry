@@ -71,7 +71,7 @@ class UserRepository {
   Future<UserAcessModel> findUserAcess(int id) async {
     final query = Query<UserAcessModel>(context)
       ..where((userAcess) => userAcess.id).equalTo(id);
-     await query.fetchOne();
+     return await query.fetchOne();
   }
 
   Future<PeopleModel> findId(int id) async {
@@ -81,6 +81,7 @@ class UserRepository {
   }
 
   Future<DoctorModel> findDoctorByUserAcessId(int id) async {
+    print('objectfindDoctorByUserAcessId');
     final query = Query<DoctorModel>(context)
       ..where((doctor) => doctor.userAcess.id).identifiedBy(id);
 

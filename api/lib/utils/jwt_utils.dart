@@ -6,6 +6,7 @@ class JwtUtils {
   static const String _jwtChavePrivada = 'DuGru4jQvUMxP9eyTvDxwpBJhhMTnCXU8cG8YYu8g4jhpRermB5jHSk';
 
   static String generateTokenJWT(UserAcessModel user) {
+    print('generateTokenJWT');
     final claimSet = JwtClaim(
       issuer: 'http://localhost',
       subject: user.id.toString(),

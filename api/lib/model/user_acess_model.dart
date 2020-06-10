@@ -1,4 +1,5 @@
 import 'package:aqueduct/aqueduct.dart';
+import 'package:dentistry_api/model/persmission_parameter_model.dart';
 
 class UserAcessModel extends ManagedObject<_UserAcessModel> implements _UserAcessModel {}
 
@@ -12,4 +13,7 @@ class _UserAcessModel {
   String password;
 
   UserAcessModel user;
+
+  ManagedSet<PerssisionParameterModel> permissions;
+
 }

@@ -50,7 +50,6 @@ class WorkInvitationController extends ResourceController {
   Future<Response> findWorkInvitations() async {
     final UserAcessModel userAcess = request.attachments['userAcess'] as UserAcessModel;
 
-
     try {
 
       return await workInvitationService.findAllBy(userAcess).then((data) {

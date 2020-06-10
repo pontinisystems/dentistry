@@ -44,5 +44,10 @@ VALUES('OdontoPrev', 'Olá, você gostaria de fazer parte da equipe ?', true, 1,
 
 
 
+INSERT INTO public."parameter"
+("name", description, lastmodifielddate, createddate)
+VALUES('REGISTER_PATIENT', 'Registro de pacientes', now(), now());
+
+
 
 DROP SCHEMA public CASCADE;

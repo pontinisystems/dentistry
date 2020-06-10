@@ -34,6 +34,7 @@ abstract class _RegisterPatientControllerBase with Store {
 
   @action
   onChangeGender(SelectGender newValue){
+    print('mudou');
     var people = patienteModel.people.copyWith(gender: newValue);
     patienteModel = patienteModel.copyWith(people: people);
   }

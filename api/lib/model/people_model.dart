@@ -27,5 +27,4 @@ class _PeopleModel {
   
   PeopleModel people;
 
-  ManagedSet<PerssisionParameterModel> permissions;
 }

@@ -49,14 +49,16 @@ class _RegisterPatientPageState
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: _textField(
                 labelText: fullName,
-                maxLenght: 50, onChanged: controller.onChangeFullName,
+                maxLenght: 50,
+                onChanged: controller.onChangeFullName,
               ),
             );
           }),
           Observer(builder: (_) {
             return _textField(
               labelText: email,
-              maxLenght: 50, onChanged: controller.onChangeEmail,
+              maxLenght: 50,
+              onChanged: controller.onChangeEmail,
             );
           }),
           Observer(builder: (_) {
@@ -75,7 +77,7 @@ class _RegisterPatientPageState
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: DateTimeField(
                 onChanged: (date) {
-                    controller.onChangeBirthday(date.toString());
+                  controller.onChangeBirthday(date.toString());
                 },
                 decoration: InputDecoration(
                   counterText: '',
@@ -92,9 +94,7 @@ class _RegisterPatientPageState
               ),
             );
           }),
-
-           _makeGender(),
-       
+          _makeGender(),
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
@@ -165,58 +165,59 @@ class _RegisterPatientPageState
   }
 
   Widget _makeGender() {
-    return Row(
+    return   Observer(builder: (_) {
+          return
+    
+    Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-          Observer(builder: (_) {
-            
-            return   Container(
-          margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
-          child: ButtonActionWidget(
-            width: 120.0,
-            labelText: male,
-            onClick: () {
-              controller.onChangeGender(SelectGender.Male);
-            },
-            colorBorder: controller.selectGender == SelectGender.Male
-                ? Color(color_blue_zodiac)
-                : Color(colorThree),
-            colorBackground: controller.selectGender == SelectGender.Male
-                ? Colors.white
-                : Color(colorThree),
-            colorText: controller.selectGender == SelectGender.Male
-                ? Color(color_blue_zodiac)
-                : Color(color_blue_zodiac),
-          ),
-        );
-          }),
-      
+        Observer(builder: (_) {
+          return Container(
+            margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
+            child: ButtonActionWidget(
+              width: 120.0,
+              labelText: male,
+              onClick: () {
+                controller.onChangeGender(SelectGender.Male);
+              },
+              colorBorder: controller.selectGender == SelectGender.Male
+                  ? Color(color_blue_zodiac)
+                  : Color(colorThree),
+              colorBackground: controller.selectGender == SelectGender.Male
+                  ? Colors.white
+                  : Color(colorThree),
+              colorText: controller.selectGender == SelectGender.Male
+                  ? Color(color_blue_zodiac)
+                  : Color(color_blue_zodiac),
+            ),
+          );
+        }),
         SizedBox(
           width: 20.0,
         ),
-         Observer(builder: (_) {
-            return Container(
-          margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
-          child: ButtonActionWidget(
-            width: 120.0,
-            labelText: female,
-            onClick: () {
+       Container(
+            margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
+            child: ButtonActionWidget(
+              width: 120.0,
+              labelText: female,
+              onClick: () {
                 controller.onChangeGender(SelectGender.Female);
-            },
-            colorBorder: controller.selectGender == SelectGender.Female
-                ? Color(color_blue_zodiac)
-                : Color(colorThree),
-            colorBackground: controller.selectGender == SelectGender.Female
-                ? Colors.white
-                : Color(colorThree),
-            colorText: controller.selectGender == SelectGender.Female
-                ? Color(color_blue_zodiac)
-                : Color(color_blue_zodiac),
-          ),
-        );
-         })
+              },
+              colorBorder: controller.selectGender == SelectGender.Female
+                  ? Color(color_blue_zodiac)
+                  : Color(colorThree),
+              colorBackground: controller.selectGender == SelectGender.Female
+                  ? Colors.white
+                  : Color(colorThree),
+              colorText: controller.selectGender == SelectGender.Female
+                  ? Color(color_blue_zodiac)
+                  : Color(color_blue_zodiac),
+            ),
+          )
+        
       ],
     );
+    });
   }
 }

@@ -25,7 +25,6 @@ class WorkInvitationService {
 
   Future<List<WorkInvitationModel>> findAllBy(UserAcessModel userAcessModel) async {
       final DoctorModel doctorModel = await userRepository.findDoctorByUserAcessId(userAcessModel.id);
-      print("find doctor "+doctorModel.people.fullName);
       return  workInvitationRepository.findAllBy(doctorModel.id);
     
   }

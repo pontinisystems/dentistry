@@ -19,7 +19,7 @@ class JWTAuthentication extends Controller {
 
   @override
   FutureOr<RequestOrResponse> handle(Request request) async {
-    print('object');
+    print('object'+ request.raw.headers['authorization'].toString());
     
     final authHeader = request.raw.headers['authorization'];
 
@@ -46,7 +46,11 @@ class JWTAuthentication extends Controller {
       if(dateNow.isAfter(claimSet.expiry)){
         return Response.unauthorized(); // Alterinativa é dar um refresh ......
       }
+      print('user id que ele vai buscar a '+userId.toString());
       final   userAcessModel = await service.findUserAcess(userId); 
+  
+   
+
       request.attachments['userAcess']=userAcessModel;
 
       return request;
