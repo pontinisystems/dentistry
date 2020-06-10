@@ -21,8 +21,8 @@ class CustomDio {
 
   BaseOptions _options = BaseOptions(
     baseUrl: 'http://192.168.0.6:8888/',
-    connectTimeout: 30000,
-    receiveTimeout: 30000,
+    connectTimeout: 60000,
+    receiveTimeout: 60000,
   );
 
   Dio get instance => _dio;

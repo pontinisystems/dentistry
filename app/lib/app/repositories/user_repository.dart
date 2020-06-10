@@ -1,5 +1,6 @@
 import 'package:dentistry/app/core/custom_dio.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
+import 'package:dentistry/app/models/insert_patient_model.dart';
 import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,10 +61,11 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<void> registerPatient(PatientModel insertPatientModel) {
+  Future<void> registerPatient(InsertPatientModel insertPatientModel) {
     final dio = CustomDio().instance;
     return dio.post('v1/patient/register', data: {
-      'user': insertPatientModel.people.toJson(),
+      'idClinic':insertPatientModel.idClinic,
+      'patient': insertPatientModel.patienteModel.toJson(),
      
     });
   }

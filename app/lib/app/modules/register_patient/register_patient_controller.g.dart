@@ -73,19 +73,19 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
     });
   }
 
-  final _$patienteModelAtom =
-      Atom(name: '_RegisterPatientControllerBase.patienteModel');
+  final _$insertPatientModelAtom =
+      Atom(name: '_RegisterPatientControllerBase.insertPatientModel');
 
   @override
-  PatientModel get patienteModel {
-    _$patienteModelAtom.reportRead();
-    return super.patienteModel;
+  InsertPatientModel get insertPatientModel {
+    _$insertPatientModelAtom.reportRead();
+    return super.insertPatientModel;
   }
 
   @override
-  set patienteModel(PatientModel value) {
-    _$patienteModelAtom.reportWrite(value, super.patienteModel, () {
-      super.patienteModel = value;
+  set insertPatientModel(InsertPatientModel value) {
+    _$insertPatientModelAtom.reportWrite(value, super.insertPatientModel, () {
+      super.insertPatientModel = value;
     });
   }
 
@@ -162,7 +162,7 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
 selectGender: ${selectGender},
 errorMessage: ${errorMessage},
 registerSucess: ${registerSucess},
-patienteModel: ${patienteModel}
+insertPatientModel: ${insertPatientModel}
     ''';
   }
 }

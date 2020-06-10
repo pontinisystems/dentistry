@@ -1,3 +1,4 @@
+import 'package:dentistry/app/models/insert_patient_model.dart';
 import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/models/people_model.dart';
@@ -28,38 +29,39 @@ abstract class _RegisterPatientControllerBase with Store {
   ObservableFuture _registerUserFuture;
 
   @observable
-  PatientModel patienteModel = PatientModel(people: PeopleModel(gender: SelectGender.Male));
+  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: "1",patienteModel: PatientModel(people: PeopleModel(gender: SelectGender.Male)) );
+ 
 
 
 
   @action
   onChangeGender(SelectGender newValue){
     print('mudou');
-    var people = patienteModel.people.copyWith(gender: newValue);
-    patienteModel = patienteModel.copyWith(people: people);
+    var people = insertPatientModel.patienteModel.people.copyWith(gender: newValue);
+    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
   }
  
   @action
   onChangeEmail(String newValue){
-    patienteModel =patienteModel.copyWith(email: newValue);
+    insertPatientModel.patienteModel =insertPatientModel.patienteModel.copyWith(email: newValue);
   }
 
   @action
   onChangeFullName(String newValue){
-   var people = patienteModel.people.copyWith(fullName: newValue);
-    patienteModel = patienteModel.copyWith(people: people);
+   var people = insertPatientModel.patienteModel.people.copyWith(fullName: newValue);
+    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
   }
 
   @action
   onChangeBirthday(String newValue){
-    var people = patienteModel.people.copyWith(dateOfBirth: newValue);
-    patienteModel = patienteModel.copyWith(people: people);
+    var people = insertPatientModel.patienteModel.people.copyWith(dateOfBirth: newValue);
+    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
   }
 
   @action
   onChangeNumberPhone(String newValue){
-    var people = patienteModel.people.copyWith(numberPhone: newValue);
-    patienteModel = patienteModel.copyWith(people: people);
+    var people = insertPatientModel.patienteModel.people.copyWith(numberPhone: newValue);
+    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
   }
 
 
@@ -68,7 +70,7 @@ abstract class _RegisterPatientControllerBase with Store {
     String validate = validateFields();
     if (validate == null) {
       try {
-        _registerUserFuture =  ObservableFuture(userService.registerPatient(patienteModel));
+        _registerUserFuture =  ObservableFuture(userService.registerPatient(insertPatientModel));
         await _registerUserFuture;
       } on DioError catch (e) {
         print(e);
@@ -92,7 +94,11 @@ abstract class _RegisterPatientControllerBase with Store {
   }
 
   String validateFields() {
-  
+    if(insertPatientModel?.patienteModel?.people==null){
+      print('object');
+      return requeridField;
+    }
+
     return null;
   }
 }

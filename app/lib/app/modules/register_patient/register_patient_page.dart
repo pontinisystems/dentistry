@@ -94,7 +94,8 @@ class _RegisterPatientPageState
               ),
             );
           }),
-          _makeGender(),
+       
+          _makeGenderV2(),
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
@@ -131,6 +132,8 @@ class _RegisterPatientPageState
             errorText: errorText == null ? null : errorText()));
   }
 
+  
+
   Widget _makeHeader() {
     return Container(
         color: Colors.white,
@@ -164,11 +167,8 @@ class _RegisterPatientPageState
         ]));
   }
 
-  Widget _makeGender() {
-    return   Observer(builder: (_) {
-          return
-    
-    Row(
+  Widget _makeGenderV2() {
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -181,13 +181,16 @@ class _RegisterPatientPageState
               onClick: () {
                 controller.onChangeGender(SelectGender.Male);
               },
-              colorBorder: controller.selectGender == SelectGender.Male
+              colorBorder: controller.insertPatientModel.patienteModel.people.gender ==
+                      SelectGender.Male
                   ? Color(color_blue_zodiac)
                   : Color(colorThree),
-              colorBackground: controller.selectGender == SelectGender.Male
+              colorBackground: controller.insertPatientModel.patienteModel.people.gender ==
+                      SelectGender.Male
                   ? Colors.white
                   : Color(colorThree),
-              colorText: controller.selectGender == SelectGender.Male
+              colorText: controller.insertPatientModel.patienteModel.people.gender ==
+                      SelectGender.Male
                   ? Color(color_blue_zodiac)
                   : Color(color_blue_zodiac),
             ),
@@ -196,7 +199,8 @@ class _RegisterPatientPageState
         SizedBox(
           width: 20.0,
         ),
-       Container(
+        Observer(builder: (_) {
+          return Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
               width: 120.0,
@@ -204,20 +208,24 @@ class _RegisterPatientPageState
               onClick: () {
                 controller.onChangeGender(SelectGender.Female);
               },
-              colorBorder: controller.selectGender == SelectGender.Female
+              colorBorder: controller.insertPatientModel.patienteModel.people.gender ==
+                      SelectGender.Female
                   ? Color(color_blue_zodiac)
                   : Color(colorThree),
-              colorBackground: controller.selectGender == SelectGender.Female
+              colorBackground: controller.insertPatientModel.patienteModel.people.gender ==
+                      SelectGender.Female
                   ? Colors.white
                   : Color(colorThree),
-              colorText: controller.selectGender == SelectGender.Female
+              colorText: controller.insertPatientModel.patienteModel.people.gender ==
+                      SelectGender.Female
                   ? Color(color_blue_zodiac)
                   : Color(color_blue_zodiac),
             ),
-          )
-        
+          );
+        })
       ],
     );
-    });
   }
+
+ 
 }
