@@ -1,7 +1,8 @@
 import 'package:dentistry/app/core/custom_dio.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
-import 'package:dentistry/app/models/login_model.dart';
+import 'package:dentistry/app/models/insert_patient_model.dart';
 import 'package:dentistry/app/models/patient_model.dart';
+import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'interfaces/i_user_repository.dart';
@@ -29,13 +30,12 @@ class UserRepository implements IUserRepository {
     prefs.clear();
   }
 
-  Future<bool> login(LoginModel loginModel) {
+  Future<bool> login(UserAcessModel loginModel) {
     final dio = CustomDio().instance;
     return dio
         .post('v1/user/login', data: loginModel.toJson())
         .then((res) async {
       final String token = res.data['token'];
-      print(token);
       if (token != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', token);
@@ -47,18 +47,25 @@ class UserRepository implements IUserRepository {
   }
 
   Future<void> registerDoctor(DoctorModel insertDoctorModel) async {
+    print(insertDoctorModel.people.fullName);
+    print(insertDoctorModel.cro);
+    print(insertDoctorModel.userAcess.login);
     final dio = CustomDio().instance;
-    return dio.post('v1/doctor/register', data: {
-      'user': insertDoctorModel.user.toJson(),
-      'cro': insertDoctorModel.cro,
-    });
+    return dio.post('v1/doctor/register', data:{
+      'cro':insertDoctorModel.cro,
+      'people':insertDoctorModel.people,
+      'userAcess':insertDoctorModel.userAcess
+    }
+     
+    );
   }
 
   @override
-  Future<void> registerPatient(PatientModel insertPatientModel) {
+  Future<void> registerPatient(InsertPatientModel insertPatientModel) {
     final dio = CustomDio().instance;
     return dio.post('v1/patient/register', data: {
-      'user': insertPatientModel.user.toJson(),
+      'idClinic':insertPatientModel.idClinic,
+      'patient': insertPatientModel.patienteModel.toJson(),
      
     });
   }

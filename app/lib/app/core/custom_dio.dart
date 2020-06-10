@@ -20,15 +20,16 @@ class CustomDio {
   }
 
   BaseOptions _options = BaseOptions(
-    baseUrl: 'http://192.168.15.2:8888/',
-    connectTimeout: 30000,
-    receiveTimeout: 30000,
+    baseUrl: 'http://192.168.0.6:8888/',
+    connectTimeout: 60000,
+    receiveTimeout: 60000,
   );
 
   Dio get instance => _dio;
   
   _onRequest(RequestOptions options) async {
     var token = await UserRepository().getToken();
+    print("TOKEN =====> "+token.toString());
     options.headers['Authorization'] = token;
   }
 

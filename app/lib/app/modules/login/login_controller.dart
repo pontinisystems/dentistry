@@ -1,7 +1,7 @@
 
 import 'package:dentistry/app/core/store_state.dart';
-import 'package:dentistry/app/models/login_model.dart';
 import 'package:dentistry/app/models/message.dart';
+import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:dentistry/app/repositories/interfaces/i_user_repository.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
@@ -57,7 +57,7 @@ abstract class _LoginControllerBase with Store {
     if(validateLogin()==null){
       try {
         loginSuccess = null;
-        _loginFuture = ObservableFuture(_userRepository.login(LoginModel(email: login, password: password)));
+        _loginFuture = ObservableFuture(_userRepository.login(UserAcessModel(login: login, password: password)));
         loginSuccess = await _loginFuture;
 
         if(loginSuccess==false){

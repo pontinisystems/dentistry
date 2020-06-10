@@ -3,6 +3,7 @@ import 'package:dentistry/app/components/button_action_widget.dart';
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/mixins/loader_mixin.dart';
 import 'package:dentistry/app/models/message.dart';
+import 'package:dentistry/app/models/people_model.dart';
 import 'package:dentistry/app/modules/register_user/register_user_controller.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
@@ -23,12 +24,11 @@ class RegisterUserPage extends StatefulWidget {
   _RegisterUserPageState createState() => _RegisterUserPageState();
 }
 
-
-
 class _RegisterUserPageState
-    extends ModularState<RegisterUserPage, RegisterUserController>   with LoaderMixin {
- List<ReactionDisposer> _disposer;
-  
+    extends ModularState<RegisterUserPage, RegisterUserController>
+    with LoaderMixin {
+  List<ReactionDisposer> _disposer;
+
   @override
   void dispose() {
     _disposer.forEach((dispose) => dispose());
@@ -38,22 +38,22 @@ class _RegisterUserPageState
   @override
   void initState() {
     super.initState();
-      _disposer ??= [
-       reaction((_) => controller.state, (StoreState state) {
+    _disposer ??= [
+      reaction((_) => controller.state, (StoreState state) {
         print(state);
         if (state == StoreState.loading) {
           showLoader();
         } else if (state == StoreState.loaded) {
           hideLoader();
           Get.offAllNamed('/dashboard');
-        }else if(state == StoreState.error){
+        } else if (state == StoreState.error) {
           hideLoader();
         }
       }),
       reaction((_) => controller.errorMessage, (Message message) {
         print(message);
         if (message.description.isNotEmpty) {
-           Get.snackbar(message.title, message.description,
+          Get.snackbar(message.title, message.description,
               backgroundColor: Color(colorThree), colorText: Colors.red);
         }
       })
@@ -80,14 +80,12 @@ class _RegisterUserPageState
       margin: EdgeInsets.only(top: 20.0, left: 34.0, right: 34.0),
       child: Column(
         children: <Widget>[
-       
           Observer(builder: (_) {
-            return  _textField(
-                  labelText: email,
-                  maxLenght: 50,
-                  onChanged: controller.changeEmail);
-          })
-          ,
+            return _textField(
+                labelText: email,
+                maxLenght: 50,
+                onChanged: controller.onChangeEmail);
+          }),
           Observer(builder: (_) {
             return Container(
               width: 0,
@@ -131,7 +129,7 @@ class _RegisterUserPageState
                   onChanged: controller.changeFullName),
             );
           }),
- Observer(builder: (_) {
+          Observer(builder: (_) {
             return Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: _textField(
@@ -141,7 +139,6 @@ class _RegisterUserPageState
                   onChanged: controller.changePhoneNumber),
             );
           }),
-
           Observer(builder: (_) {
             return Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -159,7 +156,7 @@ class _RegisterUserPageState
                       context: context,
                       firstDate: DateTime(2000),
                       initialDate: currentValue ?? DateTime.now(),
-                      lastDate:  DateTime.now());
+                      lastDate: DateTime.now());
                 },
               ),
             );
@@ -173,6 +170,7 @@ class _RegisterUserPageState
                   onChanged: controller.changeCRO),
             );
           }),
+          _makeGender(),
           Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
@@ -188,6 +186,66 @@ class _RegisterUserPageState
     );
   }
 
+  Widget _makeGender() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Observer(builder: (_) {
+          return Container(
+            margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
+            child: ButtonActionWidget(
+              width: 120.0,
+              labelText: male,
+              onClick: () {
+                controller.onChangeGender(SelectGender.Male);
+              },
+              colorBorder: controller.insertDoctorModel.people.gender ==
+                      SelectGender.Male
+                  ? Color(color_blue_zodiac)
+                  : Color(colorThree),
+              colorBackground: controller.insertDoctorModel.people.gender ==
+                      SelectGender.Male
+                  ? Colors.white
+                  : Color(colorThree),
+              colorText: controller.insertDoctorModel.people.gender ==
+                      SelectGender.Male
+                  ? Color(color_blue_zodiac)
+                  : Color(color_blue_zodiac),
+            ),
+          );
+        }),
+        SizedBox(
+          width: 20.0,
+        ),
+        Observer(builder: (_) {
+          return Container(
+            margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
+            child: ButtonActionWidget(
+              width: 120.0,
+              labelText: female,
+              onClick: () {
+                controller.onChangeGender(SelectGender.Female);
+              },
+              colorBorder: controller.insertDoctorModel.people.gender ==
+                      SelectGender.Female
+                  ? Color(color_blue_zodiac)
+                  : Color(colorThree),
+              colorBackground: controller.insertDoctorModel.people.gender ==
+                      SelectGender.Female
+                  ? Colors.white
+                  : Color(colorThree),
+              colorText: controller.insertDoctorModel.people.gender ==
+                      SelectGender.Female
+                  ? Color(color_blue_zodiac)
+                  : Color(color_blue_zodiac),
+            ),
+          );
+        })
+      ],
+    );
+  }
+
   TextField _textField(
       {String labelText,
       bool obscure,
@@ -199,9 +257,9 @@ class _RegisterUserPageState
         maxLength: maxLenght == null ? 0 : maxLenght,
         obscureText: obscure == null ? false : obscure,
         decoration: InputDecoration(
-          counterText: '',
-          labelText: labelText,
-       errorText: errorText == null ? null : errorText()));
+            counterText: '',
+            labelText: labelText,
+            errorText: errorText == null ? null : errorText()));
   }
 
   Widget _makeHeader() {

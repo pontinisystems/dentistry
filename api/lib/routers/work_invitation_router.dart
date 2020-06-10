@@ -7,7 +7,7 @@ class WorkInvitationRouter {
   static void configure(Router router, ManagedContext context) {
     router
         .route('v1/work/myinvitations')
-        .link(() => JWTAuthentication(context))
+       .link(() => JWTAuthentication(context))
         .link(() => WorkInvitationController(context));
 
     router

@@ -5,27 +5,27 @@ import 'package:aqueduct/aqueduct.dart';
 class LoginRequest extends Serializable {
 
   
-  String email;
+  String login;
   String password;
 
   @override
   Map<String, dynamic> asMap() {
     return {
-      'email': email,
+      'login': login,
       'password': password
     };
   }
 
   @override
   void readFromMap(Map<String, dynamic> object) {
-    email = object['email'] as String;
+    login = object['login'] as String;
     password = object[ 'password'] as String;
   }
   
   Map<String,String> validate() {
     final Map<String,String> validateResult = {};
-    if(email == null || email.isEmpty) {
-      validateResult['email'] = 'E-mail Obrigatório';
+    if(login == null || login.isEmpty) {
+      validateResult['login'] = 'Login Obrigatório';
     }
     
     if(password == null || password.isEmpty) {

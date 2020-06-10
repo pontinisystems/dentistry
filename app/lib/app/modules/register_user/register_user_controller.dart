@@ -1,7 +1,8 @@
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/models/doctor_model.dart';
 import 'package:dentistry/app/models/message.dart';
-import 'package:dentistry/app/models/user_model.dart';
+import 'package:dentistry/app/models/people_model.dart';
+import 'package:dentistry/app/models/user_acess_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
@@ -20,103 +21,68 @@ abstract class _RegisterUserControllerBase with Store {
   _RegisterUserControllerBase(this.userService);
 
   @observable
-  DoctorModel insertDoctorModel = DoctorModel();
+  DoctorModel insertDoctorModel =
+      DoctorModel(people: PeopleModel(gender: SelectGender.Male), userAcess: UserAcessModel());
 
   @observable
   bool registerSucess;
 
   @observable
-  ObservableFuture _registerUserFuture;
+  ObservableFuture _registerpeopleFuture;
 
   @computed
-  StoreState get state => StoreUtils.statusCheck(_registerUserFuture);
+  StoreState get state => StoreUtils.statusCheck(_registerpeopleFuture);
 
   @observable
   Message errorMessage = Message();
 
-
-
-  @action
-  changeGender(int newValue) {
-    print(newValue);
-
-    UserModel user = insertDoctorModel.user;
-    if (user == null) {
-      user = UserModel();
-    }
-    if (newValue == 1) {
-      user = user.copyWith(gender: 'M');
-    } else if (newValue == 2) {
-      user = user.copyWith(gender: 'F');
-    }
-    insertDoctorModel = insertDoctorModel.copyWith(user: user);
-    print(insertDoctorModel.user.gender);
-  }
-
-  @action
-  changeEmail(String newValue) {
-    UserModel user = insertDoctorModel.user;
-    if (user == null) {
-      user = UserModel();
-    }
-    user = user.copyWith(email: newValue.trim());
-    insertDoctorModel = insertDoctorModel.copyWith(user: user);
-    print(insertDoctorModel.user.email);
-  }
-
-  @action
-  changePassword(String newValue) {
-    UserModel user = insertDoctorModel.user;
-    if (user == null) {
-      user = UserModel();
-    }
-    user = user.copyWith(pasword: newValue.trim());
-    insertDoctorModel = insertDoctorModel.copyWith(user: user);
-    print(insertDoctorModel.user.password);
-  }
-
   @observable
-  String confirmPassword = "";
-  @action
-  changeConfimPassword(String newValue) => confirmPassword = newValue;
+  String confimrPassword;
 
   @action
-  changeFullName(String newValue) {
-    UserModel user = insertDoctorModel.user;
-    if (user == null) {
-      user = UserModel();
-    }
-    user = user.copyWith(fullName: newValue.trim());
-    insertDoctorModel = insertDoctorModel.copyWith(user: user);
-    print(insertDoctorModel.user.fullName);
+  onChangeEmail(String newValue) {
+     var login = insertDoctorModel.userAcess.copyWith(login: newValue );
+    insertDoctorModel = insertDoctorModel.copyWith(userAcess: login);
   }
 
   @action
   changePhoneNumber(String newValue) {
-    UserModel user = insertDoctorModel.user;
-    if (user == null) {
-      user = UserModel();
-    }
-    user = user.copyWith(numberPhone: newValue.trim());
-    insertDoctorModel = insertDoctorModel.copyWith(user: user);
-    print(insertDoctorModel.user.numberPhone);
+     var people = insertDoctorModel.people.copyWith(numberPhone: newValue);
+    insertDoctorModel = insertDoctorModel.copyWith(people: people);
+  }
+
+  @action
+  changePassword(String newValue) {
+    var login = insertDoctorModel.userAcess.copyWith(password: newValue);
+    insertDoctorModel = insertDoctorModel.copyWith(userAcess: login);
+  }
+
+  @action
+  changeConfimPassword(String newValue) {
+    confimrPassword = newValue;
+  }
+
+  @action
+  changeFullName(String newValue) {
+    var people = insertDoctorModel.people.copyWith(fullName: newValue);
+    insertDoctorModel = insertDoctorModel.copyWith(people: people);
   }
 
   @action
   changeDateOfBirth(String newValue) {
-    UserModel user = insertDoctorModel.user;
-    if (user == null) {
-      user = UserModel();
-    }
-    user = user.copyWith(dateOfBirth: newValue.trim());
-    insertDoctorModel = insertDoctorModel.copyWith(user: user);
-    print(insertDoctorModel.user.dateOfBirth);
+    var people = insertDoctorModel.people.copyWith(dateOfBirth: newValue);
+    insertDoctorModel = insertDoctorModel.copyWith(people: people);
   }
 
   @action
   changeCRO(String newValue) {
-    insertDoctorModel = insertDoctorModel.copyWith(cro: newValue.trim());
-    print(insertDoctorModel.cro);
+    insertDoctorModel = insertDoctorModel.copyWith(cro: newValue);
+  }
+
+  @action
+  onChangeGender(SelectGender newValue) {
+    var people = insertDoctorModel.people.copyWith(gender: newValue);
+    insertDoctorModel = insertDoctorModel.copyWith(people: people);
   }
 
   @action
@@ -124,12 +90,10 @@ abstract class _RegisterUserControllerBase with Store {
     String validate = validateFields();
     print(validate);
     if (validate == null) {
-      if(insertDoctorModel.user.gender==null){
-       changeGender(1);
-      }
       try {
-        _registerUserFuture =  ObservableFuture(userService.registerDoctor(insertDoctorModel));
-        await _registerUserFuture;
+        _registerpeopleFuture =
+            ObservableFuture(userService.registerDoctor(insertDoctorModel));
+        await _registerpeopleFuture;
       } on DioError catch (e) {
         print(e);
         if (e.response != null) {
@@ -146,17 +110,14 @@ abstract class _RegisterUserControllerBase with Store {
             title: eunexpectedError, description: tryagainLater);
       }
     } else {
-      errorMessage = errorMessage.copyWith(
-          title: requeridField, description: validate);
+      errorMessage =
+          errorMessage.copyWith(title: requeridField, description: validate);
     }
   }
 
   String validateFields() {
-  
     return null;
   }
-
-  
 
   String requeridAllField() {
     print(insertDoctorModel);
@@ -164,10 +125,9 @@ abstract class _RegisterUserControllerBase with Store {
       return requeridField;
     }
 
-    if (insertDoctorModel.user == null) {
+    if (insertDoctorModel.people == null) {
       return requeridField;
     }
     return null;
   }
 }
-  

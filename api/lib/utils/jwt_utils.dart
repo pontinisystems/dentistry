@@ -1,14 +1,15 @@
-import 'package:dentistry_api/model/user_model.dart';
+import 'package:dentistry_api/model/user_acess_model.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
 
 class JwtUtils {
 
   static const String _jwtChavePrivada = 'DuGru4jQvUMxP9eyTvDxwpBJhhMTnCXU8cG8YYu8g4jhpRermB5jHSk';
 
-  static String generateTokenJWT(UserModel usuario) {
+  static String generateTokenJWT(UserAcessModel user) {
+    print('generateTokenJWT');
     final claimSet = JwtClaim(
       issuer: 'http://localhost',
-      subject: usuario.id.toString(),
+      subject: user.id.toString(),
       otherClaims: <String,dynamic>{},
       maxAge: const Duration(days: 1)
     );
