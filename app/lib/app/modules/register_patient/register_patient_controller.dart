@@ -29,7 +29,7 @@ abstract class _RegisterPatientControllerBase with Store {
   ObservableFuture _registerUserFuture;
 
   @observable
-  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: "1",patienteModel: PatientModel(people: PeopleModel(gender: SelectGender.Male)) );
+  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: "1",patient: PatientModel(people: PeopleModel(gender: SelectGender.Male)) );
  
 
 
@@ -37,31 +37,31 @@ abstract class _RegisterPatientControllerBase with Store {
   @action
   onChangeGender(SelectGender newValue){
     print('mudou');
-    var people = insertPatientModel.patienteModel.people.copyWith(gender: newValue);
-    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
+    var people = insertPatientModel.patient.people.copyWith(gender: newValue);
+    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
   }
  
   @action
   onChangeEmail(String newValue){
-    insertPatientModel.patienteModel =insertPatientModel.patienteModel.copyWith(email: newValue);
+    insertPatientModel.patient =insertPatientModel.patient.copyWith(email: newValue);
   }
 
   @action
   onChangeFullName(String newValue){
-   var people = insertPatientModel.patienteModel.people.copyWith(fullName: newValue);
-    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
+   var people = insertPatientModel.patient.people.copyWith(fullName: newValue);
+    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
   }
 
   @action
   onChangeBirthday(String newValue){
-    var people = insertPatientModel.patienteModel.people.copyWith(dateOfBirth: newValue);
-    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
+    var people = insertPatientModel.patient.people.copyWith(dateOfBirth: newValue);
+    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
   }
 
   @action
   onChangeNumberPhone(String newValue){
-    var people = insertPatientModel.patienteModel.people.copyWith(numberPhone: newValue);
-    insertPatientModel.patienteModel = insertPatientModel.patienteModel.copyWith(people: people);
+    var people = insertPatientModel.patient.people.copyWith(numberPhone: newValue);
+    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
   }
 
 
@@ -94,7 +94,7 @@ abstract class _RegisterPatientControllerBase with Store {
   }
 
   String validateFields() {
-    if(insertPatientModel?.patienteModel?.people==null){
+    if(insertPatientModel?.patient?.people==null){
       print('object');
       return requeridField;
     }

@@ -4,45 +4,28 @@ import 'package:dentistry_api/model/patient_model.dart';
 
 import '../../../dentistry_api.dart';
 
-class AcceptWorkInvitationRequest extends Serializable {
-
-  int idClinic;
-  PatientModel patientModel;
-  AcceptWorkInvitationRequest({
-    this.idWorkInvitation,
-    this.isAccepet,
+class InsertPatientRequest extends Serializable {
+  String idClinic;
+  PatientModel patient;
+  InsertPatientRequest({
+    this.idClinic,
+    this.patient,
   });
 
-  Map<String,String> validateField() {
-    final Map<String,String> mapValidate = {};
+  Map<String, String> validate() {
+    final Map<String, String> validateResult = {};
 
-    if(idWorkInvitation == null ) {
-      mapValidate['id'] = 'Id obrigatório';
-    }
-    
-    if(isAccepet == null ) {
-      mapValidate['isAccepet'] = 'isAccepet';
-    }
-    
-
-    return mapValidate;
-
+    return validateResult;
   }
 
- @override
+  @override
   Map<String, dynamic> asMap() {
-    return {
-      'idWorkInvitation': idWorkInvitation,
-      'isAccepet': isAccepet
-    };
+    return {'idClinic': idClinic, 'patient': patient};
   }
 
   @override
   void readFromMap(Map<String, dynamic> object) {
-    idWorkInvitation = object['idWorkInvitation'] as int;
-    isAccepet = object[ 'isAccepet'] as bool;
+    idClinic = object['idWorkInvitation'] as String;
+    patient = object['isAccepet'] as PatientModel;
   }
-
-
-
 }

@@ -181,15 +181,15 @@ class _RegisterPatientPageState
               onClick: () {
                 controller.onChangeGender(SelectGender.Male);
               },
-              colorBorder: controller.insertPatientModel.patienteModel.people.gender ==
+              colorBorder: controller.insertPatientModel.patient.people.gender ==
                       SelectGender.Male
                   ? Color(color_blue_zodiac)
                   : Color(colorThree),
-              colorBackground: controller.insertPatientModel.patienteModel.people.gender ==
+              colorBackground: controller.insertPatientModel.patient.people.gender ==
                       SelectGender.Male
                   ? Colors.white
                   : Color(colorThree),
-              colorText: controller.insertPatientModel.patienteModel.people.gender ==
+              colorText: controller.insertPatientModel.patient.people.gender ==
                       SelectGender.Male
                   ? Color(color_blue_zodiac)
                   : Color(color_blue_zodiac),
@@ -208,15 +208,15 @@ class _RegisterPatientPageState
               onClick: () {
                 controller.onChangeGender(SelectGender.Female);
               },
-              colorBorder: controller.insertPatientModel.patienteModel.people.gender ==
+              colorBorder: controller.insertPatientModel.patient.people.gender ==
                       SelectGender.Female
                   ? Color(color_blue_zodiac)
                   : Color(colorThree),
-              colorBackground: controller.insertPatientModel.patienteModel.people.gender ==
+              colorBackground: controller.insertPatientModel.patient.people.gender ==
                       SelectGender.Female
                   ? Colors.white
                   : Color(colorThree),
-              colorText: controller.insertPatientModel.patienteModel.people.gender ==
+              colorText: controller.insertPatientModel.patient.people.gender ==
                       SelectGender.Female
                   ? Color(color_blue_zodiac)
                   : Color(color_blue_zodiac),

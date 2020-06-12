@@ -6,10 +6,11 @@ part 'insert_patient_model.g.dart';
 
 @JsonSerializable()
 class InsertPatientModel {
-  PatientModel patienteModel;
+
+  PatientModel patient;
   String idClinic;
   InsertPatientModel({
-    this.patienteModel,
+    this.patient,
     this.idClinic,
   });
 

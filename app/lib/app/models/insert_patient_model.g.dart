@@ -8,15 +8,15 @@ part of 'insert_patient_model.dart';
 
 InsertPatientModel _$InsertPatientModelFromJson(Map<String, dynamic> json) {
   return InsertPatientModel(
-    patienteModel: json['patienteModel'] == null
+    patient: json['patient'] == null
         ? null
-        : PatientModel.fromJson(json['patienteModel'] as Map<String, dynamic>),
+        : PatientModel.fromJson(json['patient'] as Map<String, dynamic>),
     idClinic: json['idClinic'] as String,
   );
 }
 
 Map<String, dynamic> _$InsertPatientModelToJson(InsertPatientModel instance) =>
     <String, dynamic>{
-      'patienteModel': instance.patienteModel,
+      'patient': instance.patient,
       'idClinic': instance.idClinic,
     };
