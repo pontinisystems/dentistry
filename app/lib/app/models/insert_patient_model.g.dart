@@ -11,7 +11,7 @@ InsertPatientModel _$InsertPatientModelFromJson(Map<String, dynamic> json) {
     patient: json['patient'] == null
         ? null
         : PatientModel.fromJson(json['patient'] as Map<String, dynamic>),
-    idClinic: json['idClinic'] as String,
+    idClinic: json['idClinic'] as int,
   );
 }
 

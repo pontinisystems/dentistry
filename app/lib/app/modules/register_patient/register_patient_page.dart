@@ -168,11 +168,13 @@ class _RegisterPatientPageState
   }
 
   Widget _makeGenderV2() {
+ 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Observer(builder: (_) {
+             print("make gender"+controller.gender.toString());
           return Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
@@ -181,15 +183,15 @@ class _RegisterPatientPageState
               onClick: () {
                 controller.onChangeGender(SelectGender.Male);
               },
-              colorBorder: controller.insertPatientModel.patient.people.gender ==
+              colorBorder: controller.gender ==
                       SelectGender.Male
                   ? Color(color_blue_zodiac)
                   : Color(colorThree),
-              colorBackground: controller.insertPatientModel.patient.people.gender ==
+              colorBackground: controller.gender ==
                       SelectGender.Male
                   ? Colors.white
                   : Color(colorThree),
-              colorText: controller.insertPatientModel.patient.people.gender ==
+              colorText: controller.gender ==
                       SelectGender.Male
                   ? Color(color_blue_zodiac)
                   : Color(color_blue_zodiac),
@@ -200,6 +202,8 @@ class _RegisterPatientPageState
           width: 20.0,
         ),
         Observer(builder: (_) {
+             print("make gender"+controller.gender.toString());
+
           return Container(
             margin: EdgeInsets.only(top: 40.0, bottom: 8.0),
             child: ButtonActionWidget(
@@ -208,15 +212,15 @@ class _RegisterPatientPageState
               onClick: () {
                 controller.onChangeGender(SelectGender.Female);
               },
-              colorBorder: controller.insertPatientModel.patient.people.gender ==
+              colorBorder: controller.gender ==
                       SelectGender.Female
                   ? Color(color_blue_zodiac)
                   : Color(colorThree),
-              colorBackground: controller.insertPatientModel.patient.people.gender ==
+              colorBackground: controller.gender ==
                       SelectGender.Female
                   ? Colors.white
                   : Color(colorThree),
-              colorText: controller.insertPatientModel.patient.people.gender ==
+              colorText: controller.gender ==
                       SelectGender.Female
                   ? Color(color_blue_zodiac)
                   : Color(color_blue_zodiac),

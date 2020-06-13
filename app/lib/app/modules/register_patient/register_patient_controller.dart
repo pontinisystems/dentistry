@@ -29,15 +29,17 @@ abstract class _RegisterPatientControllerBase with Store {
   ObservableFuture _registerUserFuture;
 
   @observable
-  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: "1",patient: PatientModel(people: PeopleModel(gender: SelectGender.Male)) );
- 
+  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: 5,patient: PatientModel(people: PeopleModel(gender: SelectGender.Male)) );
+
+  @observable
+  SelectGender gender =SelectGender.Male;
 
 
 
   @action
   onChangeGender(SelectGender newValue){
-    print('mudou');
-    var people = insertPatientModel.patient.people.copyWith(gender: newValue);
+    gender=newValue;
+    var people = insertPatientModel.patient.people.copyWith(gender: gender);
     insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
   }
  

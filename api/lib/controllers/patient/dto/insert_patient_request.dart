@@ -5,7 +5,7 @@ import 'package:dentistry_api/model/patient_model.dart';
 import '../../../dentistry_api.dart';
 
 class InsertPatientRequest extends Serializable {
-  String idClinic;
+  int idClinic;
   PatientModel patient;
   InsertPatientRequest({
     this.idClinic,
@@ -25,7 +25,7 @@ class InsertPatientRequest extends Serializable {
 
   @override
   void readFromMap(Map<String, dynamic> object) {
-    idClinic = object['idWorkInvitation'] as String;
+    idClinic = object['idWorkInvitation'] as int;
     patient = object['isAccepet'] as PatientModel;
   }
 }

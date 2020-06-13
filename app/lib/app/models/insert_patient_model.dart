@@ -8,7 +8,7 @@ part 'insert_patient_model.g.dart';
 class InsertPatientModel {
 
   PatientModel patient;
-  String idClinic;
+  int idClinic;
   InsertPatientModel({
     this.patient,
     this.idClinic,

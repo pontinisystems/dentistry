@@ -89,6 +89,21 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
     });
   }
 
+  final _$genderAtom = Atom(name: '_RegisterPatientControllerBase.gender');
+
+  @override
+  SelectGender get gender {
+    _$genderAtom.reportRead();
+    return super.gender;
+  }
+
+  @override
+  set gender(SelectGender value) {
+    _$genderAtom.reportWrite(value, super.gender, () {
+      super.gender = value;
+    });
+  }
+
   final _$registerPatientAsyncAction =
       AsyncAction('_RegisterPatientControllerBase.registerPatient');
 
@@ -162,7 +177,8 @@ mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
 selectGender: ${selectGender},
 errorMessage: ${errorMessage},
 registerSucess: ${registerSucess},
-insertPatientModel: ${insertPatientModel}
+insertPatientModel: ${insertPatientModel},
+gender: ${gender}
     ''';
   }
 }

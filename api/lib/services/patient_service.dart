@@ -31,15 +31,6 @@ class PatientService {
 
   }
 
-  Future<bool> userExist(String fullName) async {
-      final PeopleModel userModel = await userRepository.findByName(fullName);
-      if(userModel!=null){
-        return true;
-      }else{
-        return false;
-        
-      }
-    
-  }
+
 
 }

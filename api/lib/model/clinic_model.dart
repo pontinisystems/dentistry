@@ -2,6 +2,7 @@ import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/doctor_clinic_model.dart';
 import 'package:dentistry_api/model/doctor_model.dart';
 import 'package:dentistry_api/model/item_plan.dart';
+import 'package:dentistry_api/model/patient_model.dart';
 import 'package:dentistry_api/model/work_invitation.model.dart';
 
 import 'address_model.dart';
@@ -35,5 +36,5 @@ class _ClinicModel {
   ManagedSet<AppointmentDoctorModel> appointmentDoctors;
   ManagedSet<DoctorClinicModel> doctorClinics;
   ManagedSet<WorkInvitationModel> workInvitationModels;
-
+  ManagedSet<PatientModel> patients;
 }
