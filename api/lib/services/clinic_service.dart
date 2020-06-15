@@ -11,6 +11,7 @@ class ClinicService {
 
 
   Future<bool> clinicExist(int idClinic) async {
+    print('clinicExiste');
       final ClinicModel clinicModel = await clinicRepository.find(idClinic);
       if(clinicModel!=null){
         return true;

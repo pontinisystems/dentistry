@@ -16,7 +16,7 @@ class _PeopleModel {
 
   String dateOfBirth;
 
-  String gender;
+  SelectGender gender;
 
  @Relate(
     #address,
@@ -28,3 +28,4 @@ class _PeopleModel {
   PeopleModel people;
 
 }
+enum SelectGender { Male, Female }

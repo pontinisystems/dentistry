@@ -13,7 +13,11 @@ class RegisterPatientController = _RegisterPatientControllerBase
     with _$RegisterPatientController;
 
 abstract class _RegisterPatientControllerBase with Store {
+  
    IUserService userService;
+
+  _RegisterPatientControllerBase(this.userService);
+
 
   @observable
   SelectGender selectGender = SelectGender.Female;
@@ -72,6 +76,7 @@ abstract class _RegisterPatientControllerBase with Store {
     String validate = validateFields();
     if (validate == null) {
       try {
+        print(insertPatientModel.toJson());
         _registerUserFuture =  ObservableFuture(userService.registerPatient(insertPatientModel));
         await _registerUserFuture;
       } on DioError catch (e) {

@@ -11,6 +11,7 @@ class ClinicRepository {
 
 
   Future<ClinicModel> find(int id) async {
+    print('chegou no repositorio'+id.toString());
     final query = Query<ClinicModel>(context)
       ..where((clinic) => clinic.id).equalTo(id);
     return await query.fetchOne();

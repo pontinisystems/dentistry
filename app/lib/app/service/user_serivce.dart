@@ -43,6 +43,7 @@ class UserService implements IUserService{
 
   @override
   Future<void> registerPatient(InsertPatientModel insertPatientModel) {
+    print('service');
    return  userRepository.registerPatient(insertPatientModel);
 
   }

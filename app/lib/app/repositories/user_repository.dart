@@ -64,7 +64,7 @@ class UserRepository implements IUserRepository {
     final dio = CustomDio().instance;
     return dio.post('v1/patient/register', data: {
       'idClinic':insertPatientModel.idClinic,
-      'patient': insertPatientModel.patient.toJson(),
+      'people': insertPatientModel.patient.people.toJson(),
      
     });
   }
