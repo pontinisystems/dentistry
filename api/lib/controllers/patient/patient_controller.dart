@@ -23,26 +23,35 @@ class PatientController extends ResourceController {
 
   @Operation.post()
   Future<Response> save(
-      @Bind.body() InsertPatientRequest insertPatientRequest) async {
-    final validate = insertPatientRequest.validate();
+      @Bind.body() InsertPatientRequest patientRequest) async {
+    final validate = patientRequest.validate();
 
     if (validate.isNotEmpty) {
       return Response.badRequest(body: validate);
     }
-        print('cheguamoouuuuu'+insertPatientRequest.idClinic.toString());
-
+print('1 passo');
     try {
       final bool clinicExist =
-          await clinicService.clinicExist(insertPatientRequest.idClinic);
+          await clinicService.clinicExist(5);
+
+print('2 passo');
+
       if (!clinicExist) {
-        return Response.notFound(body: Message(
-                action: false,
-                technicalMessage: entityNotFound,
-                userMessage: entityNotFound)
-            .toMap());
+        return Response.notFound(
+            body: Message(
+                    action: false,
+                    technicalMessage: entityNotFound,
+                    userMessage: entityNotFound)
+                .toMap());
       }
 
-  
+      
+       await userService.saveUserPatient(patientRequest);
+      return Response.created('',body:Message(
+              action: true,
+              technicalMessage: successfulRegistration,
+              userMessage: userSuccessfullyRegistered)
+          .toMap() );
 
     } catch (e) {
       print(e);

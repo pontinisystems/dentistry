@@ -29,16 +29,11 @@ class _PatientModel {
   )
   PeopleModel people;
 
-  @Relate(
-    #address,
-    isRequired: true,
-    onDelete: DeleteRule.cascade,
-  )
-  AddressModel address;
+  String email;
+
 
   ManagedSet<AppointmentDoctorModel> appointmentDoctors;
 
-  String email;
 
   @Relate(#patients)
   ClinicModel clinic;
