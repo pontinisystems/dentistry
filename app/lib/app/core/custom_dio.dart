@@ -20,7 +20,7 @@ class CustomDio {
   }
 
   BaseOptions _options = BaseOptions(
-    baseUrl: 'http://192.168.15.8:8888/',
+    baseUrl: 'http://192.168.0.6:8888/',
     connectTimeout: 60000,
     receiveTimeout: 60000,
   );
