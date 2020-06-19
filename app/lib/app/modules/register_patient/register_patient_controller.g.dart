@@ -9,6 +9,14 @@ part of 'register_patient_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RegisterPatientController on _RegisterPatientControllerBase, Store {
+  Computed<StoreState> _$stateComputed;
+
+  @override
+  StoreState get state =>
+      (_$stateComputed ??= Computed<StoreState>(() => super.state,
+              name: '_RegisterPatientControllerBase.state'))
+          .value;
+
   final _$selectGenderAtom =
       Atom(name: '_RegisterPatientControllerBase.selectGender');
 
@@ -178,7 +186,8 @@ selectGender: ${selectGender},
 errorMessage: ${errorMessage},
 registerSucess: ${registerSucess},
 insertPatientModel: ${insertPatientModel},
-gender: ${gender}
+gender: ${gender},
+state: ${state}
     ''';
   }
 }

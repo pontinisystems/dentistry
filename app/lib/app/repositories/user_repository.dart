@@ -59,6 +59,9 @@ class UserRepository implements IUserRepository {
   @override
   Future<void> registerPatient(InsertPatientModel insertPatientModel) {
     final dio = CustomDio().instance;
+    print("=========");
+    print(insertPatientModel.toJson());
+    print("=========");
     return dio.post('v1/patient/register',
         data: insertPatientModel.toJson());
   }

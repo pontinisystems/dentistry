@@ -21,14 +21,14 @@ dependencies:
   shared_preferences: ^0.5.6+3
   dio: ^3.0.9
   logger: ^0.8.3  
-  get: ^2.5.7
+  get: ^2.14.1
   bubble_bottom_bar: ^1.2.0
   json_serializable: ^3.3.0
   flutter_svg: ^0.17.2
   flutter_mobx: ^1.1.0
   mobx: ^1.1.1
   datetime_picker_formfield: ^1.0.0
-  flutter_modular: ^1.1.1
+  flutter_modular: ^1.2.5+1
   flutter:
     sdk: flutter
   sliding_sheet: ^0.2.12

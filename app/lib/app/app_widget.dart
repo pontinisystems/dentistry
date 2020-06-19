@@ -20,7 +20,7 @@ class AppWidget extends StatelessWidget {
         ],
         debugShowCheckedModeBanner: false,
         supportedLocales: [const Locale('pt', 'BR')],
-        navigatorKey: Get.key,
+        navigatorKey: Modular.navigatorKey,
         title: 'Dentistry',
         theme: ThemeData(
         ),

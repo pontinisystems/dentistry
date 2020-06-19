@@ -7,6 +7,7 @@ import 'package:dentistry/app/service/i_work_invitation_service.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 

@@ -37,7 +37,7 @@ class UserRepository {
 
       return transaction
           .insertObject(request.people.address)
-          .then((addressModel)  {
+          .then((addressModel) {
         request.people.address = addressModel;
         return transaction.insertObject(request.people).then((people) {
           return transaction.insertObject(request.userAcess).then((userAcess) {
@@ -52,26 +52,28 @@ class UserRepository {
   }
 
   Future savePatient(PatientModel request) async {
+    request.people.address = AddressModel();
+    request.people.address.city = "";
+    request.people.address.neighborhood = "";
+    request.people.address.street = "";
+    request.people.address.number = "";
+
     await context.transaction((transaction) async {
-      request.people.address = AddressModel();
-      request.people.address.city = "";
-      request.people.address.neighborhood = "";
-      request.people.address.street = "";
-      request.people.address.number = "";
       await transaction
           .insertObject(request.people.address)
           .then((addressModel) async {
         request.people.address = addressModel;
         await transaction.insertObject(request.people).then((newUser) {
-          return transaction.insertObject(PatientModel()..people = newUser);
+          return transaction.insertObject(request..people = newUser);
         });
       });
     });
   }
+
   Future<UserAcessModel> findUserAcess(int id) async {
     final query = Query<UserAcessModel>(context)
       ..where((userAcess) => userAcess.id).equalTo(id);
-     return await query.fetchOne();
+    return await query.fetchOne();
   }
 
   Future<PeopleModel> findId(int id) async {

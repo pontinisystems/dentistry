@@ -33,9 +33,7 @@ class InsertPatientRequest extends Serializable {
 
   @override
   void readFromMap(Map<String, dynamic> object) {
-    print("==============");
-    print(object);
-    print("==============");
+   
 
     fullName = object['fullName'] as String;
     email = object['email'] as String;
@@ -43,18 +41,18 @@ class InsertPatientRequest extends Serializable {
     dateOfBirth = object['dateOfBirth'] as String;
     gender = object['gender'] as String;
     idClinic = object['idClinic'] as int;
-
-      print("======FIM========");
-
   }
 
   PatientModel toPatientModel(){
-    var patient =PatientModel();
+    final patient =PatientModel();
     patient.people= PeopleModel();
-    
+    patient.email=email;
+    patient.people.fullName=fullName;
+    patient.people.dateOfBirth=dateOfBirth;
+    patient.people.numberPhone=numberPhone;
+    patient.people.gender=SelectGender.Male;
 
-    patient.email =email;
-   
+    return patient;
   }
 
 }

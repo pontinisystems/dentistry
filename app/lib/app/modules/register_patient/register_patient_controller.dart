@@ -1,8 +1,9 @@
+import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/models/insert_patient_model.dart';
 import 'package:dentistry/app/models/message.dart';
-import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/models/people_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
+import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
@@ -17,6 +18,9 @@ abstract class _RegisterPatientControllerBase with Store {
    IUserService userService;
 
   _RegisterPatientControllerBase(this.userService);
+
+   @computed
+   StoreState get state => StoreUtils.statusCheck(_registerUserFuture);
 
 
   @observable
@@ -51,6 +55,7 @@ abstract class _RegisterPatientControllerBase with Store {
   onChangeEmail(String newValue){
      var people = insertPatientModel.copyWith(email: newValue);
     insertPatientModel = people;
+    print(insertPatientModel.email.toString());
   }
 
   @action

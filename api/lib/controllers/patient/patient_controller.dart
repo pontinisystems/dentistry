@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/controllers/patient/dto/insert_patient_request.dart';
 import 'package:dentistry_api/model/message.dart';
-import 'package:dentistry_api/model/patient_model.dart';
+import 'package:dentistry_api/model/user_acess_model.dart';
 import 'package:dentistry_api/services/clinic_service.dart';
 import 'package:dentistry_api/services/patient_service.dart';
 import 'package:dentistry_api/services/user_service.dart';
@@ -21,6 +21,38 @@ class PatientController extends ResourceController {
   final PatientService patientService;
   final ClinicService clinicService;
 
+
+
+
+ @Operation.get()
+  Future<Response> findWorkInvitations() async {
+    final UserAcessModel userAcess = request.attachments['userAcess'] as UserAcessModel;
+    try {
+
+      return await patientService.findAllBy(userAcess).then((data) {
+        return data
+            .map((m) => {
+                  'id': m.id,
+                  'name': "Ewerton Pontini",
+                })
+            .toList();
+      }).then((lista) => Response.ok(lista));
+    } catch (e,s) {
+      return Response.serverError(
+          body: Message(
+                  action: false,
+                  userMessage: unexpectedFailure,
+                  technicalMessage: serverError)
+              .toMap());
+    }
+  
+}
+
+
+
+
+
+
   @Operation.post()
   Future<Response> save(
       @Bind.body() InsertPatientRequest patientRequest) async {
@@ -29,12 +61,10 @@ class PatientController extends ResourceController {
     if (validate.isNotEmpty) {
       return Response.badRequest(body: validate);
     }
-print('1 passo');
     try {
       final bool clinicExist =
           await clinicService.clinicExist(5);
 
-print('2 passo');
 
       if (!clinicExist) {
         return Response.notFound(
@@ -46,7 +76,8 @@ print('2 passo');
       }
 
       
-       await userService.saveUserPatient(patientRequest);
+       await userService.saveUserPatient(patientRequest.toPatientModel());
+       
       return Response.created('',body:Message(
               action: true,
               technicalMessage: successfulRegistration,
