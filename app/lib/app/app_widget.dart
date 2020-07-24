@@ -11,16 +11,22 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return OKToast(
       position: ToastPosition.bottom,
-      child: MaterialApp(
+      child: GetMaterialApp(
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           DefaultCupertinoLocalizations.delegate,
         ],
+        builder: (context, child){
+          return Scaffold(
+            body: child,
+          );
+        },
         debugShowCheckedModeBanner: false,
         supportedLocales: [const Locale('pt', 'BR')],
-        navigatorKey: Get.key,
+        navigatorKey: Modular.navigatorKey,
+        navigatorObservers: [GetObserver()],
         title: 'Dentistry',
         theme: ThemeData(
         ),

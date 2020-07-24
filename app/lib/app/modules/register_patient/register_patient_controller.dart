@@ -1,8 +1,9 @@
+import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/models/insert_patient_model.dart';
 import 'package:dentistry/app/models/message.dart';
-import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/models/people_model.dart';
 import 'package:dentistry/app/service/i_user_service.dart';
+import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
@@ -17,6 +18,9 @@ abstract class _RegisterPatientControllerBase with Store {
    IUserService userService;
 
   _RegisterPatientControllerBase(this.userService);
+
+   @computed
+   StoreState get state => StoreUtils.statusCheck(_registerUserFuture);
 
 
   @observable
@@ -33,7 +37,7 @@ abstract class _RegisterPatientControllerBase with Store {
   ObservableFuture _registerUserFuture;
 
   @observable
-  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: 5,patient: PatientModel(people: PeopleModel(gender: SelectGender.Male)) );
+  InsertPatientModel insertPatientModel = InsertPatientModel(idClinic: 5);
 
   @observable
   SelectGender gender =SelectGender.Male;
@@ -43,31 +47,33 @@ abstract class _RegisterPatientControllerBase with Store {
   @action
   onChangeGender(SelectGender newValue){
     gender=newValue;
-    var people = insertPatientModel.patient.people.copyWith(gender: gender);
-    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
+    var people = insertPatientModel.copyWith(gender: gender);
+    insertPatientModel = people;
   }
  
   @action
   onChangeEmail(String newValue){
-    insertPatientModel.patient =insertPatientModel.patient.copyWith(email: newValue);
+     var people = insertPatientModel.copyWith(email: newValue);
+    insertPatientModel = people;
+    print(insertPatientModel.email.toString());
   }
 
   @action
   onChangeFullName(String newValue){
-   var people = insertPatientModel.patient.people.copyWith(fullName: newValue);
-    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
+   var people = insertPatientModel.copyWith(fullName: newValue);
+    insertPatientModel = people;
   }
 
   @action
   onChangeBirthday(String newValue){
-    var people = insertPatientModel.patient.people.copyWith(dateOfBirth: newValue);
-    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
+    var people = insertPatientModel.copyWith(dateOfBirth: newValue);
+    insertPatientModel = people;
   }
 
   @action
   onChangeNumberPhone(String newValue){
-    var people = insertPatientModel.patient.people.copyWith(numberPhone: newValue);
-    insertPatientModel.patient = insertPatientModel.patient.copyWith(people: people);
+    var people = insertPatientModel.copyWith(numberPhone: newValue);
+    insertPatientModel = people;
   }
 
 
@@ -84,7 +90,7 @@ abstract class _RegisterPatientControllerBase with Store {
         if (e.response != null) {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure,
-              description: e.response.data['message']);
+              description: e.response.data['userMessage']);
         } else {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure, description: tryagainLater);
@@ -101,7 +107,7 @@ abstract class _RegisterPatientControllerBase with Store {
   }
 
   String validateFields() {
-    if(insertPatientModel?.patient?.people==null){
+    if(insertPatientModel==null){
       print('object');
       return requeridField;
     }

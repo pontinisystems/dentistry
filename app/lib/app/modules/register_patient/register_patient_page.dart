@@ -1,5 +1,7 @@
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dentistry/app/components/button_action_widget.dart';
+import 'package:dentistry/app/core/store_state.dart';
+import 'package:dentistry/app/mixins/loader_mixin.dart';
+import 'package:dentistry/app/models/message.dart';
 import 'package:dentistry/app/models/people_model.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mobx/mobx.dart';
 import 'register_patient_controller.dart';
 
 class RegisterPatientPage extends StatefulWidget {
@@ -22,8 +25,39 @@ class RegisterPatientPage extends StatefulWidget {
 }
 
 class _RegisterPatientPageState
-    extends ModularState<RegisterPatientPage, RegisterPatientController> {
+    extends ModularState<RegisterPatientPage, RegisterPatientController> with LoaderMixin{
   //use 'controller' variable to access controller
+  List<ReactionDisposer> _disposer;
+  @override
+  void dispose() {
+    _disposer.forEach((dispose) => dispose());
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _disposer ??= [
+      reaction((_) => controller.state, (StoreState state) {
+        print(state);
+        if (state == StoreState.loading) {
+          showLoader();
+        } else if (state == StoreState.loaded) {
+          hideLoader();
+          Get.offAllNamed('/dashboard');
+        } else if (state == StoreState.error) {
+          hideLoader();
+        }
+      }),
+      reaction((_) => controller.errorMessage, (Message message) {
+        print(message);
+        if (message.description.isNotEmpty) {
+          Get.snackbar(message.title, message.description,
+              backgroundColor: Color(colorThree), colorText: Colors.red);
+        }
+      })
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +109,7 @@ class _RegisterPatientPageState
           Observer(builder: (_) {
             return Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: DateTimeField(
-                onChanged: (date) {
-                  controller.onChangeBirthday(date.toString());
-                },
-                decoration: InputDecoration(
-                  counterText: '',
-                  labelText: dateOfBirth,
-                ),
-                format: DateFormat("dd/MM/yyyy"),
-                onShowPicker: (context, currentValue) {
-                  return showDatePicker(
-                      context: context,
-                      firstDate: DateTime(2000),
-                      initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime.now());
-                },
-              ),
+              child:Text('')
             );
           }),
        

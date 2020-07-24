@@ -2,7 +2,6 @@ import 'package:aqueduct/aqueduct.dart';
 import 'package:dentistry_api/model/appointment_doctor_model.dart';
 import 'package:dentistry_api/model/people_model.dart';
 
-import 'address_model.dart';
 import 'clinic_model.dart';
 
 class PatientModel extends ManagedObject<_PatientModel>
@@ -29,16 +28,11 @@ class _PatientModel {
   )
   PeopleModel people;
 
-  @Relate(
-    #address,
-    isRequired: true,
-    onDelete: DeleteRule.cascade,
-  )
-  AddressModel address;
+  String email;
+
 
   ManagedSet<AppointmentDoctorModel> appointmentDoctors;
 
-  String email;
 
   @Relate(#patients)
   ClinicModel clinic;

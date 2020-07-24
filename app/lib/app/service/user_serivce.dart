@@ -1,6 +1,5 @@
 import 'package:dentistry/app/models/doctor_model.dart';
 import 'package:dentistry/app/models/insert_patient_model.dart';
-import 'package:dentistry/app/models/patient_model.dart';
 import 'package:dentistry/app/repositories/interfaces/i_user_repository.dart';
 
 import 'i_user_service.dart';

@@ -28,4 +28,9 @@ class _PeopleModel {
   PeopleModel people;
 
 }
-enum SelectGender { Male, Female }
+enum SelectGender {
+   Male, Female 
+   
+   
+
+   }

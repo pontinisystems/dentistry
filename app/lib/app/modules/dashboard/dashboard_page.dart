@@ -21,10 +21,11 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
-        children: [InfoPage(), PatientPage()],
+        children: [InfoPage(), PatientPage(),PatientPage()],
       ),
       floatingActionButton: Observer(builder: (_) {
         return Visibility(
@@ -71,6 +72,15 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
                 backgroundColor: Colors.blue,
                 title: Text("Pacientes"),
                 activeIcon: Icon(Icons.people_outline),
+              ),
+              BubbleBottomBarItem(
+                icon: Icon(
+                  Icons.queue,
+                  color: Color(test_color_dashBoard),
+                ),
+                backgroundColor: Colors.blue,
+                title: Text("Consultas"),
+                activeIcon: Icon(Icons.queue),
               ),
             ],
           );
