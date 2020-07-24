@@ -13,7 +13,7 @@ class PatientRepository implements IPatientRepository {
       "finalDate":DateTime.now(),
 
     }).then((res) => res.data
-        .map<AppointmentResult>((m) => PatientResult.fromJson(m))
+        .map<PatientResult>((m) => PatientResult.fromJson(m))
         .toList());
   }
 }

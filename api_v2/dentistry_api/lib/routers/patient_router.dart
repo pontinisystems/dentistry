@@ -13,10 +13,7 @@ class PatientRouter {
 
     router
         .route('v1/patient/')
-      /*  .link(() => JWTAuthentication(context))*/
         .link(() => PatientController(context));
-
-
   }
 
 }

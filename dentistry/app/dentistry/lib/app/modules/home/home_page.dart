@@ -1,14 +1,18 @@
-
 import 'package:dentistry/app/modules/home/dashboard_page.dart';
 import 'package:dentistry/app/modules/home/patients_page.dart';
+import 'package:dentistry/app/utils/colors_util.dart';
+import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
 import 'appointments_page.dart';
 import 'controllers/home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
+
   const HomePage({Key key, this.title = "Home"}) : super(key: key);
 
   @override
@@ -20,18 +24,26 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: PageView(
-        controller: controller.pageViewController,
+      body: Column(
         children: <Widget>[
-          //TODO se for um page direto, chama a pagina direto
+          _makeHeader(),
+          SizedBox(
+            height: 16.0,
+          ),
+          Expanded(
+            child: PageView(
+              controller: controller.pageViewController,
+              children: <Widget>[
+                //TODO se for um page direto, chama a pagina direto
 
-          DashboardPage(),
-          AppointmentsPage(),
-          PatientsPage()
-
+                DashboardPage(),
+                AppointmentsPage(),
+                PatientsPage(),
 
 //          RouterOutlet(module: ,),
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: AnimatedBuilder(
@@ -43,11 +55,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 BottomNavigationBarItem(
                     icon: Icon(Icons.home), title: Text(home.toUpperCase())),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.today), title: Text(appointment.toUpperCase())),
+                    icon: Icon(Icons.today),
+                    title: Text(appointment.toUpperCase())),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.people), title: Text(patients.toUpperCase())),
-
-
+                    icon: Icon(Icons.people),
+                    title: Text(patients.toUpperCase())),
               ],
               onTap: (index) {
                 controller.pageViewController.jumpToPage(index);
@@ -55,5 +67,45 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             );
           }),
     );
+  }
+
+  Widget _makeHeader() {
+    return Container(
+        color: Colors.white,
+        width: SizeUtils.widthScreen,
+        height: (MediaQuery.of(context).size.height * .2) -
+            MediaQuery.of(context).padding.top,
+        child: Container(
+            width: 50.0,
+            margin: EdgeInsets.all(15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(
+                      'https://s3.portalt5.com.br/imagens/ronaldinhogaucho.jpeg?mtime=20191026212926'),
+                  backgroundColor: Colors.transparent,
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Dr Bruxo',
+                        style: TextStyle(color: Color(label_color)),
+                      ),
+                      SizedBox(height: 2.0),
+                      Text('PeG Odontologia',
+                          style:
+                              TextStyle(color: Color(test_color_new_screen))),
+                    ],
+                  ),
+                ),
+              ],
+            )));
   }
 }

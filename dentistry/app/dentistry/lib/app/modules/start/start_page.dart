@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/mixins/loader_mixin.dart';
 import 'package:dentistry/app/utils/colors_util.dart';
+import 'package:dentistry/app/utils/size_utils.dart';
+import 'package:dentistry/app/utils/theme_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,7 +64,10 @@ class _StartPageState extends ModularState<StartPage, StartController>
 
   @override
   Widget build(BuildContext context) {
+    ThemeUtils.init(context);
+    SizeUtils.init(context);
     return Scaffold(
+
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

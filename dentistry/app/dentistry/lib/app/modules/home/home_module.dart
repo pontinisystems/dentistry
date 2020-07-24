@@ -1,7 +1,10 @@
 import 'file:///C:/workspace/dentistry/dentistry/app/dentistry/lib/app/modules/home/controllers/appointment_controller.dart';
 import 'file:///C:/workspace/dentistry/dentistry/app/dentistry/lib/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:dentistry/app/modules/home/controllers/patient_controller.dart';
 import 'package:dentistry/app/repositories/appointment_repository.dart';
+import 'package:dentistry/app/repositories/patient_repository.dart';
 import 'package:dentistry/app/service/appointment_serivce.dart';
+import 'package:dentistry/app/service/patient_serivce.dart';
 
 import 'controllers/home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,9 +15,12 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppointmentRepository()),
+        Bind((i) => PatientRepository()),
         Bind((i) => AppointmentService(i.get())),
+        Bind((i) => PatientService(i.get())),
         Bind((i) => DashboardController(i.get())),
         Bind((i) => AppointmentController(i.get())),
+        Bind((i) => PatientController(i.get())),
         Bind((i) => HomeController()),
 
       ];

@@ -1,5 +1,6 @@
 
 import 'file:///C:/workspace/dentistry/dentistry/app/dentistry/lib/app/modules/home/controllers/appointment_controller.dart';
+import 'package:dentistry/app/modules/home/controllers/patient_controller.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -17,7 +18,7 @@ class PatientsPage extends StatefulWidget {
 }
 
 class _PatientsPageState
-    extends ModularState<PatientsPage, AppointmentController> {
+    extends ModularState<PatientsPage, PatientController> {
   //use 'controller' variable to access controller
   var homeController = Modular.get<HomeController>();
 
@@ -26,10 +27,10 @@ class _PatientsPageState
     return Column(
       children: <Widget>[
         Observer(builder: (_) {
-          return controller.appointmentResults != null
+          return controller.patientResults != null
               ? Column(
                   children: <Widget>[
-                    Text('Lista de consultas  '+controller.appointmentResults.length.toString()),
+                    Text('Lista de consultas  '+controller.patientResults.length.toString()),
                   ],
                 )
               : Container(
