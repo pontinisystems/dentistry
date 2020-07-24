@@ -34,7 +34,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             child: PageView(
               controller: controller.pageViewController,
               children: <Widget>[
-                //TODO se for um page direto, chama a pagina direto
+                // se for um page direto, chama a pagina direto
 
                 DashboardPage(),
                 AppointmentsPage(),

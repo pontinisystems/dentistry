@@ -25,7 +25,10 @@ class _DashboardPageState
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Observer(builder: (_) {
+    Observer(builder: (_) {
+      return controller.statisticResult != null ?
+           _makeStatistic():Container(width: 0.0,height: 0.0);  }),
+       /* Observer(builder: (_) {
           return controller.statisticResult != null
               ? Column(
                   children: <Widget>[
@@ -54,8 +57,99 @@ class _DashboardPageState
                   width: 0.0,
                   height: 0.0,
                 );
-        }),
+        }),*/
       ],
+    );
+  }
+
+  Widget _makeStatistic() {
+    return Container(
+      margin: EdgeInsets.only(right: 10, left: 10),
+      width: double.infinity,
+      height: 175.0,
+      child: Card(
+        color: Color(color_white),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: Text('20,  Jan  - 20 Abr',
+                      style: TextStyle(
+                          fontSize: 12.0, color: Color(color_cyprus))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: Text('Filter',
+                      style: TextStyle(
+                          fontSize: 12.0, color: Color(color_cyprus))),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width: 4.0,
+                ),
+                _statisctContainer(
+                  Color(color_tomato),"Cancelado",controller.statisticResult.canceled
+                ),
+                SizedBox(
+                  width: 4.0,
+                ),
+                _statisctContainer(Color(color_light_sea_green),"Próximos",controller.statisticResult.marked),
+                SizedBox(
+                  width: 4.0,
+                ),
+                _statisctContainer(Color(color_moon_yellow),"Hoje",controller.statisticResult.today)
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _statisctContainer(Color color, String label, int value) {
+    return Container(
+      height: 100,
+      width: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.schedule,
+            color: Colors.white,
+          ),
+          SizedBox(
+            height: 2.0,
+          ),
+          Text(
+            value.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+          SizedBox(
+            height: 2.0,
+          ),
+          Text(
+            label,
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
+      ),
+      decoration: BoxDecoration(
+          color: color, borderRadius: BorderRadius.all(Radius.circular(10))),
     );
   }
 }
