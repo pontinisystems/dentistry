@@ -23,9 +23,12 @@ class PatientPage extends StatefulWidget {
 
 class _PatientPageState extends ModularState<PatientPage, PatientController>  with LoaderMixin {
 
+
+
   //use 'controller' variable to access controller
 
   List<ReactionDisposer> _disposer;
+
 
   @override
   void dispose() {
@@ -35,18 +38,23 @@ class _PatientPageState extends ModularState<PatientPage, PatientController>  wi
 
   @override
   void initState() {
+    controller.fetchPatients();
     super.initState();
     _disposer ??= [
       reaction((_) => controller.state, (StoreState state) {
         if (state == StoreState.loading) {
-          showLoader();
+print("objecAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
           // Chamar um loading
+          showLoader();
         } else if (state == StoreState.loaded) {
           // esconder o loading
           hideLoader();
 
         } else if (state == StoreState.error) {
           hideLoader();
+        }else if(state==StoreState.initial){
+          showLoader();
+
         }
       }),
 
@@ -60,11 +68,13 @@ class _PatientPageState extends ModularState<PatientPage, PatientController>  wi
         }
       })
     ];
+
   }
 
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       color: Colors.white,
       child: Scaffold(
@@ -97,7 +107,7 @@ class _PatientPageState extends ModularState<PatientPage, PatientController>  wi
   }
   Widget _makeItem(PatientResult patient) {
     return  Container(
-          margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+          margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 2.0),
           child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
@@ -148,7 +158,7 @@ class _PatientPageState extends ModularState<PatientPage, PatientController>  wi
         color: Colors.white,
         width: SizeUtils.widthScreen,
         height: (MediaQuery.of(context).size.height * .2) -
-            MediaQuery.of(context).padding.top,
+            MediaQuery.of(context).padding.top-10,
         child: Stack(children: <Widget>[
           Align(
               alignment: Alignment.center,

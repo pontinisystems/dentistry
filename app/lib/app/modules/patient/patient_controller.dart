@@ -19,7 +19,9 @@ abstract class _PatientControllerBase with Store {
   IPatientService _patientService;
 
   _PatientControllerBase(this._patientService){
-   // fetchPatients();
+ print("_PatientControllerBase");
+    //fetchPatients();
+
   }
 
   @observable
@@ -38,6 +40,8 @@ abstract class _PatientControllerBase with Store {
   @action
   fetchPatients() async {
     try {
+      print("fetchPatients");
+
       _patients =
           ObservableFuture(_patientService.fetch());
       List<PatientResult> result = await _patients;
@@ -48,7 +52,7 @@ abstract class _PatientControllerBase with Store {
       if (e.response != null) {
         errorMessage = errorMessage.copyWith(
             title: unexpectedFailure,
-            description: e.response.data['message']);
+            description: e.response.data['userMessage']);
       } else {
         errorMessage = errorMessage.copyWith(
             title: unexpectedFailure, description: tryagainLater);

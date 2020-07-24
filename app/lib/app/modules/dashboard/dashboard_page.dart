@@ -21,6 +21,7 @@ class _DashBoardPage extends ModularState<DashBoardPage, DashBoardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,

@@ -1,4 +1,3 @@
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dentistry/app/components/button_action_widget.dart';
 import 'package:dentistry/app/core/store_state.dart';
 import 'package:dentistry/app/mixins/loader_mixin.dart';
@@ -110,23 +109,7 @@ class _RegisterPatientPageState
           Observer(builder: (_) {
             return Container(
               margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: DateTimeField(
-                onChanged: (date) {
-                  controller.onChangeBirthday(date.toString());
-                },
-                decoration: InputDecoration(
-                  counterText: '',
-                  labelText: dateOfBirth,
-                ),
-                format: DateFormat("dd/MM/yyyy"),
-                onShowPicker: (context, currentValue) {
-                  return showDatePicker(
-                      context: context,
-                      firstDate: DateTime(2000),
-                      initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime.now());
-                },
-              ),
+              child:Text('')
             );
           }),
        

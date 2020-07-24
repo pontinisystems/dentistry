@@ -90,7 +90,7 @@ abstract class _RegisterPatientControllerBase with Store {
         if (e.response != null) {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure,
-              description: e.response.data['message']);
+              description: e.response.data['userMessage']);
         } else {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure, description: tryagainLater);

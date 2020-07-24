@@ -7,7 +7,6 @@ import 'package:dentistry/app/service/i_work_invitation_service.dart';
 import 'package:dentistry/app/utils/store_utils.dart';
 import 'package:dentistry/app/utils/strings.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
@@ -27,9 +26,8 @@ abstract class _HomeControllerBase with Store {
   @observable
   ObservableList<WorkInvitationModel> works;
 
- @observable
+  @observable
   ObservableFuture<bool> _acceptWork;
-
 
   @computed
   StoreState get stateAccepetWork => StoreUtils.statusCheck(_acceptWork);
@@ -47,41 +45,35 @@ abstract class _HomeControllerBase with Store {
     bool isLogged = await _userService.isLogged();
 
     if (!isLogged) {
-      
       Get.offAllNamed('/login');
     } else {
       fetchMyWorkInvitation();
     }
   }
 
-
   @action
   acceptWorkInvitation(int idWorkInvitation) async {
-      try{
-
-        await _workInvitationService.acceptWork(AcceptWorkInvitationModel(idWorkInvitation: idWorkInvitation, isAccepet: true));
-          fetchMyWorkInvitation();
-      }on DioError catch (e) {
-       print("object"+e.toString());
-        if (e.response != null) {
-          errorMessage = errorMessage.copyWith(
-              title: unexpectedFailure,
-              description: e.response.data['message']);
-        } else {
-          errorMessage = errorMessage.copyWith(
-              title: unexpectedFailure, description: tryagainLater);
-        }
-      } catch (e,s) {
-       print("object"+e.toString());
+    try {
+      await _workInvitationService.acceptWork(AcceptWorkInvitationModel(
+          idWorkInvitation: idWorkInvitation, isAccepet: true));
+      fetchMyWorkInvitation();
+    } on DioError catch (e) {
+      print("object" + e.toString());
+      if (e.response != null) {
         errorMessage = errorMessage.copyWith(
-            title: eunexpectedError, description: tryagainLater);
+            title: unexpectedFailure, description: e.response.data['message']);
+      } else {
+        errorMessage = errorMessage.copyWith(
+            title: unexpectedFailure, description: tryagainLater);
       }
-
-
+    } catch (e, s) {
+      print("object" + e.toString());
+      errorMessage = errorMessage.copyWith(
+          title: eunexpectedError, description: tryagainLater);
+    }
   }
 
-
-  @action  
+  @action
   fetchMyWorkInvitation() async {
     try {
       _works =
@@ -89,20 +81,20 @@ abstract class _HomeControllerBase with Store {
       List<WorkInvitationModel> result = await _works;
       works = result.asObservable();
       print(works.length);
-    
-    }on DioError catch (e) {
-       print("object");
-        if (e.response != null) {
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (e.response.data['message'] != null) {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure,
-              description: e.response.data['message']);
+              description: e.response.data['userMessage']);
         } else {
           errorMessage = errorMessage.copyWith(
               title: unexpectedFailure, description: tryagainLater);
         }
-      } catch (e,s) {
-        errorMessage = errorMessage.copyWith(
-            title: eunexpectedError, description: tryagainLater);
       }
+    } catch (e, s) {
+      errorMessage = errorMessage.copyWith(
+          title: eunexpectedError, description: tryagainLater);
+    }
   }
 }
