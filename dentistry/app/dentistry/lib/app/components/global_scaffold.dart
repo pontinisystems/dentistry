@@ -21,6 +21,9 @@ class GlobalScaffold {
 
   }
 
+
+
+
   void showSnackBarV2(BuildContext context,Color backgroundColor, Color textColor,) {
     Flushbar(
       duration: Duration(seconds: 2),

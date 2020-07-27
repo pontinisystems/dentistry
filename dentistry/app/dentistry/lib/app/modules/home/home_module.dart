@@ -1,5 +1,5 @@
-import 'file:///C:/workspace/dentistry/dentistry/app/dentistry/lib/app/modules/home/controllers/appointment_controller.dart';
-import 'file:///C:/workspace/dentistry/dentistry/app/dentistry/lib/app/modules/home/controllers/dashboard_controller.dart';
+import 'controllers/appointment_controller.dart';
+import 'controllers/dashboard_controller.dart';
 import 'package:dentistry/app/modules/home/controllers/patient_controller.dart';
 import 'package:dentistry/app/repositories/appointment_repository.dart';
 import 'package:dentistry/app/repositories/patient_repository.dart';

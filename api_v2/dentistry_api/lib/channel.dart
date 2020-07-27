@@ -35,6 +35,8 @@ class DentistryApiChannel extends ApplicationChannel {
   /// This method is invoked after [prepare].
   @override
   Controller get entryPoint {
+    print(DateTime.now());
+
     final router = Router();
     UserRouter.configure(router, context);
     AppointmentRouter.configure(router, context);

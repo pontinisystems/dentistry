@@ -21,14 +21,19 @@ abstract class LoaderMixin {
   }
 
   void showLoaderV2(BuildContext context) {
-    Get.dialog(Container(
-      height: 200,
-      width: 200,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[CircularProgressIndicator()],
-      ),
-    ),barrierDismissible: false);
+
+    Dialog errorDialog = Dialog(
+
+      child: Container(
+        color: Colors.transparent,
+        height: 200,
+        width: 200,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[CircularProgressIndicator()],
+        ),
+      ));
+    showDialog(context: context,barrierDismissible: false, builder: (BuildContext context) => errorDialog);}
   }
   void showFlushBarError(BuildContext context, Message message) {
     print("showFlushBarError");
@@ -43,6 +48,6 @@ abstract class LoaderMixin {
       message: message.title.isEmpty ?genericErrorDescription:message.description,
     ).show(context);
 
-  }
+
 
 }

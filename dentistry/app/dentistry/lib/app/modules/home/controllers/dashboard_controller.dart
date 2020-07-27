@@ -19,7 +19,7 @@ abstract class _DashboardControllerBase with Store {
   IAppointmentService _appointmentService;
 
   _DashboardControllerBase(this._appointmentService) {
-    requestDashBoard();
+   // requestDashBoard();
   }
 
   @observable
@@ -40,10 +40,14 @@ abstract class _DashboardControllerBase with Store {
   @computed
   StoreState get state => StoreUtils.statusCheck(_statisticFuture);
 
+
   Future<void> requestDashBoard() async {
     if (statisticResult == null && appointmentResults== null) {
       try {
+
         _statisticFuture = ObservableFuture(_appointmentService.getStatistic());
+        Future.delayed(Duration(seconds: 100));
+
         _appointmentResults =
             ObservableFuture(_appointmentService.getAppointment());
 

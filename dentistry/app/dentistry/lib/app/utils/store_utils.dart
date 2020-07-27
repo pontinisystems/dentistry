@@ -9,6 +9,7 @@ class StoreUtils {
     }
     switch(future.status){
       case FutureStatus.pending:
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return StoreState.loading;
       case FutureStatus.rejected:
         return StoreState.error;

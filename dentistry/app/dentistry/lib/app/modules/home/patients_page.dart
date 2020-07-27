@@ -1,5 +1,4 @@
 
-import 'file:///C:/workspace/dentistry/dentistry/app/dentistry/lib/app/modules/home/controllers/appointment_controller.dart';
 import 'package:dentistry/app/modules/home/controllers/patient_controller.dart';
 import 'package:dentistry/app/utils/size_utils.dart';
 import 'package:flutter/material.dart';
