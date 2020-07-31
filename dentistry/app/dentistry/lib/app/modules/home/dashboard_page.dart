@@ -41,41 +41,28 @@ class _DashboardPageState
     super.initState();
 
     _disposer ??= [
-      reaction((_) => controller.state, (StoreState state) {
-        if (state == StoreState.loading) {
-          print("cccccccccccccccccccccccccccccccccccccccccccccccccc");
-
-          showLoaderV2(context);
-          Future.delayed(Duration(seconds: 10));
-
-        } else if (state == StoreState.loaded) {
-
-          showLoaderV2(context);
-        } else if (state == StoreState.error) {
-
-        }
-      }),
       reaction((_) => controller.errorMessage, (Message errorMessage) {
         showFlushBarError(context, errorMessage);
       })
     ];
-    controller.requestDashBoard();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Observer(builder: (_) {
-          return _makeStatistic();
-        }),
-        Observer(builder: (_) {
-          return _makeAppointments();
-        }),
-      ],
-    );
+    return Scaffold(body: Observer(builder: (_) {
+      return controller.stateStatistic == StoreState.loading || controller.stateAppointment == StoreState.loading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _makeStatistic(),
+                _makeAppointments(),
+              ],
+            );
+    }));
   }
 
   Widget _makeStatistic() {
@@ -89,10 +76,9 @@ class _DashboardPageState
             color: Color(color_white),
             child: controller.statisticResult == null
                 ? Container(
-                    height: 150.0,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ))
+                    width: 0.0,
+                    height: 0.0,
+                  )
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,8 +207,9 @@ class _DashboardPageState
               },
             )),
           )
-        : Center(
-            child: CircularProgressIndicator(),
+        : Container(
+            height: 0.0,
+            width: 0.0,
           );
   }
 

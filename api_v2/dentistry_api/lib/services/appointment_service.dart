@@ -12,16 +12,16 @@ class AppointmentService implements IAppointmentService {
   @override
   Future<StatisticResult> getStatistic() async {
     var list = List<AppointmentResult>();
-    await Future.delayed(Duration(seconds: 100)).then((value) => {
+    await Future.delayed(Duration(seconds: 10)).then((value) => {
 
     });
-    return await StatisticResult(canceled: 10, marked: 10, today: 18);
+    return await StatisticResult(canceled: 5, marked: 10, today: 18);
   }
 
   @override
   Future<List<AppointmentResult>> getAppointment(FilterAppointment filterAppointment) async {
     var list = List<AppointmentResult>();
-    await Future.delayed(Duration(seconds: 100)).then((value) => {
+    await Future.delayed(Duration(seconds: 5)).then((value) => {
 
     });
     for (int i = 0; i < 1000; i++) {

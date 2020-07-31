@@ -9,13 +9,20 @@ part of 'dashboard_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DashboardController on _DashboardControllerBase, Store {
-  Computed<StoreState> _$stateComputed;
+  Computed<StoreState> _$stateAppointmentComputed;
 
   @override
-  StoreState get state =>
-      (_$stateComputed ??= Computed<StoreState>(() => super.state,
-              name: '_DashboardControllerBase.state'))
-          .value;
+  StoreState get stateAppointment => (_$stateAppointmentComputed ??=
+          Computed<StoreState>(() => super.stateAppointment,
+              name: '_DashboardControllerBase.stateAppointment'))
+      .value;
+  Computed<StoreState> _$stateStatisticComputed;
+
+  @override
+  StoreState get stateStatistic => (_$stateStatisticComputed ??=
+          Computed<StoreState>(() => super.stateStatistic,
+              name: '_DashboardControllerBase.stateStatistic'))
+      .value;
 
   final _$statisticResultAtom =
       Atom(name: '_DashboardControllerBase.statisticResult');
@@ -65,19 +72,19 @@ mixin _$DashboardController on _DashboardControllerBase, Store {
     });
   }
 
-  final _$_statisticFutureAtom =
-      Atom(name: '_DashboardControllerBase._statisticFuture');
+  final _$_statisticResultAtom =
+      Atom(name: '_DashboardControllerBase._statisticResult');
 
   @override
-  ObservableFuture<StatisticResult> get _statisticFuture {
-    _$_statisticFutureAtom.reportRead();
-    return super._statisticFuture;
+  ObservableFuture<StatisticResult> get _statisticResult {
+    _$_statisticResultAtom.reportRead();
+    return super._statisticResult;
   }
 
   @override
-  set _statisticFuture(ObservableFuture<StatisticResult> value) {
-    _$_statisticFutureAtom.reportWrite(value, super._statisticFuture, () {
-      super._statisticFuture = value;
+  set _statisticResult(ObservableFuture<StatisticResult> value) {
+    _$_statisticResultAtom.reportWrite(value, super._statisticResult, () {
+      super._statisticResult = value;
     });
   }
 
@@ -103,7 +110,8 @@ mixin _$DashboardController on _DashboardControllerBase, Store {
 statisticResult: ${statisticResult},
 appointmentResults: ${appointmentResults},
 errorMessage: ${errorMessage},
-state: ${state}
+stateAppointment: ${stateAppointment},
+stateStatistic: ${stateStatistic}
     ''';
   }
 }

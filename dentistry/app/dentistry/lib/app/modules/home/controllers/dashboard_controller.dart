@@ -19,7 +19,7 @@ abstract class _DashboardControllerBase with Store {
   IAppointmentService _appointmentService;
 
   _DashboardControllerBase(this._appointmentService) {
-   // requestDashBoard();
+    requestDashBoard();
   }
 
   @observable
@@ -32,28 +32,29 @@ abstract class _DashboardControllerBase with Store {
   Message errorMessage = Message();
 
   @observable
-  ObservableFuture<StatisticResult> _statisticFuture;
+  ObservableFuture<StatisticResult> _statisticResult;
 
   @observable
   ObservableFuture<List<AppointmentResult>> _appointmentResults;
 
   @computed
-  StoreState get state => StoreUtils.statusCheck(_statisticFuture);
+  StoreState get stateAppointment => StoreUtils.statusCheck(_appointmentResults);
+
+  @computed
+  StoreState get stateStatistic => StoreUtils.statusCheck(_statisticResult);
 
 
   Future<void> requestDashBoard() async {
-    if (statisticResult == null && appointmentResults== null) {
+    if (statisticResult == null && appointmentResults == null) {
       try {
-
-        _statisticFuture = ObservableFuture(_appointmentService.getStatistic());
+        _statisticResult = ObservableFuture(_appointmentService.getStatistic());
         Future.delayed(Duration(seconds: 100));
 
         _appointmentResults =
             ObservableFuture(_appointmentService.getAppointment());
 
-        statisticResult = await _statisticFuture;
         appointmentResults = await _appointmentResults;
-
+        statisticResult = await _statisticResult;
       } on DioError catch (e) {
         if (e.response != null) {
           if (e.response.statusCode == 401) {
